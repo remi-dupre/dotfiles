@@ -4,7 +4,7 @@
 import os
 import time
 import urllib.request
-import yaml
+import ruamel.yaml as yaml
 from datetime import date
 from shutil import copyfile
 
@@ -28,7 +28,7 @@ while True:
 tmp_file_path = '/tmp/wallpaper.png'
 
 data = urllib.request.urlopen(meta_url)
-data = yaml.load(data)
+data = yaml.safe_load(data)
 url = 'http://bing.com' + data['images'][0]['url']
 urllib.request.urlretrieve(url, tmp_file_path)
 
@@ -39,7 +39,7 @@ archive_file = '{}/descriptions.txt'.format(archive_dir)
 copyfile(tmp_file_path, '{}/{}.png'.format(archive_dir, date_str))
 
 with open(archive_file) as file:
-    descriptions = yaml.load(file)
+    descriptions = yaml.safe_load(file)
 
 #  # This is dangerous as it can erase everything
 #  if descriptions is None:
@@ -48,7 +48,7 @@ with open(archive_file) as file:
 descriptions[date_str] = data['images'][0]['copyright']
 
 with open(archive_file, 'w') as file:
-    yaml.dump(descriptions, file)
+    yaml.dump(descriptions, file, Dumper=yaml.RoundTripDumper)
 
 
 # Add legend
