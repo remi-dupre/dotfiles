@@ -16,12 +16,14 @@ if [[ $1 = create ]] ; then
 
     file=$root/$dest/$suffix.$nth.tar.gz.gpg
     create_backup=(
-        tar --create
-            --to-stdout
+        tar --create --to-stdout --gzip
             --exclude-from=$root/excludes
+            --exclude-backups
+            --exclude-caches-all
+            --exclude-vcs-ignores
+            --exclude-tag-all=.no-backup
             --files-from=$root/targets
             --listed-incremental=$root/$dest/incremential.list
-            --gzip
     )
     "${create_backup[@]}" | gpg --recipient $user --encrypt > $file
 fi
@@ -32,15 +34,12 @@ if [[ $1 = extract ]] ; then
 
     for file in $root/$dest/*.tar.gz.gpg ; do
         echo $file
-        gpg --output temp.tar.gz --decrypt $file
         extract_backup=(
-            tar --extract
+            tar --extract --gzip
                 --listed-incremental=/dev/null
-                --file temp.tar.gz
                 --directory=$root/extracted
         )
-        "${extract_backup[@]}"
-        rm temp.tar.gz
+        gpg --decrypt $file | "${extract_backup[@]}"
     done
 fi
 

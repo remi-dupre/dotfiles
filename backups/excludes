@@ -1,13 +1,9 @@
-.vim/plugged
-code/prologin
-Documents/Music
-
 .venv
+.vim/plugged
 node_modules
-target/debug
-target/release
-target/doc
-*.o
 
-.config/discord
-
+.Cache
+.cache
+.config/**/*Cache*
+Cache
+cache
