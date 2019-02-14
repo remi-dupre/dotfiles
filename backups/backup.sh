@@ -14,16 +14,16 @@ if [[ $1 = create ]] ; then
         nth=$((nth+1))
     done
 
-    file=$root/$dest/$suffix.$nth.tar.gz
+    file=$root/$dest/$suffix.$nth.tar.gz.gpg
     create_backup=(
-        tar --create --file=$file
+        tar --create
+            --to-stdout
+            --exclude-from=$root/excludes
             --files-from=$root/targets
             --listed-incremental=$root/$dest/incremential.list
             --gzip
     )
-    "${create_backup[@]}"
-    gpg --recipient $user --encrypt $file
-    rm $file
+    "${create_backup[@]}" | gpg --recipient $user --encrypt > $file
 fi
 
 

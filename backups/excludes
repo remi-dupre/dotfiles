@@ -1,0 +1,13 @@
+.vim/plugged
+code/prologin
+Documents/Music
+
+.venv
+node_modules
+target/debug
+target/release
+target/doc
+*.o
+
+.config/discord
+
