@@ -9,6 +9,7 @@ preexec () {
 
 # Add custom root to path
 export PATH=/home/remi/.root/bin:$PATH
+alias open='$HOME/scripts/open-file.sh'
 
 # Dotfiles management
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -38,25 +39,12 @@ alias youtube-audio='youtube-dl -x -f bestaudio --audio-format mp3 -o "%(title)s
 # A wonderfull function provided by Fardale (c)
 meteo () { curl wttr.in/`tr -s ' ' '_' <<< "$*"`; }
 
-# Display meteo on first login
-METEO_LOCKFILE=/tmp/disp_meteo
+# Display banner
+WELCOME_LOCKFILE=/tmp/welcome
 
-if ! [ -f $METEO_LOCKFILE ] ; then
-    echo -n "Waiting for internet "
-    touch $METEO_LOCKFILE
-
-    for i in {1..10} ; do
-        echo -n "."
-        wget -q --spider wttr.in
-
-        if [ $? -eq 0 ] ; then
-            clear
-            meteo bagneux
-            break
-        fi
-
-        sleep 1
-    done
+if ! [ -f $WELCOME_LOCKFILE ] ; then
+    touch $WELCOME_LOCKFILE
+    cat .welcome
 fi
 
 # Allows to edit command in a regular editor
@@ -73,3 +61,7 @@ function pc {
     calc=$*
     python -c "from math import * ; print($calc)"
 }
+
+# fzf bindings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

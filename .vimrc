@@ -12,7 +12,7 @@ set t_ut=
 syntax on
 filetype plugin indent on
 
-set number
+set number relativenumber
 set autoindent
 set cursorline
 set ruler
@@ -27,6 +27,10 @@ set backspace=2
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
+
+set smartcase
+set incsearch
+set hlsearch
 
 set mouse=a
 set updatetime=20
@@ -49,7 +53,6 @@ inoremap <F9> <C-O>za
 nnoremap <F9> za
 onoremap <F9> <C-C>za
 vnoremap <F9> zf
-
 
 "        _             _
 "  _ __ | |_   _  __ _(_)_ __  ___
@@ -75,11 +78,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/goyo.vim'
 
     " Quick file search
-    Plug '/usr/local/opt/fzf'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
     Plug 'junegunn/fzf.vim'
-
-    " True Sublime Text style multiple selections for Vim
-    Plug 'terryma/vim-multiple-cursors'
 
     " Quoting/parenthesizing made simple
     Plug 'tpope/vim-surround'
@@ -92,6 +92,9 @@ call plug#begin('~/.vim/plugged')
 
     " vim match-up: even better %, modern matchit and matchparen replacement
     Plug 'andymass/vim-matchup'
+
+    " FIGlet plugin for vim
+    Plug 'fadein/vim-FIGlet'
 call plug#end()
 
 
@@ -162,9 +165,7 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 " |_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
 "                |___/             |___/
 
-autocmd FileType tex set ts=2 sw=2 sts=2 expandtab
-autocmd FileType tex set tw=79
-
+autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 autocmd FileType html set ts=2 sw=2 sts=2 expandtab
 
 
@@ -181,41 +182,4 @@ if has("autocmd")
   autocmd InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
   autocmd VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
 endif
-
-" Syntax checker
-let g:syntastic_quiet_messages = { "regex": 'Command terminated with space\.' }
-
-" Enables Shift+Arrow keys in tmux
-if &term =~ '^screen'
-    " tmux will send xterm-style keys when its xterm-keys option is on
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
-endif
-
-
-" Autocomplete using tabs
-function! Smart_TabComplete()
-  let line = getline('.')                         " current line
-
-  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-                                                  " line to one character right
-                                                  " of the cursor
-  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-  if (strlen(substr)==0)                          " nothing to match on empty string
-    return "\<tab>"
-  endif
-  let has_period = match(substr, '\.') != -1      " position of period, if any
-  let has_slash = match(substr, '\/') != -1       " position of slash, if any
-  if (!has_period && !has_slash)
-    return "\<C-X>\<C-P>"                         " existing text matching
-  elseif ( has_slash )
-    return "\<C-X>\<C-F>"                         " file matching
-  else
-    return "\<C-X>\<C-O>"                         " plugin matching
-  endif
-endfunction
-
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
