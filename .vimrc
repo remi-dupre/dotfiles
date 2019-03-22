@@ -62,7 +62,14 @@ vnoremap <F9> zf
 " |_|            |___/
 
 call plug#begin('~/.vim/plugged')
-    " Plug 'vim-syntastic/syntastic'
+    " Asynchronous linting/fixing for Vim and Language Server Protocol (LSP)
+    " integration
+    Plug 'w0rp/ale'
+
+    " An eye friendly plugin that fades your inactive buffers and preserves
+    " your syntax highlighting!
+    " Plug 'TaDaa/vimade'
+
     Plug 'Valloric/YouCompleteMe'
 
     " Autocompletion
@@ -104,7 +111,7 @@ let g:completor_python_binary = '/usr/bin/python'
 
 
 " Auto Pairs:
-" let g:AutoPairsFlyMode = 1
+let g:AutoPairsMultilineClose = 0
 
 
 " GitGutter:
@@ -167,6 +174,7 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 
 autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 autocmd FileType html set ts=2 sw=2 sts=2 expandtab
+autocmd FileType htmldjango set ts=2 sw=2 sts=2 expandtab
 
 
 "  _                      _
@@ -178,8 +186,31 @@ autocmd FileType html set ts=2 sw=2 sts=2 expandtab
 
 " Cursor shape on xfce4-terminal
 if has("autocmd")
-  autocmd InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_IBEAM/' ~/.config/xfce4/terminal/terminalrc"
-  autocmd InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
-  autocmd VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
+    autocmd InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_IBEAM/' ~/.config/xfce4/terminal/terminalrc"
+    autocmd InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
+    autocmd VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
 endif
+
+
+
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+"
+" let g:syntastic_python_pylint_args = "--load-plugins pylint_django"
+" let g:syntastic_quiet_messages = { 'regex': ['missing-docstring', 'too-many-ancestors'] }
+"
+"
+map <C-j> :lnext<return>
+map <C-k> :lprev<return>
+
+let g:ale_set_loclist = 1
+
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" let g:ale_open_list = 1
+" let g:ale_set_quickfix = 1
 
