@@ -9,7 +9,7 @@ preexec () {
 
 # Add custom root to path
 export PATH=/home/remi/.root/bin:$PATH
-alias open='$HOME/scripts/open-file.sh'
+alias drop=/home/remi/scripts/drop.sh
 
 # Dotfiles management
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

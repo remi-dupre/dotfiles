@@ -237,7 +237,7 @@ bindsym XF86MonBrightnessDown exec "brightnessctl set 5%- ; $notify_brightness"
 exec --no-startup-id syndaemon -d -i 0.05 -t -K -R
 
 # Set wallpaper
-exec --no-startup-id feh --bg-scale ~/Documents/Wallpapers/life_is_strange.jpg
+exec --no-startup-id feh --bg-fill ~/Documents/Wallpapers/life_is_strange.jpg
 
 # At start
 exec --no-startup-id sleep 0.5 ; nm-applet
@@ -267,5 +267,5 @@ for_window [class="Firefox" instance="Devtools"] floating enable
 exec --no-startup-id compton -b --no-fading-openclose --shadow-opacity=0
 
 # Disable ctrl+Q in firefox and other apps
-bindsym Control+Q null
+#bindsym Control+Q null
 
