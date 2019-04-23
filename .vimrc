@@ -20,7 +20,7 @@ set linebreak
 set breakindent
 set breakindentopt=shift:1
 set colorcolumn=80
-set list listchars=trail:·,tab:»\
+set list listchars=trail:·,tab:»\ 
 
 set expandtab
 set backspace=2
@@ -35,10 +35,12 @@ set hlsearch
 set mouse=a
 set updatetime=20
 
-set guifont=Noto\ Sans\ Mono\ 8
+set guifont=Noto\ Sans\ Mono\ Regular\ 7.3
 set guioptions -=m
 set guioptions -=T
 
+map <C-j> :lnext<return>
+map <C-k> :lprev<return>
 
 "            _                               _
 "   __ _  __| |_   ____ _ _ __   ___ ___  __| |
@@ -66,10 +68,9 @@ call plug#begin('~/.vim/plugged')
     " integration
     Plug 'w0rp/ale'
 
-    " An eye friendly plugin that fades your inactive buffers and preserves
-    " your syntax highlighting!
-    " Plug 'TaDaa/vimade'
+    Plug 'rust-lang/rust.vim'
 
+    " A code-completion engine for Vim
     Plug 'Valloric/YouCompleteMe'
 
     " Autocompletion
@@ -112,7 +113,6 @@ let g:completor_python_binary = '/usr/bin/python'
 
 " Auto Pairs:
 let g:AutoPairsMultilineClose = 0
-
 
 " GitGutter:
 let g:gitgutter_sign_added = '┃'
@@ -165,6 +165,16 @@ let g:NERDToggleCheckAllLines = 1
 " Vim Matchup:
 hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 
+" Ale
+let g:ale_set_loclist = 1
+let g:ale_linters = {'rust': ['rls', 'rustfmt', 'cargo']}
+let g:ale_rust_cargo_options = ''
+let g:ale_rust_rustc_options = ''
+let g:ale_rust_cargo_include_features = 'clippy'
+
+" Rust
+let g:rustfmt_autosave = 1
+
 "  _
 " | | __ _ _ __   __ _ _   _  __ _  __ _  ___  ___
 " | |/ _` | '_ \ / _` | | | |/ _` |/ _` |/ _ \/ __|
@@ -172,6 +182,7 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 " |_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
 "                |___/             |___/
 
+autocmd FileType rust set cc=99
 autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 autocmd FileType html set ts=2 sw=2 sts=2 expandtab
 autocmd FileType htmldjango set ts=2 sw=2 sts=2 expandtab
@@ -190,27 +201,3 @@ if has("autocmd")
     autocmd InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
     autocmd VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
 endif
-
-
-
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-"
-" let g:syntastic_python_pylint_args = "--load-plugins pylint_django"
-" let g:syntastic_quiet_messages = { 'regex': ['missing-docstring', 'too-many-ancestors'] }
-"
-"
-map <C-j> :lnext<return>
-map <C-k> :lprev<return>
-
-let g:ale_set_loclist = 1
-
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" let g:ale_open_list = 1
-" let g:ale_set_quickfix = 1
-
