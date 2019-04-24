@@ -6,7 +6,12 @@
 "  |___/
 "
 
-colorscheme seattle
+if has("gui_running")
+    colorscheme atom-dark
+else
+    colorscheme atom-dark-256
+endif
+
 set t_ut=
 
 syntax on
@@ -38,6 +43,7 @@ set updatetime=20
 set guifont=Noto\ Sans\ Mono\ Regular\ 7.3
 set guioptions -=m
 set guioptions -=T
+set guioptions -=r
 
 map <C-j> :lnext<return>
 map <C-k> :lprev<return>
@@ -115,14 +121,11 @@ let g:completor_python_binary = '/usr/bin/python'
 let g:AutoPairsMultilineClose = 0
 
 " GitGutter:
-let g:gitgutter_sign_added = '┃'
-let g:gitgutter_sign_modified = '┃'
-let g:gitgutter_sign_removed = ''
-let g:gitgutter_sign_removed_first_line = ''
-let g:gitgutter_sign_modified_removed = ''
-
-highlight GitGutterChange ctermfg=203 ctermbg=236
-
+let g:gitgutter_sign_added = '│'
+let g:gitgutter_sign_modified = '┊'
+let g:gitgutter_sign_removed = '␡'
+let g:gitgutter_sign_removed_first_line = '␡'
+let g:gitgutter_sign_modified_removed = '┊␡'
 
 " Fzf:
 map ; :Files<CR>
@@ -182,7 +185,7 @@ let g:rustfmt_autosave = 1
 " |_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
 "                |___/             |___/
 
-autocmd FileType rust set cc=99
+autocmd FileType rust set cc=100
 autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 autocmd FileType html set ts=2 sw=2 sts=2 expandtab
 autocmd FileType htmldjango set ts=2 sw=2 sts=2 expandtab
