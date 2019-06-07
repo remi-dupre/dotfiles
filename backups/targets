@@ -1,4 +1,5 @@
 /home/remi/.config
+/home/remi/.cups
 /home/remi/.gnupg
 /home/remi/.gtkrc-2.0
 /home/remi/.latexmkrc
@@ -10,8 +11,8 @@
 /home/remi/.zshrc
 
 /home/remi/administratif
-/home/remi/backups/targets
 /home/remi/backups/excludes
+/home/remi/backups/targets
 /home/remi/code
 /home/remi/cours
 /home/remi/scripts
@@ -27,4 +28,3 @@
 /boot/EFI/BOOT/refind.conf
 /boot/refind_linux.conf
 /etc
-

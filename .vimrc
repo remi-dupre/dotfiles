@@ -25,7 +25,7 @@ set linebreak
 set breakindent
 set breakindentopt=shift:1
 set colorcolumn=80
-set list listchars=trail:·,tab:»\ 
+set list listchars=trail:·,tab:»\
 
 set expandtab
 set backspace=2
@@ -74,8 +74,6 @@ call plug#begin('~/.vim/plugged')
     " integration
     Plug 'w0rp/ale'
 
-    Plug 'rust-lang/rust.vim'
-
     " A code-completion engine for Vim
     Plug 'Valloric/YouCompleteMe'
 
@@ -88,7 +86,7 @@ call plug#begin('~/.vim/plugged')
     " A Vim plugin which shows a git diff in the gutter and stages/undoes hunks
     Plug 'airblade/vim-gitgutter'
 
-    " Distraction-free writing in Vim 
+    " Distraction-free writing in Vim
     Plug 'junegunn/goyo.vim'
 
     " Quick file search
@@ -101,7 +99,7 @@ call plug#begin('~/.vim/plugged')
     " A tree explorer plugin for Vim
     Plug 'scrooloose/nerdtree'
 
-    " Vim plugin for intensely orgasmic commenting 
+    " Vim plugin for intensely orgasmic commenting
     Plug 'scrooloose/nerdcommenter'
 
     " vim match-up: even better %, modern matchit and matchparen replacement
@@ -170,13 +168,17 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 
 " Ale
 let g:ale_set_loclist = 1
-let g:ale_linters = {'rust': ['rls', 'rustfmt', 'cargo']}
-let g:ale_rust_cargo_options = ''
-let g:ale_rust_rustc_options = ''
-let g:ale_rust_cargo_include_features = 'clippy'
+let g:ale_fix_on_save = 1
 
-" Rust
-let g:rustfmt_autosave = 1
+let g:ale_linters = {'rust': ['rls', 'rustfmt', 'cargo']}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'cpp': ['clang-format'],
+\   'python': ['autopep8'],
+\   'rust': ['rustfmt'],
+\}
+
+let g:ale_rust_rustfmt_options = '+nightly'
 
 "  _
 " | | __ _ _ __   __ _ _   _  __ _  __ _  ___  ___
@@ -189,6 +191,7 @@ autocmd FileType rust set cc=100
 autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 autocmd FileType html set ts=2 sw=2 sts=2 expandtab
 autocmd FileType htmldjango set ts=2 sw=2 sts=2 expandtab
+autocmd FileType rst set cc=73 tw=72
 
 
 "  _                      _
