@@ -25,7 +25,7 @@ set linebreak
 set breakindent
 set breakindentopt=shift:1
 set colorcolumn=80
-set list listchars=trail:·,tab:»\
+set list listchars=trail:·,tab:»\ "
 
 set expandtab
 set backspace=2
