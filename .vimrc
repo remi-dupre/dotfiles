@@ -18,6 +18,7 @@ syntax on
 filetype plugin indent on
 
 set number relativenumber
+set signcolumn=yes
 set autoindent
 set cursorline
 set ruler
@@ -187,11 +188,11 @@ let g:ale_rust_rustfmt_options = '+nightly'
 " |_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
 "                |___/             |___/
 
-autocmd FileType rust set cc=100
-autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 autocmd FileType html set ts=2 sw=2 sts=2 expandtab
 autocmd FileType htmldjango set ts=2 sw=2 sts=2 expandtab
 autocmd FileType rst set cc=73 tw=72
+autocmd FileType rust set cc=100
+autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 
 
 "  _                      _

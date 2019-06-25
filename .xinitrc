@@ -5,4 +5,3 @@ syndaemon -d -i 0.05 -t -K -R
 export LANG="fr_FR.UTF-8"
 
 exec i3
-

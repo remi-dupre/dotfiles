@@ -252,7 +252,7 @@ exec --no-startup-id system-config-printer-applet
 exec --no-startup-id light-locker
 exec --no-startup-id xfce4-power-manager
 
-exec_always --no-startup-id ~/.config/i3-renameworkspaces/i3-renameworkspaces.pl -c ~/.config/i3-renameworkspaces/config
+exec_always --no-startup-id PERL5LIB=/home/remi/perl5/lib/perl5 ~/.config/i3-renameworkspaces/i3-renameworkspaces.pl -c ~/.config/i3-renameworkspaces/config
 
 # At start: deprecated (replaced with systemctl)
 #exec --no-startup-id sleep 0.5 && mpd-notification
