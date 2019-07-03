@@ -8,7 +8,7 @@ preexec () {
 }
 
 # Add custom root to path
-export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:$PATH
+export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PATH
 alias drop=/home/remi/scripts/drop.sh
 
 # Dotfiles management

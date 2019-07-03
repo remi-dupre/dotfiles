@@ -171,12 +171,18 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 let g:ale_set_loclist = 1
 let g:ale_fix_on_save = 1
 
-let g:ale_linters = {'rust': ['rls', 'rustfmt', 'cargo']}
+let g:ale_linters = {
+\   'rust': ['rls', 'rustfmt', 'cargo'],
+\   'python': ['pylint'],
+\}
+
+let g:ale_python_pylint_options = '--load-plugins pylint_django'
+
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'cpp': ['clang-format'],
-\   'python': ['autopep8'],
 \   'rust': ['rustfmt'],
+\   'python': ['black'],
 \}
 
 let g:ale_rust_rustfmt_options = '+nightly'
