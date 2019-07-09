@@ -49,6 +49,9 @@ set guioptions -=r
 map <C-j> :lnext<return>
 map <C-k> :lprev<return>
 
+inoremap <C-tab> <C-p>
+
+
 "            _                               _
 "   __ _  __| |_   ____ _ _ __   ___ ___  __| |
 "  / _` |/ _` \ \ / / _` | '_ \ / __/ _ \/ _` |
@@ -75,12 +78,6 @@ call plug#begin('~/.vim/plugged')
     " integration
     Plug 'w0rp/ale'
 
-    " A code-completion engine for Vim
-    Plug 'Valloric/YouCompleteMe'
-
-    " Autocompletion
-    Plug 'maralla/completor.vim'
-
     " Vim plugin, insert or delete brackets, parens, quotes in pair
     Plug 'jiangmiao/auto-pairs'
 
@@ -106,18 +103,14 @@ call plug#begin('~/.vim/plugged')
     " vim match-up: even better %, modern matchit and matchparen replacement
     Plug 'andymass/vim-matchup'
 
-    " FIGlet plugin for vim
-    Plug 'fadein/vim-FIGlet'
+    " Perform all your vim insert mode completions with Tab
+    Plug 'ervandew/supertab'
 call plug#end()
-
-
-" Completor:
-let g:completor_clang_binary = '/usr/bin/clang'
-let g:completor_python_binary = '/usr/bin/python'
 
 
 " Auto Pairs:
 let g:AutoPairsMultilineClose = 0
+
 
 " GitGutter:
 let g:gitgutter_sign_added = '│'
@@ -125,6 +118,7 @@ let g:gitgutter_sign_modified = '┊'
 let g:gitgutter_sign_removed = '␡'
 let g:gitgutter_sign_removed_first_line = '␡'
 let g:gitgutter_sign_modified_removed = '┊␡'
+
 
 " Fzf:
 map ; :Files<CR>
@@ -167,7 +161,10 @@ let g:NERDToggleCheckAllLines = 1
 " Vim Matchup:
 hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 
+
 " Ale
+let g:ale_completion_enabled = 1
+
 let g:ale_set_loclist = 1
 let g:ale_fix_on_save = 1
 
@@ -187,6 +184,11 @@ let g:ale_fixers = {
 
 let g:ale_rust_rustfmt_options = '+nightly'
 
+
+" Super Tab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+
 "  _
 " | | __ _ _ __   __ _ _   _  __ _  __ _  ___  ___
 " | |/ _` | '_ \ / _` | | | |/ _` |/ _` |/ _ \/ __|
@@ -197,7 +199,7 @@ let g:ale_rust_rustfmt_options = '+nightly'
 autocmd FileType html set ts=2 sw=2 sts=2 expandtab
 autocmd FileType htmldjango set ts=2 sw=2 sts=2 expandtab
 autocmd FileType rst set cc=73 tw=72
-autocmd FileType rust set cc=100
+autocmd FileType rust set cc=101
 autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 
 
