@@ -38,8 +38,13 @@ set smartcase
 set incsearch
 set hlsearch
 
-set mouse=a
 set updatetime=20
+
+set mouse=a
+set ttymouse=sgr
+set balloondelay=250
+set ballooneval
+set balloonevalterm
 
 set guifont=Noto\ Sans\ Mono\ Regular\ 7.3
 set guioptions -=m
@@ -49,22 +54,6 @@ set guioptions -=r
 map <C-j> :lnext<return>
 map <C-k> :lprev<return>
 
-inoremap <C-tab> <C-p>
-
-
-"            _                               _
-"   __ _  __| |_   ____ _ _ __   ___ ___  __| |
-"  / _` |/ _` \ \ / / _` | '_ \ / __/ _ \/ _` |
-" | (_| | (_| |\ V / (_| | | | | (_|  __/ (_| |
-"  \__,_|\__,_| \_/ \__,_|_| |_|\___\___|\__,_|
-"
-
-set foldmethod=indent
-set nofoldenable
-inoremap <F9> <C-O>za
-nnoremap <F9> za
-onoremap <F9> <C-C>za
-vnoremap <F9> zf
 
 "        _             _
 "  _ __ | |_   _  __ _(_)_ __  ___
@@ -164,6 +153,7 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 
 " Ale
 let g:ale_completion_enabled = 1
+let g:ale_set_balloons = 1
 
 let g:ale_set_loclist = 1
 let g:ale_fix_on_save = 1
