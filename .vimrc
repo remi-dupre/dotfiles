@@ -27,6 +27,8 @@ set breakindent
 set breakindentopt=shift:1
 set colorcolumn=80
 set list listchars=trail:·,tab:»\ "
+set renderoptions=type:directx
+set encoding=utf-8
 
 set expandtab
 set backspace=2
@@ -46,7 +48,7 @@ set balloondelay=250
 set ballooneval
 set balloonevalterm
 
-set guifont=Noto\ Sans\ Mono\ Regular\ 7.3
+set guifont=Hasklig\ Regular\ 8
 set guioptions -=m
 set guioptions -=T
 set guioptions -=r
@@ -170,8 +172,10 @@ let g:ale_fixers = {
 \   'cpp': ['clang-format'],
 \   'rust': ['rustfmt'],
 \   'python': ['black'],
+\   'bib': ['bibclean'],
 \}
 
+"let g:ale_bib_bibclean_options = '-quiet'
 let g:ale_rust_rustfmt_options = '+nightly'
 
 
@@ -186,12 +190,13 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " |_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
 "                |___/             |___/
 
-autocmd FileType html set ts=2 sw=2 sts=2 expandtab
-autocmd FileType htmldjango set ts=2 sw=2 sts=2 expandtab
+autocmd FileType html set ts=2 sw=2 sts=2
+autocmd FileType htmldjango set ts=2 sw=2 sts=2
 autocmd FileType rst set cc=73 tw=72
 autocmd FileType rust set cc=101
-autocmd FileType tex set ts=2 sw=2 sts=2 tw=79 expandtab
 
+autocmd FileType tex      set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
+autocmd FileType plaintex set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 
 "  _                      _
 " | |___      _____  __ _| | _____

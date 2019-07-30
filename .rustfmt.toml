@@ -8,3 +8,4 @@ struct_field_align_threshold = 20
 format_strings = true
 use_field_init_shorthand = true
 format_code_in_doc_comments = true
+max_width=79

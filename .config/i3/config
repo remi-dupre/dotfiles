@@ -39,7 +39,7 @@ new_window 1pixel
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec konsole
 bindsym XF86PowerOff exec shutdown -h now
 
 # kill focused window
@@ -210,7 +210,7 @@ client.focused #000000 #000000 #FFFFFF #000000a
 exec alias minecraft=optirun minecraft
 
 # Custom shortcuts
-bindsym Control+Mod1+t exec xfce4-terminal
+bindsym Control+Mod1+t exec konsole
 bindsym Control+Mod1+f exec firefox
 bindsym Control+Mod1+d exec nemo
 bindsym Control+Mod1+s exec pavucontrol
@@ -261,7 +261,7 @@ exec_always --no-startup-id PERL5LIB=/home/remi/perl5/lib/perl5 ~/.config/i3-ren
 
 # Launch applications at startup
 exec i3-msg "workspace ; exec thunderbird"
-exec i3-msg "workspace ; exec xfce4-terminal"
+exec i3-msg "workspace ; exec konsole"
 
 # Popups
 for_window [class="Adl" instance="adl"] floating enable
@@ -275,4 +275,3 @@ exec --no-startup-id compton -b --no-fading-openclose --shadow-opacity=0
 
 # Disable ctrl+Q in firefox and other apps
 #bindsym Control+Q null
-
