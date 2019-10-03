@@ -1,0 +1,4 @@
+rofi.combi-modi:    window,drun,ssh
+rofi.theme:         solarized
+rofi.font:          Noto Sans 9
+rofi.modi:          combi
