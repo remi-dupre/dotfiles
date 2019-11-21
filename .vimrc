@@ -65,6 +65,12 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
+" Clipboard
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+
 " set guifont=Hasklig\ Regular\ 8
 " set guioptions -=m
 " set guioptions -=T
@@ -117,6 +123,46 @@ call plug#end()
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
+      \ },
+      \ }
+" let g:lightline.component_expand = {
+"     \  'linter_checking': 'lightline#ale#checking',
+"     \  'linter_warnings': 'lightline#ale#warnings',
+"     \  'linter_errors': 'lightline#ale#errors',
+"     \  'linter_ok': 'lightline#ale#ok',
+"     \ }
+" let g:lightline.component_type = {
+"     \     'linter_checking': 'left',
+"     \     'linter_warnings': 'warning',
+"     \     'linter_errors': 'error',
+"     \     'linter_ok': 'left',
+"     \ }
+" let g:lightline.active = {
+"     \     'right': [[
+"     \         'linter_checking',
+"     \         'linter_errors',
+"     \         'linter_warnings',
+"     \         'linter_ok'
+"     \     ]]
+"     \ }
+" let g:lightline#ale#indicator_checking = "\uf110"
+" let g:lightline#ale#indicator_warnings = "\uf071 "
+" let g:lightline#ale#indicator_errors = "\uf05e "
+" let g:lightline#ale#indicator_ok = "\uf00c"
+
+"
+" Auto Pairs:
+let g:AutoPairsMultilineClose = 0
 
 function! CocGitBlame()
   let blame = get(b:, 'coc_git_blame', '')
@@ -191,10 +237,6 @@ let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline#ale#indicator_ok = "\uf00c"
 
-" Auto Pairs:
-let g:AutoPairsMultilineClose = 0
-
-
 " Fzf:
 map ; :Files<CR>
 
@@ -220,6 +262,7 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 " Lightline
 set laststatus=2
 
+
 " CoC
 let g:coc_global_extensions = [
     \ 'coc-pairs',
@@ -234,6 +277,19 @@ nmap <leader>rn <Plug>(coc-rename)
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                         \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+
+" Lightline
+set laststatus=2
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -288,11 +344,3 @@ autocmd FileType plaintex set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 "     autocmd InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
 "     autocmd VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
 " endif
-
-autocmd User CocStatusChange,CocDiagnosticChange call strftime('%c')
-
-function! Test()
-    call coc#refresh()
-    call lightline#update()
-    echo strftime('%c')
-endfunction
