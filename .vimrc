@@ -65,12 +65,6 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
-" Clipboard
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
-
 " set guifont=Hasklig\ Regular\ 8
 " set guioptions -=m
 " set guioptions -=T
@@ -126,15 +120,18 @@ endfunction
 
 let g:lightline = {
       \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
-      \ },
+      \   'active': {
+      \     'left': [ [ 'mode', 'paste' ],
+      \               [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \   },
+      \   'component_function': {
+      \     'cocstatus': 'coc#status',
+      \     'currentfunction': 'CocCurrentFunction'
+      \   },
       \ }
+
+let g:lightline#bufferline#enable_devicons = 1
+
 " let g:lightline.component_expand = {
 "     \  'linter_checking': 'lightline#ale#checking',
 "     \  'linter_warnings': 'lightline#ale#warnings',
@@ -155,10 +152,10 @@ let g:lightline = {
 "     \         'linter_ok'
 "     \     ]]
 "     \ }
-" let g:lightline#ale#indicator_checking = "\uf110"
-" let g:lightline#ale#indicator_warnings = "\uf071 "
-" let g:lightline#ale#indicator_errors = "\uf05e "
-" let g:lightline#ale#indicator_ok = "\uf00c"
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_warnings = "\uf071 "
+let g:lightline#ale#indicator_errors = "\uf05e "
+let g:lightline#ale#indicator_ok = "\uf00c"
 
 "
 " Auto Pairs:
@@ -268,8 +265,7 @@ let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-rls',
     \ 'coc-python',
-    \ 'coc-json',
-    \ 'coc-git'
+    \ 'coc-json'
   \ ]
 
 nmap <silent> gd <Plug>(coc-definition)
@@ -277,19 +273,6 @@ nmap <leader>rn <Plug>(coc-rename)
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                         \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-
-" Lightline
-set laststatus=2
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <leader>rn <Plug>(coc-rename)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
