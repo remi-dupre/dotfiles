@@ -49,13 +49,15 @@ set hlsearch
 set updatetime=300
 
 set mouse=a
-" Not supported in nvim
-" set ttymouse=sgr
 
-" Not supported in nvim
-" set balloondelay=250
-" set ballooneval
-" set balloonevalterm
+if has('nvim')
+else
+    set ttymouse=sgr
+    set balloondelay=250
+    set ballooneval
+    set balloonevalterm
+    set renderoptions=type:directx
+endif
 
 " Clipboard
 noremap <Leader>y "*y
@@ -84,7 +86,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'cespare/vim-toml'
 
     " Vim plugin, insert or delete brackets, parens, quotes in pair
-    Plug 'jiangmiao/auto-pairs'
+    " Plug 'jiangmiao/auto-pairs'
 
     " A Vim plugin which shows a git diff in the gutter and stages/undoes hunks
     Plug 'airblade/vim-gitgutter'
@@ -124,15 +126,18 @@ endfunction
 
 let g:lightline = {
       \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
-      \ },
+      \   'active': {
+      \     'left': [ [ 'mode', 'paste' ],
+      \               [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \   },
+      \   'component_function': {
+      \     'cocstatus': 'coc#status',
+      \     'currentfunction': 'CocCurrentFunction'
+      \   },
       \ }
+
+let g:lightline#bufferline#enable_devicons = 1
+
 " let g:lightline.component_expand = {
 "     \  'linter_checking': 'lightline#ale#checking',
 "     \  'linter_warnings': 'lightline#ale#warnings',
@@ -153,10 +158,10 @@ let g:lightline = {
 "     \         'linter_ok'
 "     \     ]]
 "     \ }
-" let g:lightline#ale#indicator_checking = "\uf110"
-" let g:lightline#ale#indicator_warnings = "\uf071 "
-" let g:lightline#ale#indicator_errors = "\uf05e "
-" let g:lightline#ale#indicator_ok = "\uf00c"
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_warnings = "\uf071 "
+let g:lightline#ale#indicator_errors = "\uf05e "
+let g:lightline#ale#indicator_ok = "\uf00c"
 
 " Auto Pairs:
 let g:AutoPairsMultilineClose = 0
@@ -222,8 +227,18 @@ let g:ale_rust_cargo_use_clippy = 1
 set laststatus=2
 
 " CoC
+let g:coc_global_extensions = [
+    \ 'coc-pairs',
+    \ 'coc-rls',
+    \ 'coc-python',
+    \ 'coc-json'
+  \ ]
+
 nmap <silent> gd <Plug>(coc-definition)
 nmap <leader>rn <Plug>(coc-rename)
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                        \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
