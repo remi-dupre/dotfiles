@@ -5,8 +5,6 @@
 "  \__, |\___|_| |_|\___|_|  \__,_|_|
 "  |___/
 "
-
-
 let mapleader = ","
 
 if has("gui_running")
@@ -118,16 +116,42 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
+function! CocGitBlame()
+  let blame = get(b:, 'coc_git_blame', '')
+  return blame " return winwidth(0) > 120 ? blame : ''
+endfunction
+
+function! CocStatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, '🛑 ' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, '⚠ ' . info['warning'])
+  endif
+  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+endfunction
+
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \   'active': {
-      \     'left': [ [ 'mode', 'paste' ],
-      \               [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \     'left': [
+      \       [ 'mode', 'paste' ],
+      \       [ 'cocstatus', 'currentfunction'],
+      \       ['readonly', 'filename', 'modified' ],
+      \     ],
+      \     'right':[
+      \       [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+      \       [ 'blame' ],
+      \     ]
       \   },
       \   'component_function': {
-      \     'cocstatus': 'coc#status',
-      \     'currentfunction': 'CocCurrentFunction'
-      \   },
+      \     'blame': 'CocGitBlame',
+      \     'cocstatus': 'CocStatusDiagnostic',
+      \     'currentfunction': 'CocCurrentFunction',
+      \   }
       \ }
 
 let g:lightline#bufferline#enable_devicons = 1
@@ -157,7 +181,7 @@ let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline#ale#indicator_ok = "\uf00c"
 
-"
+
 " Auto Pairs:
 let g:AutoPairsMultilineClose = 0
 
@@ -234,6 +258,7 @@ let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline#ale#indicator_ok = "\uf00c"
 
+
 " Fzf:
 map ; :Files<CR>
 
@@ -265,7 +290,8 @@ let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-rls',
     \ 'coc-python',
-    \ 'coc-json'
+    \ 'coc-json',
+    \ 'coc-git'
   \ ]
 
 nmap <silent> gd <Plug>(coc-definition)
