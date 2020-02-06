@@ -29,7 +29,7 @@ export STDERRED_BLACKLIST="^(clang-7,gcc-7)$"
 
 # Call latexmk with dynamic parameters and cleans up at the end
 latex-preview() {
-    latexmk -pdf -pvc -quiet $1
+    latexmk -shell-escape -pdf -pvc -quiet $1
     latexmk -c
 }
 
@@ -58,8 +58,7 @@ SAVEHIST=$HISTSIZE
 
 # Minimalist calculator
 function pc {
-    calc=$*
-    python -c "from math import * ; print($calc)"
+    python -c "from math import * ; print($*)"
 }
 
 # fzf bindings

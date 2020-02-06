@@ -65,6 +65,9 @@ map <C-k> :lprev<return>
 " |_|            |___/
 
 call plug#begin('~/.vim/plugged')
+    " Vim syntax for TOML
+    Plug 'cespare/vim-toml'
+
     " Asynchronous linting/fixing for Vim and Language Server Protocol (LSP)
     " integration
     Plug 'w0rp/ale'
@@ -158,7 +161,7 @@ let g:ale_completion_enabled = 1
 let g:ale_set_balloons = 1
 
 let g:ale_set_loclist = 1
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 let g:ale_linters = {
 \   'rust': ['rls', 'rustfmt', 'cargo'],
@@ -177,6 +180,7 @@ let g:ale_fixers = {
 
 "let g:ale_bib_bibclean_options = '-quiet'
 let g:ale_rust_rustfmt_options = '+nightly'
+let g:ale_rust_cargo_use_clippy = 1
 
 
 " Super Tab
@@ -206,8 +210,8 @@ autocmd FileType plaintex set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 "
 
 " Cursor shape on xfce4-terminal
-if has("autocmd")
-    autocmd InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_IBEAM/' ~/.config/xfce4/terminal/terminalrc"
-    autocmd InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
-    autocmd VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
-endif
+" if has("autocmd")
+"     autocmd InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_IBEAM/' ~/.config/xfce4/terminal/terminalrc"
+"     autocmd InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
+"     autocmd VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
+" endif
