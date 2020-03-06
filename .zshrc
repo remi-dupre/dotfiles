@@ -1,3 +1,11 @@
+# Common variables
+export EDITOR="nvim"
+export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PATH
+
+# Common aliases
+alias vim="nvim"  # use nvim by default
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME" # dotfiles management
+
 # Ask for ssh key only once
 alias unlock_keys='eval $(keychain --eval --quiet id_rsa --timeout 20)'
 
@@ -7,12 +15,7 @@ preexec () {
     fi
 }
 
-# Add custom root to path
-export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PATH
 alias drop=/home/remi/scripts/drop.sh
-
-# Dotfiles management
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Some prologin tools
 export TEXMFCNF=$HOME/.texmf-config/web2c:
