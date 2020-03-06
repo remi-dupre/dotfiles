@@ -136,6 +136,10 @@ function! CocStatusDiagnostic() abort
   return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
 endfunction
 
+function! FileType()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype  : 'no ft') : ''
+endfunction
+
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \   'active': {
@@ -145,7 +149,7 @@ let g:lightline = {
       \       ['readonly', 'filename', 'modified' ],
       \     ],
       \     'right':[
-      \       [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+      \       [ 'filetype', 'lineinfo', 'percent' ],
       \       [ 'blame' ],
       \     ]
       \   },
@@ -153,6 +157,7 @@ let g:lightline = {
       \     'blame': 'CocGitBlame',
       \     'cocstatus': 'CocStatusDiagnostic',
       \     'currentfunction': 'CocCurrentFunction',
+      \     'filetype': 'FileType',
       \   }
       \ }
 
