@@ -48,10 +48,10 @@ set balloondelay=250
 set ballooneval
 set balloonevalterm
 
-set guifont=Hasklig\ Regular\ 8
-set guioptions -=m
-set guioptions -=T
-set guioptions -=r
+" set guifont=Hasklig\ Regular\ 8
+" set guioptions -=m
+" set guioptions -=T
+" set guioptions -=r
 
 map <C-j> :lnext<return>
 map <C-k> :lprev<return>

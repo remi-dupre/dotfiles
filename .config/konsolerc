@@ -1,8 +1,8 @@
 [Desktop Entry]
-DefaultProfile=New Profile.profile
+DefaultProfile=Profile 2.profile
 
 [Favorite Profiles]
-Favorites=New Profile.profile
+Favorites=
 
 [KonsoleWindow]
 ShowMenuBarByDefault=false

@@ -181,7 +181,7 @@ bindsym $mod+r mode "resize"
 #   }
 # }
 
-set $main_status /home/remi/code/bumblebee-status/bumblebee-status \
+set $main_status bumblebee-status \
   -m title spacer spacer progress spacer spacer traffic cpu spacer spacer spacer amixer brightness battery spacer spacer spacer datetime spacer \
   -p interval=1 spacer.theme.bg=\#002b36 datetime.format=" %A %d %B %Y - %H:%M" \
     root.path=/ home.path=/home data.path=/data root.format=" root {used} / {size}" home.format=" home {used} / {size}" data.format=" data {used} / {size}" \
