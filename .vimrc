@@ -85,12 +85,6 @@ call plug#begin('~/.vim/plugged')
     " Vim syntax for TOML
     Plug 'cespare/vim-toml'
 
-    " Vim plugin, insert or delete brackets, parens, quotes in pair
-    " Plug 'jiangmiao/auto-pairs'
-
-    " A Vim plugin which shows a git diff in the gutter and stages/undoes hunks
-    Plug 'airblade/vim-gitgutter'
-
     " Distraction-free writing in Vim
     Plug 'junegunn/goyo.vim'
 
@@ -124,16 +118,42 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
+function! CocGitBlame()
+  let blame = get(b:, 'coc_git_blame', '')
+  return blame " return winwidth(0) > 120 ? blame : ''
+endfunction
+
+function! CocStatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, ' ' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, '⚠ ' . info['warning'])
+  endif
+  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+endfunction
+
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \   'active': {
-      \     'left': [ [ 'mode', 'paste' ],
-      \               [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \     'left': [
+      \       [ 'mode', 'paste' ],
+      \       [ 'cocstatus', 'currentfunction'],
+      \       ['readonly', 'filename', 'modified' ],
+      \     ],
+      \     'right':[
+      \       [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+      \       [ 'blame' ],
+      \     ]
       \   },
       \   'component_function': {
-      \     'cocstatus': 'coc#status',
-      \     'currentfunction': 'CocCurrentFunction'
-      \   },
+      \     'blame': 'CocGitBlame',
+      \     'cocstatus': 'CocStatusDiagnostic',
+      \     'currentfunction': 'CocCurrentFunction',
+      \   }
       \ }
 
 let g:lightline#bufferline#enable_devicons = 1
@@ -144,12 +164,14 @@ let g:lightline#bufferline#enable_devicons = 1
 "     \  'linter_errors': 'lightline#ale#errors',
 "     \  'linter_ok': 'lightline#ale#ok',
 "     \ }
+"
 " let g:lightline.component_type = {
 "     \     'linter_checking': 'left',
 "     \     'linter_warnings': 'warning',
 "     \     'linter_errors': 'error',
 "     \     'linter_ok': 'left',
 "     \ }
+"
 " let g:lightline.active = {
 "     \     'right': [[
 "     \         'linter_checking',
@@ -158,6 +180,7 @@ let g:lightline#bufferline#enable_devicons = 1
 "     \         'linter_ok'
 "     \     ]]
 "     \ }
+
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
@@ -165,14 +188,6 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 " Auto Pairs:
 let g:AutoPairsMultilineClose = 0
-
-
-" GitGutter:
-let g:gitgutter_sign_added = '│'
-let g:gitgutter_sign_modified = '┊'
-let g:gitgutter_sign_removed = '␡'
-let g:gitgutter_sign_removed_first_line = '␡'
-let g:gitgutter_sign_modified_removed = '┊␡'
 
 
 " Fzf:
@@ -197,32 +212,6 @@ let g:NERDToggleCheckAllLines = 1
 hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 
 
-" Ale
-let g:ale_completion_enabled = 1
-let g:ale_set_balloons = 1
-
-let g:ale_set_loclist = 1
-let g:ale_fix_on_save = 0
-
-let g:ale_linters = {
-\   'rust': ['rls', 'rustfmt', 'cargo'],
-\   'python': ['pylint'],
-\}
-
-" let g:ale_python_pylint_options = '--load-plugins pylint_django'
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'cpp': ['clang-format'],
-\   'rust': ['rustfmt'],
-\   'python': ['black'],
-\   'bib': ['bibclean'],
-\}
-
-"let g:ale_bib_bibclean_options = '-quiet'
-let g:ale_rust_rustfmt_options = '+nightly'
-let g:ale_rust_cargo_use_clippy = 1
-
 " Lightline
 set laststatus=2
 
@@ -231,7 +220,8 @@ let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-rls',
     \ 'coc-python',
-    \ 'coc-json'
+    \ 'coc-json',
+    \ 'coc-git'
   \ ]
 
 nmap <silent> gd <Plug>(coc-definition)

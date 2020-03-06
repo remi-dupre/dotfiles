@@ -1,0 +1,17 @@
+{
+    "git.addedSign.text": "│",
+    "git.changedSign.text": "┊",
+    "git.removedSign.text": "␡",
+    "git.topRemovedSign.text": "␡",
+    "git.changeRemovedSign.text": "┊␡",
+    "git.addedSign.hlGroup": "LineNr",
+    "git.changedSign.hlGroup": "LineNr",
+    "git.removedSign.hlGroup": "LineNr",
+    "git.topRemovedSign.hlGroup": "LineNr",
+    "git.changeRemovedSign.hlGroup": "LineNr",
+    "git.addGBlameToBufferVar": true,
+
+    "coc.preferences.formatOnSaveFiletypes": ["rust"],
+
+    "python.formatting.provider": "black"
+}
