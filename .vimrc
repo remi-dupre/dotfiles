@@ -51,10 +51,16 @@ set mouse=a
 if has('nvim')
 else
     set ttymouse=sgr
+
     set balloondelay=250
     set ballooneval
     set balloonevalterm
+
     set renderoptions=type:directx
+    set guifont=Hasklig\ Regular\ 8
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=r
 endif
 
 " Clipboard
@@ -62,11 +68,6 @@ noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
-
-" set guifont=Hasklig\ Regular\ 8
-" set guioptions -=m
-" set guioptions -=T
-" set guioptions -=r
 
 map <C-j> :lnext<return>
 map <C-k> :lprev<return>
@@ -108,6 +109,10 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'itchyny/lightline.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " Vim plugin to add Jinja2 template syntax to a number of programming
+    " languages
+    Plug 'seirl/vim-jinja-languages'
 call plug#end()
 
 
@@ -281,11 +286,11 @@ let g:NERDToggleCheckAllLines = 1
 hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 
 
-" Lightline
+" Lightline:
 set laststatus=2
 
 
-" CoC
+" CoC:
 let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-rls',

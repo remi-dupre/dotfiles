@@ -167,27 +167,28 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#   verbose yes
-#   status_command i3status | ~/.config/i3status/custom.py
-#   #strip_workspace_numbers yes
-#   colors {
-#     statusline #AAAAAA
-#     background #333333
-#     focused_workspace #282828 #282828 #FFFFFF
-#     inactive_workspace #333333 #333333 #AAAAAA
-#   }
-# }
+#  ____  _        _               ____
+# / ___|| |_ __ _| |_ _   _ ___  | __ )  __ _ _ __
+# \___ \| __/ _` | __| | | / __| |  _ \ / _` | '__|
+#  ___) | || (_| | |_| |_| \__ \ | |_) | (_| | |
+# |____/ \__\__,_|\__|\__,_|___/ |____/ \__,_|_|
+#
 
 set $main_status bumblebee-status \
-  -m title spacer spacer progress spacer spacer traffic cpu spacer spacer spacer amixer brightness battery spacer spacer spacer datetime spacer \
-  -p interval=1 spacer.theme.bg=\#002b36 datetime.format=" %A %d %B %Y - %H:%M" \
-    root.path=/ home.path=/home data.path=/data root.format=" root {used} / {size}" home.format=" home {used} / {size}" data.format=" data {used} / {size}" \
+  -t custom \
+  -m title spacer progress spacer spacer traffic cpu memory spacer spacer spacer amixer spacer spacer spacer datetime spacer \
+  -p \
+    interval=1 \
+    data.path="/data" data.format=" data {used} / {size}" \
+    datetime.format=" %A %d %B %Y - %H:%M" \
+    home.path="/home" home.format=" home {used} / {size}" \
+    memory.format="{used}" \
+    progress.baremptychar="--" \
+    progress.format="{cmd} {bar} ({time})" \
+    progress.placeholder="" \
+    root.path="/" root.format=" root {used} / {size}" \
+    spacer.theme.bg=\#002b36 \
     traffic.showname=False \
-    progress.placeholder="" progress.format="{cmd} {bar} ({time})" progress.baremptychar="--" \
-  -t custom
 
 bar {
   i3bar_command i3bar
@@ -205,9 +206,6 @@ bar {
 client.unfocused #333333 #333333 #FFFFFF #333333
 client.focused_inactive #333333 #333333 #FFFFFF #000000
 client.focused #000000 #000000 #FFFFFF #000000a
-
-# Aliasing
-exec alias minecraft=optirun minecraft
 
 # Custom shortcuts
 bindsym Control+Mod1+t exec konsole
@@ -252,8 +250,6 @@ exec --no-startup-id system-config-printer-applet
 exec --no-startup-id light-locker
 exec --no-startup-id xfce4-power-manager
 
-exec_always --no-startup-id PERL5LIB=/home/remi/perl5/lib/perl5 ~/.config/i3-renameworkspaces/i3-renameworkspaces.pl -c ~/.config/i3-renameworkspaces/config
-
 # At start: deprecated (replaced with systemctl)
 #exec --no-startup-id sleep 0.5 && mpd-notification
 #exec --no-startup-id redshift-gtk -l 48:2
@@ -273,5 +269,5 @@ for_window [class="Firefox" instance="Devtools"] floating enable
 # Composite manager
 exec --no-startup-id compton -b --no-fading-openclose --shadow-opacity=0
 
-# Disable ctrl+Q in firefox and other apps
-#bindsym Control+Q null
+# Synchronization notification tray
+exec --no-startup-id syncthing-gtk --minimized
