@@ -81,9 +81,6 @@ map <C-k> :lprev<return>
 " |_|            |___/
 
 call plug#begin('~/.vim/plugged')
-    " Vim syntax for TOML
-    Plug 'cespare/vim-toml'
-
     " Distraction-free writing in Vim
     Plug 'junegunn/goyo.vim'
 
@@ -113,6 +110,9 @@ call plug#begin('~/.vim/plugged')
     " Vim plugin to add Jinja2 template syntax to a number of programming
     " languages
     Plug 'seirl/vim-jinja-languages'
+
+    " Vim syntax for TOML
+    Plug 'cespare/vim-toml'
 call plug#end()
 
 
@@ -293,10 +293,11 @@ set laststatus=2
 " CoC:
 let g:coc_global_extensions = [
     \ 'coc-pairs',
-    \ 'coc-rls',
-    \ 'coc-python',
+    \ 'coc-git',
+    \ 'coc-clangd',
     \ 'coc-json',
-    \ 'coc-git'
+    \ 'coc-python',
+    \ 'coc-rls'
   \ ]
 
 nmap <silent> gd <Plug>(coc-definition)
