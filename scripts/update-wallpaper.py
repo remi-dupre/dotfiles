@@ -9,19 +9,15 @@ import yaml
 from PIL import Image, ImageDraw, ImageFont
 
 
-archive_dir = '/data/bing-wallpapers'
-file_path = (
-    '/usr/share/lightdm-webkit/themes/litarvan-pre/img/bing-wallpaper.png'
-)
-meta_url = (
-    'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=fr-FR'
-)
+archive_dir = "/data/bing-wallpapers"
+file_path = "/usr/share/bing-wallpaper.png"
+meta_url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=fr-FR"
 
 
 # Wait for internet connection
 while True:
     try:
-        response = urllib.request.urlopen('http://perdu.com', timeout=1)
+        response = urllib.request.urlopen("http://perdu.com", timeout=1)
         break
     except urllib.request.URLError:
         pass
@@ -29,17 +25,17 @@ while True:
     time.sleep(0.1)
 
 # Get the image
-tmp_file_path = '/tmp/wallpaper.png'
+tmp_file_path = "/tmp/wallpaper.png"
 
 data = urllib.request.urlopen(meta_url)
 data = yaml.safe_load(data)
-url = 'http://bing.com' + data['images'][0]['url']
+url = "http://bing.com" + data["images"][0]["url"]
 urllib.request.urlretrieve(url, tmp_file_path)
 
 # Archive the picture
 date_str = date.today().isoformat()
-archive_file = '{}/descriptions.txt'.format(archive_dir)
-copyfile(tmp_file_path, '{}/{}.png'.format(archive_dir, date_str))
+archive_file = "{}/descriptions.txt".format(archive_dir)
+copyfile(tmp_file_path, "{}/{}.png".format(archive_dir, date_str))
 
 with open(archive_file) as file:
     descriptions = yaml.safe_load(file)
@@ -48,24 +44,22 @@ with open(archive_file) as file:
 if descriptions is None:
     descriptions = dict()
 
-descriptions[date_str] = data['images'][0]['copyright']
+descriptions[date_str] = data["images"][0]["copyright"]
 
-with open(archive_file, 'w') as file:
-    yaml.dump(
-        descriptions, file, default_style='>', width=79, allow_unicode=True
-    )
+with open(archive_file, "w") as file:
+    yaml.dump(descriptions, file, default_style=">", width=79, allow_unicode=True)
 
 
 # Add legend
 text = descriptions[date_str]
 img = Image.open(tmp_file_path)
-img = img.convert('RGBA')
+img = img.convert("RGBA")
 
-tmp = Image.new('RGBA', img.size, (0, 0, 0, 0))
+tmp = Image.new("RGBA", img.size, (0, 0, 0, 0))
 draw = ImageDraw.Draw(tmp)
 
 font = ImageFont.truetype(
-    font='/usr/share/fonts/OTF/FiraSansCondensed-Regular.otf', size=20
+    font="/usr/share/fonts/OTF/FiraSansCondensed-Regular.otf", size=20
 )
 text_size = draw.textsize(text, font=font)
 shape = (

@@ -217,7 +217,8 @@ bindsym Mod1+F4 kill
 bindsym Mod1+F2 exec rofi -show drun -show-icons
 
 # for some reason light-locker doesn"t manage to launch webkit2-greter by itself
-bindsym Control+Shift+l exec light-locker-command -l && dm-tool switch-to-greeter
+# bindsym Control+Shift+l exec light-locker-command -l && dm-tool switch-to-greeter
+bindsym Control+Shift+l exec i3lock -i /usr/share/bing-wallpaper.png -t
 
 bindsym Shift+Print exec xfce4-screenshooter
 

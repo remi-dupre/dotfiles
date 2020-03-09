@@ -1,5 +1,5 @@
 [Desktop Entry]
-DefaultProfile=Profile 9.profile
+DefaultProfile=default.profile
 
 [Favorite Profiles]
 Favorites=
@@ -16,7 +16,7 @@ State=AAAA/wAAAAD9AAAAAAAABVQAAALZAAAABAAAAAQAAAAIAAAACPwAAAAA
 ToolBarsMovable=Disabled
 Width 1366=681
 Width 1440=1438
-Width 1920=958
+Width 1920=1918
 
 [TabBar]
 TabBarPosition=Top
