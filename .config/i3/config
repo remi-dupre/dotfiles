@@ -272,3 +272,6 @@ exec --no-startup-id compton -b --no-fading-openclose --shadow-opacity=0
 
 # Synchronization notification tray
 exec --no-startup-id syncthing-gtk --minimized
+
+# Lock at startup
+exec i3lock -i /usr/share/bing-wallpaper.png -t
