@@ -57,7 +57,7 @@ else
     set balloonevalterm
 
     set renderoptions=type:directx
-    set guifont=Hasklig\ Regular\ 8
+    set guifont=FiraMono\ Nerd\ Font\ 9
     set guioptions-=m
     set guioptions-=T
     set guioptions-=r
@@ -329,6 +329,11 @@ function! s:check_back_space() abort
 endfunction
 
 
+" coc-pairs:
+
+autocmd FileType tex let b:coc_pairs = [["$", "$"]]
+
+
 "  _
 " | | __ _ _ __   __ _ _   _  __ _  __ _  ___  ___
 " | |/ _` | '_ \ / _` | | | |/ _` |/ _` |/ _ \/ __|
@@ -341,6 +346,7 @@ autocmd FileType htmldjango set ts=2 sw=2 sts=2
 autocmd FileType rust set cc=101
 
 autocmd FileType rst set cc=73 tw=72
+autocmd FileType json     set ts=4 sw=4 sts=4 tw=79
 autocmd FileType yaml     set ts=2 sw=2 sts=2 tw=79
 
 autocmd FileType tex      set ts=2 sw=2 sts=2 tw=79 spell spelllang=en

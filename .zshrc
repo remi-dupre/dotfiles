@@ -1,5 +1,6 @@
 # Common variables
 export EDITOR="nvim"
+export GPG_TTY=$(tty)
 export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PATH
 
 # Common aliases
