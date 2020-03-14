@@ -3,7 +3,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
 # NOTE: On a laptop, add this line to .profile:
-#       export EXTRA_BUMBLEBEE_MODS="battery brightness"
+#       export EXTRA_BUMBLEBEE_MODS="spacer spacer battery brightness"
 
 set $mod Mod4
 font pango:Noto Sans 7.3
@@ -31,12 +31,19 @@ set $LOCK               i3lock -t -i /usr/share/bing-wallpaper.png \
 # Sound and brightness notifications
 set $NOTIFY_SOUND       $HOME/scripts/notify/sound.sh
 set $NOTIFY_BRIGHTNESS  $HOME/scripts/notify/brightness.sh
+set $NOTIFY_MIC         $HOME/scripts/notify/microphone.sh
 
 # Sound control
-set $SOUND_MUTE_TOGGLE  pactl set-sink-mute @DEFAULT_SINK@ toogle
+set $SOUND_MUTE_TOGGLE  pactl set-sink-mute @DEFAULT_SINK@ toggle
 set $SOUND_MUTE_OFF     pactl set-sink-mute @DEFAULT_SINK@ off
 set $SOUND_UP           pactl set-sink-volume @DEFAULT_SINK@ +5%
 set $SOUND_DOWN         pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Microphone control
+set $MIC_MUTE_TOGGLE    pactl set-source-mute @DEFAULT_SOURCE@ toggle
+set $MIC_MUTE_OFF       pactl set-source-mute @DEFAULT_SOURCE@ off
+set $MIC_UP             pactl set-source-volume @DEFAULT_SOURCE@ +5%
+set $MIC_DOWN           pactl set-source-volume @DEFAULT_SOURCE@ -5%
 
 # Brightness control
 set $BRIGHTNESS_UP      brightnessctl set 5%+
@@ -185,7 +192,7 @@ bindsym $mod+r mode "resize"
 
 set $main_status bumblebee-status \
   -t custom \
-  -m title spacer progress spacer spacer traffic cpu memory spacer spacer spacer pasink $EXTRA_BUMBLEBEE_MODS spacer spacer spacer datetime spacer \
+  -m title progress spacer spacer spacer traffic cpu memory spacer spacer pasource pasink $EXTRA_BUMBLEBEE_MODS spacer spacer spacer datetime spacer \
   -p \
     interval=1 \
     data.path="/data" data.format=" data {used} / {size}" \
@@ -197,7 +204,8 @@ set $main_status bumblebee-status \
     progress.placeholder="" \
     root.path="/" root.format=" root {used} / {size}" \
     spacer.theme.bg=\#002b36 \
-    traffic.showname=False \
+    traffic.showname=False traffic.exclude="lo,virbr,docker,vboxnet,veth,br-" \
+    title.max=128 \
 
 bar {
   i3bar_command i3bar
@@ -234,7 +242,12 @@ bindsym Shift+Print exec xfce4-screenshooter
 # Sound
 bindsym XF86AudioRaiseVolume exec "$SOUND_MUTE_OFF ; $SOUND_UP ; $NOTIFY_SOUND"
 bindsym XF86AudioLowerVolume exec "$SOUND_MUTE_OFF ; $SOUND_DOWN ; $NOTIFY_SOUND"
-bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle ; $NOTIFY_SOUND"
+bindsym XF86AudioMute exec "$SOUND_MUTE_TOGGLE ; $NOTIFY_SOUND"
+
+# Microphone
+bindsym Shift+XF86AudioRaiseVolume exec "$MIC_MUTE_OFF ; $MIC_UP ; $NOTIFY_MIC"
+bindsym Shift+XF86AudioLowerVolume exec "$MIC_MUTE_OFF ; $MIC_DOWN ; $NOTIFY_MIC"
+bindsym Shift+XF86AudioMute exec "$MIC_MUTE_TOGGLE ; $NOTIFY_MIC"
 
 # MPD controls
 bindsym XF86AudioPlay exec mpc toggle
@@ -257,11 +270,6 @@ exec --no-startup-id sleep 0.5 ; nm-applet
 exec --no-startup-id system-config-printer-applet
 exec --no-startup-id light-locker
 exec --no-startup-id xfce4-power-manager
-
-# At start: deprecated (replaced with systemctl)
-#exec --no-startup-id sleep 0.5 && mpd-notification
-#exec --no-startup-id redshift-gtk -l 48:2
-#exec --no-startup-id dunst
 
 # Launch applications at startup
 # exec i3-msg "workspace ; exec konsole"
