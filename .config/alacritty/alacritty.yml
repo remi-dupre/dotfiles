@@ -1,0 +1,106 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty itself.
+env:
+  TERM: xterm-256color
+
+window:
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+  padding:
+    x: 1
+    y: 1
+
+  # Window class (Linux/BSD only):
+  class:
+    # Application instance name
+    instance: Alacritty
+    # General application class
+    general: Alacritty
+
+# Font configuration
+font:
+  normal:
+    family: FiraMono Nerd Font
+    style: Medium
+
+  bold:
+    family: FiraMono Nerd Font
+    style: Bold
+
+  italic:
+    family: FiraMono Nerd Font
+    style: Italic
+
+  bold_italic:
+    family: FiraMono
+    style: Bold Italic
+
+  size: 6.0
+
+
+# If `true`, bold text is drawn using the bright color variants.
+draw_bold_text_with_bright_colors: true
+
+schemes:
+  darkside: &darkside
+    primary:
+      background: "#222324"
+      foreground: "#BABABA"
+
+    normal:
+      black:    "#000000"
+      red:      "#E8341C"
+      green:    "#68C256"
+      yellow:   "#F2D42C"
+      blue:     "#1C98E8"
+      magenta:  "#8E69C9"
+      cyan:     "#1C98E8"
+      white:    "#BABABA"
+
+    bright:
+      black:    "#666666"
+      red:      "#E05A4F"
+      green:    "#77B869"
+      yellow:   "#EFD64B"
+      blue:     "#387CD3"
+      magenta:  "#957BBE"
+      cyan:     "#3D97E2"
+      white:    "#BABABA"
+
+colors: *darkside
+
+# Background opacity
+#
+# Window opacity as a floating point number from `0.0` to `1.0`.
+# The value `0.0` is completely transparent and `1.0` is opaque.
+background_opacity: 0.98
+
+#selection:
+  #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  #save_to_clipboard: false
+
+# Allow terminal applications to change Alacritty's window title.
+dynamic_title: true
+
+cursor:
+  # Cursor style
+  #
+  # Values for `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
+
+# Live config reload (changes require restart)
+live_config_reload: true

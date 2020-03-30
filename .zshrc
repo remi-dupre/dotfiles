@@ -7,6 +7,9 @@ export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PA
 alias vim="nvim"  # use nvim by default
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME" # dotfiles management
 
+# gh cli completion
+eval "$(gh completion -s zsh)"
+
 # Ask for ssh key only once
 alias unlock_keys='eval $(keychain --eval --quiet id_rsa --timeout 20)'
 

@@ -19,6 +19,9 @@ new_window 1pixel
 # |_|   |_|  \___/ \__, |_|  \__,_|_| |_| |_|___/
 #                  |___/
 
+# Terminal emulator
+set $TERM               alacritty
+
 # i3lock fork from cac03: https://github.com/cac03/i3lock (AUR)
 set $LOCK               i3lock -t -i /usr/share/bing-wallpaper.png \
                                -l "#000000" \
@@ -38,6 +41,9 @@ set $SOUND_MUTE_TOGGLE  pactl set-sink-mute @DEFAULT_SINK@ toggle
 set $SOUND_MUTE_OFF     pactl set-sink-mute @DEFAULT_SINK@ off
 set $SOUND_UP           pactl set-sink-volume @DEFAULT_SINK@ +5%
 set $SOUND_DOWN         pactl set-sink-volume @DEFAULT_SINK@ -5%
+# Make sure you loaded samples with:
+#   pacmd load-sample-dir-lazy /usr/share/sounds/freedesktop/stereo/
+set $SOUND_SAMPLE       pacmd play-sample audio-volume-change.oga @DEFAULT_SINK@
 
 # Microphone control
 set $MIC_MUTE_TOGGLE    pactl set-source-mute @DEFAULT_SOURCE@ toggle
@@ -60,7 +66,7 @@ set $BRIGHTNESS_DOWN    brightnessctl set 5%-
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec $TERM
 bindsym XF86PowerOff exec shutdown -h now
 
 # kill focused window
@@ -204,8 +210,8 @@ set $main_status bumblebee-status \
     progress.placeholder="" \
     root.path="/" root.format=" root {used} / {size}" \
     spacer.theme.bg=\#002b36 \
-    traffic.showname=False traffic.exclude="lo,virbr,docker,vboxnet,veth,br-" \
     title.max=128 \
+    traffic.showname=False traffic.exclude="lo,virbr,docker,vboxnet,veth,br-,tun0" \
 
 bar {
   i3bar_command i3bar
@@ -225,7 +231,7 @@ client.focused_inactive #333333 #333333 #FFFFFF #000000
 client.focused #000000 #000000 #FFFFFF #000000a
 
 # Custom shortcuts
-bindsym Control+Mod1+t exec konsole
+bindsym Control+Mod1+t exec $TERM
 bindsym Control+Mod1+f exec firefox
 bindsym Control+Mod1+d exec nemo
 bindsym Control+Mod1+s exec pavucontrol
@@ -240,9 +246,9 @@ bindsym Control+Shift+l exec $LOCK
 bindsym Shift+Print exec xfce4-screenshooter
 
 # Sound
-bindsym XF86AudioRaiseVolume exec "$SOUND_MUTE_OFF ; $SOUND_UP ; $NOTIFY_SOUND"
-bindsym XF86AudioLowerVolume exec "$SOUND_MUTE_OFF ; $SOUND_DOWN ; $NOTIFY_SOUND"
-bindsym XF86AudioMute exec "$SOUND_MUTE_TOGGLE ; $NOTIFY_SOUND"
+bindsym XF86AudioRaiseVolume exec "$SOUND_MUTE_OFF ; $SOUND_UP ; $SOUND_SAMPLE ; $NOTIFY_SOUND"
+bindsym XF86AudioLowerVolume exec "$SOUND_MUTE_OFF ; $SOUND_DOWN ; $SOUND_SAMPLE ; $NOTIFY_SOUND"
+bindsym XF86AudioMute exec "$SOUND_MUTE_TOGGLE ; $SOUND_SAMPLE ; $NOTIFY_SOUND"
 
 # Microphone
 bindsym Shift+XF86AudioRaiseVolume exec "$MIC_MUTE_OFF ; $MIC_UP ; $NOTIFY_MIC"
@@ -263,7 +269,7 @@ bindsym XF86MonBrightnessDown exec "$BRIGHTNESS_DOWN ; $NOTIFY_BRIGHTNESS"
 exec --no-startup-id syndaemon -d -i 0.05 -t -K -R
 
 # Set wallpaper
-exec --no-startup-id feh --bg-fill ~/Documents/Wallpapers/life_is_strange.jpg
+exec --no-startup-id feh --bg-fill $HOME/.wallpaper.jpg
 
 # At start
 exec --no-startup-id sleep 0.5 ; nm-applet
@@ -283,7 +289,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Firefox" instance="Devtools"] floating enable
 
 # Composite manager
-exec --no-startup-id compton -b --no-fading-openclose --shadow-opacity=0
+exec --no-startup-id picom -b --fade-in-step=1 --fade-out-step=1 --fade-delta=0
 
 # Synchronization notification tray
 exec --no-startup-id syncthing-gtk --minimized

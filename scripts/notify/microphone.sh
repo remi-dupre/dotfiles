@@ -3,7 +3,7 @@ source "$(dirname ${BASH_SOURCE[0]})/bar.sh"
 
 BAR_MUTE="·"
 ID_FILE=/tmp/.notif_microphone_id
-NOTIF_ID=$(cat $ID_FILE || echo "600")
+NOTIF_ID=$(cat $ID_FILE || echo "602")
 
 
 default_source_name() {

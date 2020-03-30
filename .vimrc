@@ -113,6 +113,9 @@ call plug#begin('~/.vim/plugged')
 
     " Vim syntax for TOML
     Plug 'cespare/vim-toml'
+
+    " Highlight docstrings as comments
+    Plug 'Kareeeeem/python-docstring-comments'
 call plug#end()
 
 
@@ -351,6 +354,10 @@ autocmd FileType yaml     set ts=2 sw=2 sts=2 tw=79
 
 autocmd FileType tex      set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 autocmd FileType plaintex set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
+
+" Fix python docstrings
+syn region Comment start=/"""/ end=/"""/
+syn region pythonDocstring  start=+^\s*[uU]\?[rR]\?"""+ end=+"""+ keepend excludenl contains=pythonEscape,@Spell,pythonDoctest,pythonDocTest2,pythonSpaceError
 
 "  _                      _
 " | |___      _____  __ _| | _____

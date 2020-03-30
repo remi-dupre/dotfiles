@@ -58,9 +58,7 @@ img = img.convert("RGBA")
 tmp = Image.new("RGBA", img.size, (0, 0, 0, 0))
 draw = ImageDraw.Draw(tmp)
 
-font = ImageFont.truetype(
-    font="/usr/share/fonts/OTF/FiraSansCondensed-Regular.otf", size=20
-)
+font = ImageFont.truetype(font="/usr/share/fonts/noto/NotoSans-Regular.ttf", size=18)
 text_size = draw.textsize(text, font=font)
 shape = (
     img.size[0] - text_size[0] - 6,
