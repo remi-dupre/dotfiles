@@ -2,12 +2,13 @@
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PATH
+export RUSTC_WRAPPER=/home/remi/.cargo/bin/sccache
 
-# Common aliases
+# Common aliases
 alias vim="nvim"  # use nvim by default
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME" # dotfiles management
 
-# gh cli completion
+# gh cli completion
 eval "$(gh completion -s zsh)"
 
 # Ask for ssh key only once
