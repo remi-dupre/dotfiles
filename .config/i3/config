@@ -6,7 +6,7 @@
 #       export EXTRA_BUMBLEBEE_MODS="spacer spacer battery brightness"
 
 set $mod Mod4
-font pango:Noto Sans 7.3
+font pango:Noto Sans Nerd Font 7.3
 
 default_border normal
 default_floating_border normal
