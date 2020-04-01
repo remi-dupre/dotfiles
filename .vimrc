@@ -27,7 +27,7 @@ set linebreak
 set breakindent
 set breakindentopt=shift:1
 set colorcolumn=80
-set list listchars=trail:·,tab:»\ "
+set list listchars=trail:·,nbsp:␣,tab:»\ "
 set encoding=utf-8
 set cmdheight=2 " better display for messages
 set nobackup " some CoC servers have issues with backup files, see #649
