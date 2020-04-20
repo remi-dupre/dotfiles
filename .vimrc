@@ -116,6 +116,9 @@ call plug#begin('~/.vim/plugged')
 
     " Highlight docstrings as comments
     Plug 'Kareeeeem/python-docstring-comments'
+
+    " Vim syntax highlighting for pest PEG grammar files
+    Plug 'pest-parser/pest.vim'
 call plug#end()
 
 

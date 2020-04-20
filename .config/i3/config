@@ -19,10 +19,10 @@ new_window 1pixel
 # |_|   |_|  \___/ \__, |_|  \__,_|_| |_| |_|___/
 #                  |___/
 
-# Terminal emulator
+# Terminal emulator
 set $TERM               alacritty
 
-# i3lock fork from cac03: https://github.com/cac03/i3lock (AUR)
+# i3lock fork from cac03: https://github.com/cac03/i3lock (AUR)
 set $LOCK               i3lock -t -i /usr/share/bing-wallpaper.png \
                                -l "#000000" \
                                -w "#990000" \
@@ -31,27 +31,27 @@ set $LOCK               i3lock -t -i /usr/share/bing-wallpaper.png \
                                -F 50 \
                                -T 1
 
-# Sound and brightness notifications
+# Sound and brightness notifications
 set $NOTIFY_SOUND       $HOME/scripts/notify/sound.sh
 set $NOTIFY_BRIGHTNESS  $HOME/scripts/notify/brightness.sh
 set $NOTIFY_MIC         $HOME/scripts/notify/microphone.sh
 
-# Sound control
+# Sound control
 set $SOUND_MUTE_TOGGLE  pactl set-sink-mute @DEFAULT_SINK@ toggle
 set $SOUND_MUTE_OFF     pactl set-sink-mute @DEFAULT_SINK@ off
 set $SOUND_UP           pactl set-sink-volume @DEFAULT_SINK@ +5%
 set $SOUND_DOWN         pactl set-sink-volume @DEFAULT_SINK@ -5%
-# Make sure you loaded samples with:
+# Make sure you loaded samples with:
 #   pacmd load-sample-dir-lazy /usr/share/sounds/freedesktop/stereo/
 set $SOUND_SAMPLE       pacmd play-sample audio-volume-change.oga @DEFAULT_SINK@
 
-# Microphone control
+# Microphone control
 set $MIC_MUTE_TOGGLE    pactl set-source-mute @DEFAULT_SOURCE@ toggle
 set $MIC_MUTE_OFF       pactl set-source-mute @DEFAULT_SOURCE@ off
 set $MIC_UP             pactl set-source-volume @DEFAULT_SOURCE@ +5%
 set $MIC_DOWN           pactl set-source-volume @DEFAULT_SOURCE@ -5%
 
-# Brightness control
+# Brightness control
 set $BRIGHTNESS_UP      brightnessctl set 5%+
 set $BRIGHTNESS_DOWN    brightnessctl set 5%-
 
@@ -197,33 +197,33 @@ bindsym $mod+r mode "resize"
 #
 
 set $main_status bumblebee-status \
-  -t custom \
-  -m title progress spacer spacer spacer traffic cpu memory spacer spacer pasource pasink $EXTRA_BUMBLEBEE_MODS spacer spacer spacer datetime spacer \
-  -p \
-    interval=1 \
-    data.path="/data" data.format=" data {used} / {size}" \
-    datetime.format=" %A %d %B %Y - %H:%M" \
-    home.path="/home" home.format=" home {used} / {size}" \
-    memory.format="{used}" \
-    progress.baremptychar="--" \
-    progress.format="{cmd} {bar} ({time})" \
-    progress.placeholder="" \
-    root.path="/" root.format=" root {used} / {size}" \
-    spacer.theme.bg=\#002b36 \
-    title.max=128 \
-    traffic.showname=False traffic.exclude="lo,virbr,docker,vboxnet,veth,br-,tun0" \
+    -t custom \
+    -m title progress spacer spacer spacer traffic cpu memory spacer spacer pasource pasink $EXTRA_BUMBLEBEE_MODS spacer spacer spacer datetime spacer \
+    -p \
+        interval=1 \
+        data.path="/data" data.format=" data {used} / {size}" \
+        datetime.format=" %A %d %B %Y - %H:%M" \
+        home.path="/home" home.format=" home {used} / {size}" \
+        memory.format="{used}" \
+        progress.baremptychar="--" \
+        progress.format="{cmd} {bar} ({time})" \
+        progress.placeholder="" \
+        root.path="/" root.format=" root {used} / {size}" \
+        spacer.theme.bg=\#002b36 \
+        title.max=128 \
+        traffic.showname=False traffic.exclude="lo,virbr,docker,vboxnet,veth,br-,tun0" \
 
 bar {
-  i3bar_command i3bar
-  status_command $main_status
-  position top
-  tray_output primary
-  colors {
-    statusline #002b36
-    background #002b36
-    focused_workspace #181818 #181818 #FFFFFF
-    inactive_workspace #002b36 #002b36 #AAAAAA
-  }
+    i3bar_command i3bar
+    status_command $main_status
+    position top
+    tray_output primary
+    colors {
+        statusline #002b36
+        background #002b36
+        focused_workspace #181818 #181818 #FFFFFF
+        inactive_workspace #002b36 #002b36 #AAAAAA
+    }
 }
 
 client.unfocused #333333 #333333 #FFFFFF #333333
@@ -278,21 +278,21 @@ exec --no-startup-id light-locker
 exec --no-startup-id xfce4-power-manager
 
 # Launch applications at startup
-# exec i3-msg "workspace ; exec konsole"
 exec i3-msg "workspace ; exec thunderbird"
 
 # Popups
 for_window [class="Adl" instance="adl"] floating enable
 for_window [class="Ankama Launcher"] floating enable
 for_window [class="battle.net.exe"] floating enable
-for_window [class="Pavucontrol"] floating enable
 for_window [class="Firefox" instance="Devtools"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Thunderbird" instance="Calendar"] floating enable
 
 # Composite manager
 exec --no-startup-id picom -b --fade-in-step=1 --fade-out-step=1 --fade-delta=0
 
-# Synchronization notification tray
+# Synchronization notification tray
 exec --no-startup-id syncthing-gtk --minimized
 
-# Lock at startup
+# Lock at startup
 exec $LOCK
