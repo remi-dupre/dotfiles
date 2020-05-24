@@ -70,7 +70,6 @@ bindsym $mod+Return exec $TERM
 bindsym XF86PowerOff exec shutdown -h now
 
 # kill focused window
-bindsym $mod+Shift+A kill
 bindsym $mod+A kill
 
 # start dmenu (a program launcher)
