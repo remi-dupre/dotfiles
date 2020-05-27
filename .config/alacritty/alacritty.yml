@@ -40,7 +40,7 @@ font:
     family: FiraMono
     style: Bold Italic
 
-  size: 6.0
+  size: 7.5
 
 
 # If `true`, bold text is drawn using the bright color variants.
