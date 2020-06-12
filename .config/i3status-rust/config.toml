@@ -1,0 +1,91 @@
+[theme]
+name = "solarized-dark"
+[theme.overrides]
+good_bg = "#123456"
+good_fg = "#abcdef"
+
+[icons]
+name = "awesome"
+[icons.overrides]
+net_wireless = ""
+volume_muted = " \uf026 "
+
+# Blocks
+
+[[block]]
+block = "focused_window"
+max_width = 120
+
+[[block]]
+block = "custom"
+command = "echo ''"
+interval = 3600
+
+[[block]]
+block = "custom"
+command = "echo '--'"
+interval = 3600
+
+[[block]]
+block = "custom"
+command = "echo ''"
+interval = 3600
+
+[[block]]
+block = "net"
+speed_up = true
+speed_down = true
+interval = 1
+
+[[block]]
+block = "custom"
+command = "echo \u21c4 $(ping -c1 8.8.8.8 | perl -nle '/time=(\\d+)/ && print $1')ms"
+interval = 5
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "memory"
+clickable = false
+display_type = "memory"
+format_mem = "{Mug} GB"
+
+[[block]]
+block = "custom"
+command = "echo ''"
+interval = 3600
+
+[[block]]
+block = "sound"
+device_kind = "source"
+show_volume_when_muted = true
+on_click = "pavucontrol -t 4"
+
+[[block]]
+block = "sound"
+show_volume_when_muted = true
+on_click = "pavucontrol -t 3"
+
+[[block]]
+block = "backlight"
+
+[[block]]
+block = "battery"
+interval = 1
+format = " {percentage}%"
+good = 100
+info = 75
+warning = 50
+critical = 25
+
+[[block]]
+block = "custom"
+command = "echo ''"
+interval = 3600
+
+[[block]]
+block = "time"
+interval = 10
+format = "%A %d %B %Y - %H:%M"

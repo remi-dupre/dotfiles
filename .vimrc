@@ -351,8 +351,9 @@ autocmd FileType html set ts=2 sw=2 sts=2
 autocmd FileType htmldjango set ts=2 sw=2 sts=2
 autocmd FileType rust set cc=101
 
-autocmd FileType rst set cc=73 tw=72
 autocmd FileType json     set ts=4 sw=4 sts=4 tw=79
+autocmd FileType python   set cc=100
+autocmd FileType rst      set cc=73 tw=72
 autocmd FileType yaml     set ts=2 sw=2 sts=2 tw=79
 
 autocmd FileType tex      set ts=2 sw=2 sts=2 tw=79 spell spelllang=en

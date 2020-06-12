@@ -195,26 +195,9 @@ bindsym $mod+r mode "resize"
 # |____/ \__\__,_|\__|\__,_|___/ |____/ \__,_|_|
 #
 
-set $main_status bumblebee-status \
-    -t custom \
-    -m title progress spacer spacer spacer traffic cpu memory spacer spacer pasource pasink $EXTRA_BUMBLEBEE_MODS spacer spacer spacer datetime spacer \
-    -p \
-        interval=1 \
-        data.path="/data" data.format=" data {used} / {size}" \
-        datetime.format=" %A %d %B %Y - %H:%M" \
-        home.path="/home" home.format=" home {used} / {size}" \
-        memory.format="{used}" \
-        progress.baremptychar="--" \
-        progress.format="{cmd} {bar} ({time})" \
-        progress.placeholder="" \
-        root.path="/" root.format=" root {used} / {size}" \
-        spacer.theme.bg=\#002b36 \
-        title.max=128 \
-        traffic.showname=False traffic.exclude="lo,virbr,docker,vboxnet,veth,br-,tun0" \
-
 bar {
     i3bar_command i3bar
-    status_command $main_status
+    status_command /home/remi/code/i3status-rust/target/release/i3status-rs
     position top
     tray_output primary
     colors {
