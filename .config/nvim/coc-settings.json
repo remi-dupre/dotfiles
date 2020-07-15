@@ -1,6 +1,9 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["cpp", "json", "rust", "python"],
-
+    "coc.preferences.formatOnSaveFiletypes": [
+        "cpp",
+        "json",
+        "rust",
+    ],
     "git.addedSign.text": "│",
     "git.changedSign.text": "┊",
     "git.removedSign.text": "␡",
@@ -12,9 +15,8 @@
     "git.topRemovedSign.hlGroup": "LineNr",
     "git.changeRemovedSign.hlGroup": "LineNr",
     "git.addGBlameToBufferVar": true,
-
     "json.enable": true,
     "json.format.enable": true,
-
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "rust-analyzer.inlayHints.chainingHints": false
 }

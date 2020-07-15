@@ -119,6 +119,9 @@ call plug#begin('~/.vim/plugged')
 
     " Vim syntax highlighting for pest PEG grammar files
     Plug 'pest-parser/pest.vim'
+
+    " Python syntax highlighting for Vim
+    Plug 'vim-python/python-syntax'
 call plug#end()
 
 
@@ -166,27 +169,6 @@ let g:lightline = {
       \ }
 
 let g:lightline#bufferline#enable_devicons = 1
-
-" let g:lightline.component_expand = {
-"     \  'linter_checking': 'lightline#ale#checking',
-"     \  'linter_warnings': 'lightline#ale#warnings',
-"     \  'linter_errors': 'lightline#ale#errors',
-"     \  'linter_ok': 'lightline#ale#ok',
-"     \ }
-" let g:lightline.component_type = {
-"     \     'linter_checking': 'left',
-"     \     'linter_warnings': 'warning',
-"     \     'linter_errors': 'error',
-"     \     'linter_ok': 'left',
-"     \ }
-" let g:lightline.active = {
-"     \     'right': [[
-"     \         'linter_checking',
-"     \         'linter_errors',
-"     \         'linter_warnings',
-"     \         'linter_ok'
-"     \     ]]
-"     \ }
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
@@ -240,30 +222,6 @@ let g:lightline = {
       \ }
 
 let g:lightline#bufferline#enable_devicons = 1
-
-" let g:lightline.component_expand = {
-"     \  'linter_checking': 'lightline#ale#checking',
-"     \  'linter_warnings': 'lightline#ale#warnings',
-"     \  'linter_errors': 'lightline#ale#errors',
-"     \  'linter_ok': 'lightline#ale#ok',
-"     \ }
-"
-" let g:lightline.component_type = {
-"     \     'linter_checking': 'left',
-"     \     'linter_warnings': 'warning',
-"     \     'linter_errors': 'error',
-"     \     'linter_ok': 'left',
-"     \ }
-"
-" let g:lightline.active = {
-"     \     'right': [[
-"     \         'linter_checking',
-"     \         'linter_errors',
-"     \         'linter_warnings',
-"     \         'linter_ok'
-"     \     ]]
-"     \ }
-
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
@@ -303,7 +261,7 @@ let g:coc_global_extensions = [
     \ 'coc-clangd',
     \ 'coc-json',
     \ 'coc-python',
-    \ 'coc-rls'
+    \ 'coc-rust-analyzer'
   \ ]
 
 nmap <silent> gd <Plug>(coc-definition)
@@ -317,9 +275,6 @@ command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -362,6 +317,9 @@ autocmd FileType plaintex set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 " Fix python docstrings
 syn region Comment start=/"""/ end=/"""/
 syn region pythonDocstring  start=+^\s*[uU]\?[rR]\?"""+ end=+"""+ keepend excludenl contains=pythonEscape,@Spell,pythonDoctest,pythonDocTest2,pythonSpaceError
+
+" Extra python highlighting
+let g:python_highlight_all = 1
 
 "  _                      _
 " | |___      _____  __ _| | _____
