@@ -2,7 +2,7 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "cpp",
         "json",
-        "rust",
+        "rust"
     ],
     "git.addedSign.text": "│",
     "git.changedSign.text": "┊",
@@ -17,6 +17,10 @@
     "git.addGBlameToBufferVar": true,
     "json.enable": true,
     "json.format.enable": true,
+    "python.jediEnabled": false,
     "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintPath": "/usr/bin/pylint",
     "rust-analyzer.inlayHints.chainingHints": false
 }
