@@ -22,6 +22,9 @@ window:
     # General application class
     general: Alacritty
 
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
 # Font configuration
 font:
   normal:
@@ -40,7 +43,7 @@ font:
     family: FiraMono
     style: Bold Italic
 
-  size: 6.0
+  size: 7.5
 
 
 # If `true`, bold text is drawn using the bright color variants.
@@ -85,9 +88,6 @@ background_opacity: 0.98
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
-
-# Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
 
 cursor:
   # Cursor style

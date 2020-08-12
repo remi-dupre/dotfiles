@@ -2,7 +2,8 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "cpp",
         "json",
-        "rust"
+        "rust",
+        "python"
     ],
     "git.addedSign.text": "│",
     "git.changedSign.text": "┊",
