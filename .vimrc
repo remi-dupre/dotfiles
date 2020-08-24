@@ -6,12 +6,7 @@
 "  |___/
 "
 let mapleader = ","
-
-if has("gui_running")
-    colorscheme atom-dark
-else
-    colorscheme atom-dark-256
-endif
+colorscheme custom
 
 set t_ut=
 
@@ -81,9 +76,6 @@ map <C-k> :lprev<return>
 " |_|            |___/
 
 call plug#begin('~/.vim/plugged')
-    " Distraction-free writing in Vim
-    Plug 'junegunn/goyo.vim'
-
     " Quick file search
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
     Plug 'junegunn/fzf.vim'
@@ -104,23 +96,20 @@ call plug#begin('~/.vim/plugged')
     " NOTE: Requires a patched font: https://github.com/ryanoasis/nerd-fonts/
     Plug 'ryanoasis/vim-devicons'
 
+    " A light and configurable statusline/tabline plugin for Vim
     Plug 'itchyny/lightline.vim'
+
+    " Intellisense engine for Vim8 & Neovim, full language server protocol
+    " support as VSCode
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-    " Vim plugin to add Jinja2 template syntax to a number of programming
-    " languages
-    Plug 'seirl/vim-jinja-languages'
-
-    " Vim syntax for TOML
-    Plug 'cespare/vim-toml'
 
     " Highlight docstrings as comments
     Plug 'Kareeeeem/python-docstring-comments'
 
-    " Vim syntax highlighting for pest PEG grammar files
+    " Languages syntax
+    Plug 'cespare/vim-toml'
     Plug 'pest-parser/pest.vim'
-
-    " Python syntax highlighting for Vim
+    Plug 'seirl/vim-jinja-languages'
     Plug 'vim-python/python-syntax'
 call plug#end()
 
