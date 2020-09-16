@@ -7,11 +7,16 @@ from shutil import copyfile
 import urllib.request
 import yaml
 from PIL import Image, ImageDraw, ImageFont
+from Xlib.display import Display
 
 
 archive_dir = "/data/bing-wallpapers"
 file_path = "/usr/share/bing-wallpaper.png"
 meta_url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=fr-FR"
+
+screen = Display(':0').screen()
+screen_width = screen.width_in_pixels
+screen_height = screen.height_in_pixels
 
 
 # Wait for internet connection
@@ -54,12 +59,13 @@ with open(archive_file, "w") as file:
 text = descriptions[date_str]
 img = Image.open(tmp_file_path)
 img = img.convert("RGBA")
+img = img.resize((screen_width, screen_height), Image.ANTIALIAS)
 
 tmp = Image.new("RGBA", img.size, (0, 0, 0, 0))
 draw = ImageDraw.Draw(tmp)
 
 font = ImageFont.truetype(
-    font="/usr/share/fonts/noto/Noto Sans Regular Nerd Font Complete.ttf", size=18
+    font="/usr/share/fonts/noto/NotoSans-Regular.ttf", size=18
 )
 text_size = draw.textsize(text, font=font)
 shape = (
@@ -68,7 +74,7 @@ shape = (
     img.size[0],
     img.size[1],
 )
-draw.rectangle(shape, fill=(0, 0, 0, 100))
+draw.rectangle(shape, fill=(0, 0, 0, 150))
 draw.text((shape[0] + 3, shape[1] + 3), text, font=font, fill=(255, 255, 255))
 
 img = Image.alpha_composite(img, tmp)

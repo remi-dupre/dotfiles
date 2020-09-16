@@ -300,7 +300,7 @@ autocmd FileType html set ts=2 sw=2 sts=2
 autocmd FileType htmldjango set ts=2 sw=2 sts=2
 autocmd FileType rust set cc=101
 
-autocmd Filetype json let g:indentLine_setConceal = 0
+autocmd Filetype json     let g:indentLine_setConceal = 0
 autocmd FileType json     set ts=4 sw=4 sts=4 tw=79
 autocmd FileType python   set cc=100
 autocmd FileType rst      set cc=73 tw=72
