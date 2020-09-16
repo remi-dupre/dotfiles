@@ -2,7 +2,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
-# NOTE: On a laptop, add this line to .profile:
+# NOTE: On a laptop, add this line to .profile:
 #       export EXTRA_BUMBLEBEE_MODS="spacer spacer battery brightness"
 
 set $mod Mod4
@@ -20,7 +20,7 @@ new_window 1pixel
 #                  |___/
 
 # Terminal emulator
-set $TERM               alacritty
+set $TERM               alacritty 2>&1 >> /tmp/alacritty_logs
 
 # i3lock fork from cac03: https://github.com/cac03/i3lock (AUR)
 set $LOCK               i3lock -t -i /usr/share/bing-wallpaper.png \
@@ -64,6 +64,9 @@ set $BRIGHTNESS_DOWN    brightnessctl set 5%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# always on top window
+bindsym $mod+w sticky toggle
 
 # start a terminal
 bindsym $mod+Return exec $TERM

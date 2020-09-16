@@ -3,6 +3,6 @@
 	name = Rémi Dupré
 	signingkey = 01CC96711A8C2FEB5972B7D288498F75F2DBC639
 [gpg]
-	program = gpg
+	program = /home/remi/scripts/gpg-prompt.sh
 [commit]
 	gpgsign = true

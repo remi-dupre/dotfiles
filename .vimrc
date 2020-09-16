@@ -5,19 +5,11 @@
 "  \__, |\___|_| |_|\___|_|  \__,_|_|
 "  |___/
 "
-let mapleader = ","
-
-if has("gui_running")
-    colorscheme atom-dark
-else
-    colorscheme atom-dark-256
-endif
-
-set t_ut=
-
 syntax on
 filetype plugin indent on
 
+let mapleader = ","
+set t_ut=
 set number relativenumber
 set signcolumn=yes
 set autoindent
@@ -69,9 +61,8 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
-map <C-j> :lnext<return>
-map <C-k> :lprev<return>
-
+nmap <C-k> <Plug>(coc-diagnostic-prev)
+nmap <C-j> <Plug>(coc-diagnostic-next)
 
 "        _             _
 "  _ __ | |_   _  __ _(_)_ __  ___
@@ -81,8 +72,8 @@ map <C-k> :lprev<return>
 " |_|            |___/
 
 call plug#begin('~/.vim/plugged')
-    " Distraction-free writing in Vim
-    Plug 'junegunn/goyo.vim'
+    " Color scheme
+    Plug 'jacoborus/tender.vim'
 
     " Quick file search
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -104,22 +95,38 @@ call plug#begin('~/.vim/plugged')
     " NOTE: Requires a patched font: https://github.com/ryanoasis/nerd-fonts/
     Plug 'ryanoasis/vim-devicons'
 
+    " A light and configurable statusline/tabline plugin for Vim
     Plug 'itchyny/lightline.vim'
+
+    " Intellisense engine for Vim8 & Neovim, full language server protocol
+    " support as VSCode
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-    " Vim plugin to add Jinja2 template syntax to a number of programming
-    " languages
-    Plug 'seirl/vim-jinja-languages'
-
-    " Vim syntax for TOML
-    Plug 'cespare/vim-toml'
 
     " Highlight docstrings as comments
     Plug 'Kareeeeem/python-docstring-comments'
 
-    " Vim syntax highlighting for pest PEG grammar files
+    " A vim plugin to display the indention levels with thin vertical lines 
+    Plug 'Yggdroot/indentLine'
+
+    " Improved conceal for tex in vim 
+    Plug 'PietroPate/vim-tex-conceal'
+
+    " Languages syntax
+    Plug 'cespare/vim-toml'
     Plug 'pest-parser/pest.vim'
+    Plug 'seirl/vim-jinja-languages'
+    Plug 'vim-python/python-syntax'
 call plug#end()
+
+
+" Color scheme
+set termguicolors
+set background=dark
+colorscheme tender
+
+highlight LineNr        ctermbg=NONE guibg=NONE
+highlight SignColumn    ctermbg=NONE guibg=NONE
+highlight Normal        ctermbg=NONE guibg=NONE
 
 
 " Lightline
@@ -128,65 +135,44 @@ function! CocCurrentFunction()
 endfunction
 
 function! CocGitBlame()
-  let blame = get(b:, 'coc_git_blame', '')
-  return blame " return winwidth(0) > 120 ? blame : ''
+    let blame = get(b:, 'coc_git_blame', '')
+    return blame
 endfunction
 
 function! CocStatusDiagnostic() abort
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info) | return '' | endif
-  let msgs = []
-  if get(info, 'error', 0)
-    call add(msgs, '🛑 ' . info['error'])
-  endif
-  if get(info, 'warning', 0)
-    call add(msgs, '⚠ ' . info['warning'])
-  endif
-  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    let msgs = []
+    if get(info, 'error', 0)
+        call add(msgs, '🛑 ' . info['error'])
+    endif
+    if get(info, 'warning', 0)
+        call add(msgs, '⚠ ' . info['warning'])
+    endif
+    return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \   'active': {
-      \     'left': [
-      \       [ 'mode', 'paste' ],
-      \       [ 'cocstatus', 'currentfunction'],
-      \       ['readonly', 'filename', 'modified' ],
-      \     ],
-      \     'right':[
-      \       [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
-      \       [ 'blame' ],
-      \     ]
-      \   },
-      \   'component_function': {
-      \     'blame': 'CocGitBlame',
-      \     'cocstatus': 'CocStatusDiagnostic',
-      \     'currentfunction': 'CocCurrentFunction',
-      \   }
-      \ }
+ \  'colorscheme': 'tender',
+ \  'active': {
+ \      'left': [
+ \          [ 'mode', 'paste' ],
+ \          [ 'cocstatus', 'currentfunction'],
+ \          [ 'readonly', 'filename', 'modified' ],
+ \      ],
+ \      'right': [
+ \          [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+ \          [ 'blame' ],
+ \      ]
+ \  },
+ \  'component_function': {
+ \      'blame': 'CocGitBlame',
+ \      'cocstatus': 'CocStatusDiagnostic',
+ \      'currentfunction': 'CocCurrentFunction',
+ \  }
+ \}
 
 let g:lightline#bufferline#enable_devicons = 1
-
-" let g:lightline.component_expand = {
-"     \  'linter_checking': 'lightline#ale#checking',
-"     \  'linter_warnings': 'lightline#ale#warnings',
-"     \  'linter_errors': 'lightline#ale#errors',
-"     \  'linter_ok': 'lightline#ale#ok',
-"     \ }
-" let g:lightline.component_type = {
-"     \     'linter_checking': 'left',
-"     \     'linter_warnings': 'warning',
-"     \     'linter_errors': 'error',
-"     \     'linter_ok': 'left',
-"     \ }
-" let g:lightline.active = {
-"     \     'right': [[
-"     \         'linter_checking',
-"     \         'linter_errors',
-"     \         'linter_warnings',
-"     \         'linter_ok'
-"     \     ]]
-"     \ }
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
@@ -194,80 +180,33 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 
 " Auto Pairs:
-let g:AutoPairsMultilineClose = 0
+let g:AutoPairsMultilineClose = 2
 
 function! CocGitBlame()
-  let blame = get(b:, 'coc_git_blame', '')
-  return blame " return winwidth(0) > 120 ? blame : ''
+    let blame = get(b:, 'coc_git_blame', '')
+    return blame
 endfunction
 
 function! CocStatusDiagnostic() abort
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info) | return '' | endif
-  let msgs = []
-  if get(info, 'error', 0)
-    call add(msgs, ' ' . info['error'])
-  endif
-  if get(info, 'warning', 0)
-    call add(msgs, '⚠ ' . info['warning'])
-  endif
-  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+    let info = get(b:, 'coc_diagnostic_info', {})
+    let msgs = []
+
+    if empty(info) | return '' | endif
+
+    if get(info, 'error', 0)
+        call add(msgs, ' ' . info['error'])
+    endif
+
+    if get(info, 'warning', 0)
+        call add(msgs, '⚠ ' . info['warning'])
+    endif
+
+    return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
 endfunction
 
 function! FileType()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype  : 'no ft') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype  : 'no ft') : ''
 endfunction
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \   'active': {
-      \     'left': [
-      \       [ 'mode', 'paste' ],
-      \       [ 'cocstatus', 'currentfunction'],
-      \       ['readonly', 'filename', 'modified' ],
-      \     ],
-      \     'right':[
-      \       [ 'filetype', 'lineinfo', 'percent' ],
-      \       [ 'blame' ],
-      \     ]
-      \   },
-      \   'component_function': {
-      \     'blame': 'CocGitBlame',
-      \     'cocstatus': 'CocStatusDiagnostic',
-      \     'currentfunction': 'CocCurrentFunction',
-      \     'filetype': 'FileType',
-      \   }
-      \ }
-
-let g:lightline#bufferline#enable_devicons = 1
-
-" let g:lightline.component_expand = {
-"     \  'linter_checking': 'lightline#ale#checking',
-"     \  'linter_warnings': 'lightline#ale#warnings',
-"     \  'linter_errors': 'lightline#ale#errors',
-"     \  'linter_ok': 'lightline#ale#ok',
-"     \ }
-"
-" let g:lightline.component_type = {
-"     \     'linter_checking': 'left',
-"     \     'linter_warnings': 'warning',
-"     \     'linter_errors': 'error',
-"     \     'linter_ok': 'left',
-"     \ }
-"
-" let g:lightline.active = {
-"     \     'right': [[
-"     \         'linter_checking',
-"     \         'linter_errors',
-"     \         'linter_warnings',
-"     \         'linter_ok'
-"     \     ]]
-"     \ }
-
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf071 "
-let g:lightline#ale#indicator_errors = "\uf05e "
-let g:lightline#ale#indicator_ok = "\uf00c"
 
 
 " Fzf:
@@ -295,19 +234,30 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 " Lightline:
 set laststatus=2
 
+" IndentLine:
+let g:indentLine_char = '⁚'
+let g:indentLine_setConceal = 2
+
 
 " CoC:
 let g:coc_global_extensions = [
-    \ 'coc-pairs',
-    \ 'coc-git',
-    \ 'coc-clangd',
-    \ 'coc-json',
-    \ 'coc-python',
-    \ 'coc-rls'
-  \ ]
+ \  'coc-pairs',
+ \  'coc-git',
+ \  'coc-clangd',
+ \  'coc-json',
+ \  'coc-python',
+ \  'coc-rust-analyzer'
+ \]
 
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
+
+nmap <C-h> <Plug>(coc-git-prevchunk)
+nmap <C-l> <Plug>(coc-git-nextchunk)
+nmap <silent> gu :CocCommand git.browserOpen<CR>
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                         \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -318,26 +268,25 @@ command! -nargs=0 Format :call CocAction('format')
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-
 " coc-pairs:
-
 autocmd FileType tex let b:coc_pairs = [["$", "$"]]
+
+" vim-tex-conceal:
+set conceallevel=2
+let g:tex_conceal="abdgms"
 
 
 "  _
@@ -351,6 +300,7 @@ autocmd FileType html set ts=2 sw=2 sts=2
 autocmd FileType htmldjango set ts=2 sw=2 sts=2
 autocmd FileType rust set cc=101
 
+autocmd Filetype json     let g:indentLine_setConceal = 0
 autocmd FileType json     set ts=4 sw=4 sts=4 tw=79
 autocmd FileType python   set cc=100
 autocmd FileType rst      set cc=73 tw=72
@@ -363,16 +313,5 @@ autocmd FileType plaintex set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 syn region Comment start=/"""/ end=/"""/
 syn region pythonDocstring  start=+^\s*[uU]\?[rR]\?"""+ end=+"""+ keepend excludenl contains=pythonEscape,@Spell,pythonDoctest,pythonDocTest2,pythonSpaceError
 
-"  _                      _
-" | |___      _____  __ _| | _____
-" | __\ \ /\ / / _ \/ _` | |/ / __|
-" | |_ \ V  V /  __/ (_| |   <\__ \
-"  \__| \_/\_/ \___|\__,_|_|\_\___/
-"
-
-" Cursor shape on xfce4-terminal
-" if has("autocmd")
-"     autocmd InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_IBEAM/' ~/.config/xfce4/terminal/terminalrc"
-"     autocmd InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
-"     autocmd VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_IBEAM/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
-" endif
+" Extra python highlighting
+let g:python_highlight_all = 1
