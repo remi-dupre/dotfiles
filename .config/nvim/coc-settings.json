@@ -26,5 +26,6 @@
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintPath": "/usr/bin/pylint",
-    "rust-analyzer.inlayHints.chainingHints": false
+    "rust-analyzer.inlayHints.chainingHints": false,
+    "rust-analyzer.checkOnSave.command": "clippy"
 }

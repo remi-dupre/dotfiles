@@ -105,10 +105,10 @@ call plug#begin('~/.vim/plugged')
     " Highlight docstrings as comments
     Plug 'Kareeeeem/python-docstring-comments'
 
-    " A vim plugin to display the indention levels with thin vertical lines 
+    " A vim plugin to display the indention levels with thin vertical lines
     Plug 'Yggdroot/indentLine'
 
-    " Improved conceal for tex in vim 
+    " Improved conceal for tex in vim
     Plug 'PietroPate/vim-tex-conceal'
 
     " Languages syntax
@@ -309,9 +309,30 @@ autocmd FileType yaml     set ts=2 sw=2 sts=2 tw=79
 autocmd FileType tex      set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 autocmd FileType plaintex set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 
+" Custom colors
+hi CocRustChainingHint ctermfg=green
+
 " Fix python docstrings
 syn region Comment start=/"""/ end=/"""/
 syn region pythonDocstring  start=+^\s*[uU]\?[rR]\?"""+ end=+"""+ keepend excludenl contains=pythonEscape,@Spell,pythonDoctest,pythonDocTest2,pythonSpaceError
 
 " Extra python highlighting
 let g:python_highlight_all = 1
+
+"  _                      _
+" | |___      _____  __ _| | _____
+" | __\ \ /\ / / _ \/ _` | |/ / __|
+" | |_ \ V  V /  __/ (_| |   <\__ \
+"  \__| \_/\_/ \___|\__,_|_|\_\___/
+"
+"
+
+" Use external clipboard
+vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+" nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+
+" Remove highlighting when entering insert mode
+autocmd InsertEnter * setlocal nohlsearch
+autocmd InsertLeave * setlocal hlsearch lz
+inoremap <silent><Esc> <Esc>:nohl<bar>set nolz<CR>
+inoremap <silent><C-c> <C-c>:nohl<bar>set nolz<CR>

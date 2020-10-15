@@ -222,7 +222,7 @@ bindsym Control+Mod1+d exec nemo
 bindsym Control+Mod1+s exec pavucontrol
 
 bindsym Mod1+F4 kill
-bindsym Mod1+F2 exec rofi -show drun -show-icons
+bindsym Mod1+F2 exec rofi -show-icons -show
 
 # for some reason light-locker doesn"t manage to launch webkit2-greter by itself
 # bindsym Control+Shift+l exec light-locker-command -l && dm-tool switch-to-greeter
