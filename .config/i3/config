@@ -72,9 +72,6 @@ bindsym $mod+w sticky toggle
 bindsym $mod+Return exec $TERM
 bindsym XF86PowerOff exec shutdown -h now
 
-# kill focused window
-bindsym $mod+A kill
-
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
