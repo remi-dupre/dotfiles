@@ -3,6 +3,7 @@ export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PATH
 export RUSTC_WRAPPER=/home/remi/.cargo/bin/sccache
+export GOPATH=/home/remi/.go
 
 # Node version management
 source /usr/share/nvm/init-nvm.sh
