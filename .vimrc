@@ -310,21 +310,22 @@ let g:tex_conceal="abdgms"
 " |_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
 "                |___/             |___/
 
-autocmd FileType html set ts=2 sw=2 sts=2
+autocmd FileType html       set ts=2 sw=2 sts=2
 autocmd FileType htmldjango set ts=2 sw=2 sts=2
-autocmd FileType rust set cc=101
+autocmd FileType rust       set cc=101
 
-autocmd Filetype json     let g:indentLine_setConceal = 0
-autocmd FileType json     set ts=4 sw=4 sts=4 tw=79
-autocmd FileType python   set cc=100
-autocmd FileType rst      set cc=73 tw=72
-autocmd FileType yaml     set ts=2 sw=2 sts=2 tw=79
+autocmd Filetype json       let g:indentLine_setConceal = 0
+autocmd FileType json       set ts=4 sw=4 sts=4 tw=79
+autocmd FileType python     set cc=100
+autocmd FileType rst        set cc=73 tw=72
+autocmd FileType yaml       set ts=2 sw=2 sts=2 tw=79
 
-autocmd FileType tex      set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
-autocmd FileType plaintex set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
+autocmd FileType tex        set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
+autocmd FileType plaintex   set ts=2 sw=2 sts=2 tw=79 spell spelllang=en
 
 " Custom colors
-hi CocRustChainingHint ctermfg=green
+hi CocRustChainingHint      ctermfg=Black guifg=Black
+hi CocRustTypeHint          ctermfg=Black guifg=Black
 
 " Fix python docstrings
 syn region Comment start=/"""/ end=/"""/
