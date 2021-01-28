@@ -246,7 +246,8 @@ let g:coc_global_extensions = [
  \  'coc-clangd',
  \  'coc-json',
  \  'coc-python',
- \  'coc-rust-analyzer'
+ \  'coc-rust-analyzer',
+ \  'coc-emoji'
  \]
 
 nmap <silent> gd <Plug>(coc-definition)

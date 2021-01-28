@@ -68,6 +68,9 @@ floating_modifier $mod
 # always on top window
 bindsym $mod+w sticky toggle
 
+# stick and resize
+bindsym $mod+Shift+w floating enable; sticky enable; border none; resize set 533 300; move position 1385 22
+
 # start a terminal
 bindsym $mod+Return exec $TERM
 bindsym XF86PowerOff exec shutdown -h now

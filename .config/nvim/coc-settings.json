@@ -28,5 +28,8 @@
     "python.linting.pylintPath": "/usr/bin/pylint",
     "rust-analyzer.inlayHints.chainingHints": false,
     "rust-analyzer.inlayHints.maxLength": 100,
-    "rust-analyzer.checkOnSave.command": "clippy"
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.diagnostics.disabled": [
+        "macro-error"
+    ]
 }
