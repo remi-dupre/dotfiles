@@ -6,3 +6,8 @@
 	program = /home/remi/scripts/gpg-prompt.sh
 [commit]
 	gpgsign = true
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
