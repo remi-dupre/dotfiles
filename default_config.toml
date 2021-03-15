@@ -1,0 +1,17 @@
+[alacritty]
+
+  font = "FiraMono Nerd Font"
+  font_size = 6.5
+
+
+[i3status]
+
+  [i3status.battery]
+  enabled = true
+  device = "BAT0"
+
+  [i3status.backlight]
+  enabled = true
+
+  [i3status.velib]
+  stations = []

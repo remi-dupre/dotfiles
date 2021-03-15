@@ -2,8 +2,8 @@
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PATH
-# export RUSTC_WRAPPER=/home/remi/.cargo/bin/sccache
 export GOPATH=/home/remi/.go
+# export RUSTC_WRAPPER=/home/remi/.cargo/bin/sccache
 
 # Node version management
 source /usr/share/nvm/init-nvm.sh
@@ -69,7 +69,7 @@ bindkey '^xe'  edit-command-line
 # Configure history
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
-SAVEHIST=$HISTSIZE
+SAVEHIST=10000000
 
 # Minimalist calculator
 function pc {

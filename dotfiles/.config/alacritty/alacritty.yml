@@ -28,22 +28,22 @@ window:
 # Font configuration
 font:
   normal:
-    family: FiraMono Nerd Font
+    family: {{ alacritty.font }}
     style: Medium
 
   bold:
-    family: FiraMono Nerd Font
+    family: {{ alacritty.font }}
     style: Bold
 
   italic:
-    family: FiraMono Nerd Font
+    family: {{ alacritty.font }}
     style: Italic
 
   bold_italic:
-    family: FiraMono
+    family: {{ alacritty.font }}
     style: Bold Italic
 
-  size: 7.5
+  size: {{ alacritty.font_size }}
 
 
 # If `true`, bold text is drawn using the bright color variants.
