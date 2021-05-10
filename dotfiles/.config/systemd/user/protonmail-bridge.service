@@ -1,0 +1,9 @@
+[Unit]
+Description=IMAP/POP3 bridge for ProtonMail
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/protonmail-bridge
+
+[Install]
+WantedBy=default.target
