@@ -31,6 +31,9 @@ set $LOCK               i3lock -t -i /usr/share/bing-wallpaper.png \
                                -F 50 \
                                -T 1
 
+# Password manager
+set $PASS               keepassxc
+
 # Sound and brightness notifications
 set $NOTIFY_SOUND       $HOME/scripts/notify/sound.sh
 set $NOTIFY_BRIGHTNESS  $HOME/scripts/notify/brightness.sh
@@ -220,6 +223,7 @@ bindsym Control+Mod1+t exec $TERM
 bindsym Control+Mod1+f exec firefox
 bindsym Control+Mod1+d exec nemo
 bindsym Control+Mod1+s exec pavucontrol
+bindsym Control+Mod1+k exec $PASS
 
 bindsym Mod1+F4 kill
 bindsym Mod1+F2 exec rofi -show-icons -show
@@ -241,10 +245,10 @@ bindsym Shift+XF86AudioLowerVolume exec "$MIC_MUTE_OFF ; $MIC_DOWN ; $NOTIFY_MIC
 bindsym Shift+XF86AudioMute exec "$MIC_MUTE_TOGGLE ; $NOTIFY_MIC"
 
 # MPD controls
-bindsym XF86AudioPlay exec mpc toggle
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPrev exec mpc prev
-bindsym XF86AudioStop exec mpc stop
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl prev
+bindsym XF86AudioStop exec playerctl stop
 
 # Sreen brightness
 bindsym XF86MonBrightnessUp exec "$BRIGHTNESS_UP ; $NOTIFY_BRIGHTNESS"
@@ -270,6 +274,7 @@ for_window [class="Adl" instance="adl"] floating enable
 for_window [class="Ankama Launcher"] floating enable
 for_window [class="battle.net.exe"] floating enable
 for_window [class="Firefox" instance="Devtools"] floating enable
+for_window [class="KeePassXC"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Thunderbird" instance="Calendar"] floating enable
 

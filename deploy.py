@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import stat
+import subprocess
 from pathlib import Path
 from shutil import copystat
 
@@ -42,6 +43,7 @@ def real_path(template_path: Path) -> Path:
 
 def main():
     config = load_config()
+    print("===== dotfiles =====")
 
     for path in filter(Path.is_file, DOTFILES_PATH.rglob("*")):
         mode = stat.S_IMODE(path.stat().st_mode)
@@ -49,6 +51,14 @@ def main():
         rendered = jinja2.Template(open(path).read()).render(**config)
         open(real_path(path), "w").write(rendered)
         copystat(path, real_path(path))
+
+    if "gsettings" in config:
+        for schema, reccords in config["gsettings"].items():
+            print(f"\n===== gsettings: {schema} =====")
+
+            for key, val in reccords.items():
+                print(key, "=", val)
+                subprocess.call(["gsettings", "set", schema, key, val])
 
 
 if __name__ == "__main__":

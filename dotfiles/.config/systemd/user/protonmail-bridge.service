@@ -4,6 +4,8 @@ Description=IMAP/POP3 bridge for ProtonMail
 [Service]
 Type=simple
 ExecStart=/usr/bin/protonmail-bridge
+After=network-online.target
+Wants=network-online.target
 
 [Install]
 WantedBy=default.target

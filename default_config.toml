@@ -1,8 +1,6 @@
 [alacritty]
-
-  font = "FiraMono Nerd Font"
-  font_size = 6.5
-
+font = "FiraMono Nerd Font"
+font_size = 6.5
 
 [i3status]
 
@@ -15,3 +13,8 @@
 
   [i3status.velib]
   stations = []
+
+[gsettings]
+
+  [gsettings."org.cinnamon.desktop.default-applications.terminal"]
+  exec = "alacritty"
