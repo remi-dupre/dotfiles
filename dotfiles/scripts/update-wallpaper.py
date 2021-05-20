@@ -11,9 +11,8 @@ from Xlib.display import Display
 from Xlib.error import DisplayConnectionError
 
 
-ARCHIVE_DIR = "/data/bing-wallpapers"
 TMP_FILE_PATH = "/tmp/wallpaper.png"
-FILE_PATH = "/usr/share/bing-wallpaper.png"
+FILE_PATH = "/home/remi/.lock-wallpaper.png"
 META_URL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=fr-FR"
 
 # Wait for main display to be attached to get screen geometry
@@ -44,26 +43,8 @@ data = yaml.safe_load(data)
 url = "http://bing.com" + data["images"][0]["url"]
 urllib.request.urlretrieve(url, TMP_FILE_PATH)
 
-# Archive the picture
-date_str = date.today().isoformat()
-archive_file = "{}/descriptions.txt".format(ARCHIVE_DIR)
-copyfile(TMP_FILE_PATH, "{}/{}.png".format(ARCHIVE_DIR, date_str))
-
-with open(archive_file) as file:
-    descriptions = yaml.safe_load(file)
-
-# This is dangerous as it can erase everything
-if descriptions is None:
-    descriptions = dict()
-
-descriptions[date_str] = data["images"][0]["copyright"]
-
-with open(archive_file, "w") as file:
-    yaml.dump(descriptions, file, default_style=">", width=79, allow_unicode=True)
-
-
 # Add legend
-text = descriptions[date_str]
+text = data["images"][0]["copyright"]
 img = Image.open(TMP_FILE_PATH)
 img = img.convert("RGBA")
 img = img.resize((screen_width, screen_height), Image.ANTIALIAS)
@@ -87,5 +68,3 @@ img.save(TMP_FILE_PATH)
 
 # Update wallpaper
 copyfile(TMP_FILE_PATH, FILE_PATH)
-
-print("Finished!")

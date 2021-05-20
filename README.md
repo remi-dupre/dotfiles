@@ -1,3 +1,11 @@
+Crontab
+-------
+
+```crontab
+@reboot /home/remi/scripts/update-wallpaper.py
+```
+
+
 Custom services
 ---------------
 
@@ -7,7 +15,7 @@ Custom services
 systemctl enable --user --now protonmail-bridge
 ```
 
-##### Bluetooth headset's controls
+#### Bluetooth headset's controls
 
 ```
 systemctl enable --user --now mpris-proxy

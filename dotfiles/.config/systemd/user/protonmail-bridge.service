@@ -3,9 +3,8 @@ Description=IMAP/POP3 bridge for ProtonMail
 
 [Service]
 Type=simple
+ExecStartPre=/home/remi/scripts/wait-for-internet.py
 ExecStart=/usr/bin/protonmail-bridge
-After=network-online.target
-Wants=network-online.target
 
 [Install]
 WantedBy=default.target

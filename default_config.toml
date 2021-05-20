@@ -16,5 +16,4 @@ font_size = 6.5
 
 [gsettings]
 
-  [gsettings."org.cinnamon.desktop.default-applications.terminal"]
-  exec = "alacritty"
+  "org.cinnamon.desktop.default-applications.terminal" = { exec = "alacritty" }

@@ -23,7 +23,7 @@ new_window 1pixel
 set $TERM               alacritty 2>&1 >> /tmp/alacritty_logs
 
 # i3lock fork from cac03: https://github.com/cac03/i3lock (AUR)
-set $LOCK               i3lock -t -i /usr/share/bing-wallpaper.png \
+set $LOCK               i3lock -t -i /home/remi/.lock-wallpaper.png \
                                -l "#000000" \
                                -w "#990000" \
                                -o "#000099" \
@@ -219,18 +219,16 @@ client.focused_inactive #333333 #333333 #FFFFFF #000000
 client.focused #000000 #000000 #FFFFFF #000000a
 
 # Custom shortcuts
-bindsym Control+Mod1+t exec $TERM
-bindsym Control+Mod1+f exec firefox
 bindsym Control+Mod1+d exec nemo
-bindsym Control+Mod1+s exec pavucontrol
+bindsym Control+Mod1+f exec firefox
 bindsym Control+Mod1+k exec $PASS
+bindsym Control+Mod1+s exec pavucontrol
+bindsym Control+Mod1+t exec $TERM
 
-bindsym Mod1+F4 kill
+bindsym Control+Shift+l exec loginctl lock-session && $LOCK
+
 bindsym Mod1+F2 exec rofi -show-icons -show
-
-# for some reason light-locker doesn"t manage to launch webkit2-greter by itself
-# bindsym Control+Shift+l exec light-locker-command -l && dm-tool switch-to-greeter
-bindsym Control+Shift+l exec $LOCK
+bindsym Mod1+F4 kill
 
 bindsym Shift+Print exec xfce4-screenshooter
 
