@@ -33,6 +33,10 @@ alias iorgen='PYTHONPATH=/usr/lib/python37.zip:/usr/lib/python3.7:/usr/lib/pytho
 # Display stderr with a custom style
 export LD_PRELOAD="/usr/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
 
+# GPG doesn't work well together with yay
+alias gpg="LD_PRELOAD='' gpg"
+alias yay="LD_PRELOAD='' yay"
+
 # In particular, libpostal doesn't install in usual directories
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 

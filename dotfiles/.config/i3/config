@@ -276,6 +276,16 @@ for_window [class="KeePassXC"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Thunderbird" instance="Calendar"] floating enable
 
+# ---
+# --- Startup executions
+# ---
+
+# Adjust monitor size
+exec --no-startup-id bash -c "~/.screenlayout/main.sh || ~/.screenlayout/laptop.sh"
+
+# Set wallpaper
+exec --no-startup-id feh --bg-fill ~/.wallpaper.jpg
+
 # Composite manager
 exec --no-startup-id picom -b --fade-in-step=1 --fade-out-step=1 --fade-delta=0
 

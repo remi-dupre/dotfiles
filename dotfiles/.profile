@@ -6,12 +6,6 @@ export QT_QPA_PLATFORMTHEME=gtk2
 # Start SSH agent
 eval $(ssh-agent)
 
-# First available layout (arandr is a good tool to build a xrandr command)
-~/.screenlayout/main.sh || ~/.screenlayout/laptop.sh
-
-# Set wallpaper
-feh --bg-fill ~/.wallpaper.jpg
-
 # Applets
 blueman-applet&  # Bluetooth
 keepassxc&  # KeepassXC

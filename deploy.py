@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-import stat
 import subprocess
-from enum import Enum
 from pathlib import Path
 from shutil import copystat
 
@@ -9,28 +7,24 @@ import jinja2
 
 from util import PROJECT_PATH
 from util.config import load_config
+from util.print import Style
 
 
 DOTFILES_PATH = PROJECT_PATH / "dotfiles"
 BINARY_FILETYPES = [".jpg", ".png"]
 
 
-class Style(Enum):
-    UNCHANGED = "\033[02m"
-    CHANGED = "\033[0m\033[94m"
-    RESET = "\033[0m"
-
-    def print(self, *args, **kwargs):
-        print(self.value, end="")
-        print(*args, **kwargs, end="")
-        print(self.RESET.value)
-
-
 class State:
+    def run(self, verbose: bool = False):
+        self.display(verbose)
+
+        if self.changed():
+            self.apply()
+
     def changed(self) -> bool:
         raise NotImplementedError
 
-    def display(self, verbose: bool = False):
+    def display(self, verbose):
         raise NotImplementedError
 
     def apply(self):
@@ -53,7 +47,7 @@ class GSettings(State):
     def changed(self) -> bool:
         return self.current() != self.val
 
-    def display(self, verbose: bool = False):
+    def display(self, verbose):
         style = Style.CHANGED if self.changed() else Style.UNCHANGED
         style.print(f"{self.schema}: {self.key} = {self.val}")
 
@@ -75,7 +69,7 @@ class BinaryFile(State):
             and self.path.stat().st_mode == self.target_path().stat().st_mode
         )
 
-    def display(self, verbose: bool = False):
+    def display(self, verbose):
         style = Style.CHANGED if self.changed() else Style.UNCHANGED
         style.print(f" {self.target_path()}")
 
@@ -126,21 +120,14 @@ def main():
         else:
             entry = TemplateFile(path, config)
 
-        entry.display()
-
-        if entry.changed():
-            entry.apply()
+        entry.run()
 
     if "gsettings" in config:
         for schema, reccords in config["gsettings"].items():
             print(f"\n===== gsettings: {schema} =====")
 
             for key, val in reccords.items():
-                entry = GSettings(schema, key, val)
-                entry.display()
-
-                if entry.changed():
-                    entry.apply()
+                GSettings(schema, key, val).run()
 
 
 if __name__ == "__main__":
