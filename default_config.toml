@@ -1,3 +1,10 @@
+[color]
+back = "#1c1b22" # background color
+prim = "#883333" # primary color for accents
+font = "#BABABA" # font color
+fdim = "#444444" # dimmed font color
+fbri = "#FFFFFF" # bright font color
+
 [alacritty]
 font = "FiraMono Nerd Font"
 font_size = 6.5

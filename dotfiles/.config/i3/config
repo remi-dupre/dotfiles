@@ -1,16 +1,14 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-#
-# NOTE: On a laptop, add this line to .profile:
-#       export EXTRA_BUMBLEBEE_MODS="spacer spacer battery brightness"
 
 set $mod Mod4
 font pango:Noto Sans Nerd Font 7.3
 
 default_border normal
 default_floating_border normal
-new_window 1pixel
+new_window pixel 1
+hide_edge_borders smart
 
 #  ____
 # |  _ \ _ __ ___   __ _ _ __ __ _ _ __ ___  ___
@@ -207,16 +205,19 @@ bar {
     position top
     tray_output primary
     colors {
-        statusline #002b36
-        background #002b36
-        focused_workspace #181818 #181818 #FFFFFF
-        inactive_workspace #002b36 #002b36 #AAAAAA
+        statusline {{ color.back }}
+        background {{ color.back }}
+        focused_workspace  {{ color.back }} {{ color.prim }} {{ color.fbri }}
+        inactive_workspace {{ color.back }} {{ color.back }} {{ color.font }}
     }
 }
 
-client.unfocused #333333 #333333 #FFFFFF #333333
-client.focused_inactive #333333 #333333 #FFFFFF #000000
-client.focused #000000 #000000 #FFFFFF #000000a
+# class                 border           backgr.          text             indicator
+client.focused          {{ color.back }} {{ color.prim }} {{ color.fbri }} #000000
+client.focused_inactive {{ color.back }} {{ color.back }} {{ color.font }} #000000
+client.unfocused        {{ color.back }} {{ color.back }} {{ color.fdim }} #000000
+client.urgent           {{ color.back }} {{ color.back }} {{ color.font }} #000000
+client.placeholder      {{ color.back }} {{ color.back }} {{ color.font }} #000000
 
 # Custom shortcuts
 bindsym Control+Mod1+d exec nemo

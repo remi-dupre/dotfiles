@@ -8,6 +8,8 @@ name = "solarized-dark"
   good_fg = "#abcdef"
   info_bg = "#123456"
   info_fg = "#abcdef"
+  idle_fg = "{{ color.font }}"
+  idle_bg = "{{ color.back }}"
 
 [icons]
 name = "awesome"

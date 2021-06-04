@@ -3,14 +3,16 @@ export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export PATH=/home/remi/.root/bin:/home/remi/.cargo/bin:/home/remi/.local/bin:$PATH
 export GOPATH=/home/remi/.go
-# export RUSTC_WRAPPER=/home/remi/.cargo/bin/sccache
 
 # Node version management
 source /usr/share/nvm/init-nvm.sh
 
 # Common aliases
-alias vim="nvim"  # use nvim by default
+alias vim="nvim"  # use nvim by default
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME" # dotfiles management
+alias ls="exa --icons"
+alias l="exa -l --icons"
+
 
 # gh cli completion
 eval "$(gh completion -s zsh)"
