@@ -281,9 +281,6 @@ for_window [class="Thunderbird" instance="Calendar"] floating enable
 # --- Startup executions
 # ---
 
-# Adjust monitor size
-exec --no-startup-id bash -c "~/.screenlayout/main.sh || ~/.screenlayout/laptop.sh"
-
 # Set wallpaper
 exec --no-startup-id feh --bg-fill ~/.wallpaper.jpg
 

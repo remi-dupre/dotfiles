@@ -1,3 +1,7 @@
+# Update screen resolution
+/home/remi/.screenlayout/main.sh
+
+# Update Qt theme
 export QT_QPA_PLATFORMTHEME=gtk2
 
 # Disable touchpad while typing

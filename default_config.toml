@@ -5,6 +5,11 @@ font = "#BABABA" # font color
 fdim = "#444444" # dimmed font color
 fbri = "#FFFFFF" # bright font color
 
+[monitor]
+name = "eDP1"
+width = 1920
+height = 1080
+
 [alacritty]
 font = "FiraMono Nerd Font"
 font_size = 6.5
