@@ -213,7 +213,7 @@ bar {
 }
 
 # class                 border           backgr.          text             indicator
-client.focused          {{ color.back }} {{ color.prim }} {{ color.fbri }} #000000
+client.focused          {{ color.prim }} {{ color.prim }} {{ color.fbri }} #000000
 client.focused_inactive {{ color.back }} {{ color.back }} {{ color.font }} #000000
 client.unfocused        {{ color.back }} {{ color.back }} {{ color.fdim }} #000000
 client.urgent           {{ color.back }} {{ color.back }} {{ color.font }} #000000
@@ -287,7 +287,9 @@ exec --no-startup-id feh --bg-fill ~/.wallpaper.jpg
 # Composite manager
 exec --no-startup-id picom -b --fade-in-step=1 --fade-out-step=1 --fade-delta=0
 
-# Synchronization notification tray
+# Applets
+exec --no-startup-id $PASS
+exec --no-startup-id blueman-applet
 exec --no-startup-id syncthing-gtk --minimized
 
 # Lock at startup

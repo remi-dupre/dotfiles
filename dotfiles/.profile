@@ -9,7 +9,3 @@ export QT_QPA_PLATFORMTHEME=gtk2
 
 # Start SSH agent
 eval $(ssh-agent)
-
-# Applets
-blueman-applet&  # Bluetooth
-keepassxc&  # KeepassXC

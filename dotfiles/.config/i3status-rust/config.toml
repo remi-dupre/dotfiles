@@ -50,13 +50,13 @@ max_width = 120
   interval = 3600
 {% endfor %}
 
-[[block]]
-block = "music"
-buttons = ["play", "next"]
-marquee = false
-dynamic_width = true
-hide_when_empty = true
-max_width = 60
+# [[block]]
+# block = "music"
+# buttons = ["play", "next"]
+# marquee = false
+# dynamic_width = true
+# hide_when_empty = true
+# max_width = 60
 
 # [[block]]
 # block = "custom"

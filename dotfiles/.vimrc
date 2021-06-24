@@ -116,6 +116,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'pest-parser/pest.vim'
     Plug 'seirl/vim-jinja-languages'
     Plug 'vim-python/python-syntax'
+    Plug 'dag/vim-fish'
 call plug#end()
 
 
