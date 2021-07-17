@@ -273,6 +273,7 @@ for_window [class="Adl" instance="adl"] floating enable
 for_window [class="Ankama Launcher"] floating enable
 for_window [class="battle.net.exe"] floating enable
 for_window [class="Firefox" instance="Devtools"] floating enable
+for_window [window_role="About"] floating enable
 for_window [class="KeePassXC"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Thunderbird" instance="Calendar"] floating enable
