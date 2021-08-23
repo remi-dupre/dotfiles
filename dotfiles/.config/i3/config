@@ -225,6 +225,7 @@ bindsym Control+Mod1+f exec firefox
 bindsym Control+Mod1+k exec $PASS
 bindsym Control+Mod1+s exec pavucontrol
 bindsym Control+Mod1+t exec $TERM
+bindsym Control+Mod1+b exec blueman-manager
 
 bindsym Control+Shift+l exec loginctl lock-session && $LOCK
 
@@ -277,6 +278,7 @@ for_window [window_role="About"] floating enable
 for_window [class="KeePassXC"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Thunderbird" instance="Calendar"] floating enable
+for_window [class="Blueman-manager"] floating enable
 
 # ---
 # --- Startup executions
