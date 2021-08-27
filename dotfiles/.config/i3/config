@@ -201,7 +201,7 @@ bindsym $mod+r mode "resize"
 
 bar {
     i3bar_command i3bar
-    status_command /home/remi/code/i3status-rust/target/release/i3status-rs
+    status_command i3status-rs
     position top
     tray_output primary
     colors {
@@ -274,11 +274,12 @@ for_window [class="Adl" instance="adl"] floating enable
 for_window [class="Ankama Launcher"] floating enable
 for_window [class="battle.net.exe"] floating enable
 for_window [class="Firefox" instance="Devtools"] floating enable
-for_window [window_role="About"] floating enable
 for_window [class="KeePassXC"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Thunderbird" instance="Calendar"] floating enable
 for_window [class="Blueman-manager"] floating enable
+for_window [window_role="About"] floating enable
 
 # ---
 # --- Startup executions

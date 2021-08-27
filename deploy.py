@@ -74,6 +74,7 @@ class BinaryFile(State):
         style.print(f" {self.target_path()}")
 
     def apply(self):
+        self.target_path().parent.mkdir(parents=True, exist_ok=True)
         self.target_path().write_bytes(self.path.read_bytes())
         copystat(self.path, self.target_path())
 
@@ -101,6 +102,7 @@ class TemplateFile(State):
         style.print(f"f{self.target_path()}")
 
     def apply(self):
+        self.target_path().parent.mkdir(parents=True, exist_ok=True)
         self.target_path().write_text(self.render())
         copystat(self.path, self.target_path())
 
