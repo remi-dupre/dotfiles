@@ -1,3 +1,6 @@
+[font]
+monospace = "Fira Mono"
+
 [color]
 back = "#1c1b22" # background color
 prim = "#883333" # primary color for accents
@@ -11,7 +14,6 @@ width = 1920
 height = 1080
 
 [alacritty]
-font = "Fira Mono"
 font_size = 6.5
 
 [i3status]
@@ -27,5 +29,4 @@ font_size = 6.5
   stations = []
 
 [gsettings]
-
-  "org.cinnamon.desktop.default-applications.terminal" = { exec = "alacritty" }
+"org.cinnamon.desktop.default-applications.terminal" = { exec = "alacritty" }

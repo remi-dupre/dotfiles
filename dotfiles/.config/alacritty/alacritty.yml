@@ -28,19 +28,19 @@ window:
 # Font configuration
 font:
   normal:
-    family: {{ alacritty.font }}
+    family: {{ font.monospace }}
     style: Medium
 
   bold:
-    family: {{ alacritty.font }}
+    family: {{ font.monospace }}
     style: Bold
 
   italic:
-    family: {{ alacritty.font }}
+    family: {{ font.monospace }}
     style: Italic
 
   bold_italic:
-    family: {{ alacritty.font }}
+    family: {{ font.monospace }}
     style: Bold Italic
 
   size: {{ alacritty.font_size }}
