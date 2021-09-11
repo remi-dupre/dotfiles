@@ -3,7 +3,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-font pango:Noto Sans 7.3
+font pango:{{ font.default }} 7.3
 
 default_border normal
 default_floating_border normal
