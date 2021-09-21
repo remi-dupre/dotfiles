@@ -1,6 +1,7 @@
 [font]
 default = "Noto Sans"
 monospace = "Fira Mono"
+awesome = "Font Awesome"
 
 [color]
 back = "#1c1b22" # background color
