@@ -1,5 +1,11 @@
-fish_add_path /home/remi/.cargo/bin
+# Update $PATH environment variable
 fish_add_path /home/remi/.local/bin
+fish_add_path /home/remi/.cargo/bin
+fish_add_path /home/remi/.nvm/versions/node/v16.3.0/bin
+
+# GPG command line utility suffers from some sort of conflict with stderred, we
+# just need to disable it while running.
+alias gpg="LD_PRELOAD=\"\" /usr/bin/gpg"
 
 # eval (ssh-agent -c)
 
