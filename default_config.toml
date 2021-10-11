@@ -1,3 +1,7 @@
+[user]
+name = "Rémi Dupré"
+email = "remi@dupre.io"
+
 [font]
 default = "Noto Sans"
 monospace = "Fira Mono"
