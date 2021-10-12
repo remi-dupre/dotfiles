@@ -1,9 +1,0 @@
-.venv
-.vim/plugged
-node_modules
-
-.Cache
-.cache
-.config/**/*Cache*
-Cache
-cache
