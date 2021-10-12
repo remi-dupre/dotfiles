@@ -21,13 +21,7 @@ hide_edge_borders smart
 set $TERM               alacritty 2>&1 >> /tmp/alacritty_logs
 
 # i3lock fork from cac03: https://github.com/cac03/i3lock (AUR)
-set $LOCK               i3lock -t -i /home/remi/.lock-wallpaper.png \
-                               -l "#000000" \
-                               -w "#990000" \
-                               -o "#000099" \
-                               -R 150 \
-                               -F 50 \
-                               -T 1
+set $LOCK               $HOME/scripts/lock.sh
 
 # Password manager
 set $PASS               keepassxc
@@ -227,7 +221,7 @@ bindsym Control+Mod1+s exec pavucontrol
 bindsym Control+Mod1+t exec $TERM
 bindsym Control+Mod1+b exec blueman-manager
 
-bindsym Control+Shift+l exec loginctl lock-session && $LOCK
+bindsym Control+Shift+l exec $LOCK
 
 bindsym Mod1+F2 exec rofi -show-icons -show
 bindsym Mod1+F4 kill
@@ -289,7 +283,7 @@ for_window [window_role="About"] floating enable
 exec --no-startup-id feh --bg-fill ~/.wallpaper.jpg
 
 # Composite manager
-exec --no-startup-id picom -b --fade-in-step=1 --fade-out-step=1 --fade-delta=0
+exec --no-startup-id picom
 
 # Applets
 exec --no-startup-id $PASS
