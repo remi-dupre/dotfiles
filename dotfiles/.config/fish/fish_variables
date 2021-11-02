@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export GOPATH:/home/remi/.go
 SETUVAR --export --path LD_PRELOAD:/usr/lib/libstderred\x2eso
 SETUVAR --export EDITOR:vim
 SETUVAR --export STDERRED_BLACKLIST:\x5e\x28clang\x2d7\x2cgcc\x2d7\x29\x24
