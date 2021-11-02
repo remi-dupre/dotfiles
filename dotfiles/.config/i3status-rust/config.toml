@@ -58,18 +58,20 @@ max_width = 120
 # hide_when_empty = true
 # max_width = 60
 
-# [[block]]
-# block = "custom"
-# interval = 60
-# command = """
-#     cd $HOME/scripts
-#     pipenv run ./velib-station.py {{ i3status.velib.stations | join(" ") }}
-# """
+{% if i3status.velib.stations %}
+  [[block]]
+  block = "custom"
+  interval = 60
+  command = """
+      cd $HOME/scripts
+      pipenv run ./velib-station.py {{ i3status.velib.stations | join(" ") }}
+  """
 
-[[block]]
-block = "custom"
-command = "echo ''"
-interval = 3600
+  [[block]]
+  block = "custom"
+  command = "echo ''"
+  interval = 3600
+{% endif %}
 
 [[block]]
 block = "net"
@@ -85,6 +87,15 @@ interval = 5
 block = "custom"
 command = "echo ''"
 interval = 3600
+
+{% if i3status.gpu.enabled %}
+  [[block]]
+  block = "nvidia_gpu"
+  label = ""
+  show_memory = false
+  show_temperature = false
+  interval = 1
+{% endif %}
 
 [[block]]
 block = "cpu"

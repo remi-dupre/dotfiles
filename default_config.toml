@@ -34,5 +34,8 @@ font_size = 6.5
   [i3status.velib]
   stations = []
 
+  [i3status.gpu]
+  enabled = false
+
 [gsettings]
 "org.cinnamon.desktop.default-applications.terminal" = { exec = "alacritty" }

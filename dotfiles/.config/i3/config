@@ -274,6 +274,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Thunderbird" instance="Calendar"] floating enable
 for_window [class="Blueman-manager"] floating enable
 for_window [window_role="About"] floating enable
+for_window [title="Origin"] floating enable # fix launcher for Origin games
 
 # ---
 # --- Startup executions
