@@ -1,6 +1,7 @@
 configuration {
     modi: "drun,ssh";
-    theme: "solarized";
     font: "{{ font.default }} 9";
     combi-modi: "window,drun,ssh";
 }
+
+@theme "solarized"

@@ -1,6 +1,7 @@
 [user]
 name = "Rémi Dupré"
 email = "remi@dupre.io"
+startup_lock = true
 
 [font]
 default = "Noto Sans"
@@ -20,6 +21,7 @@ width = 1920
 height = 1080
 
 [alacritty]
+pixel_ratio = 1
 font_size = 6.5
 
 [i3status]

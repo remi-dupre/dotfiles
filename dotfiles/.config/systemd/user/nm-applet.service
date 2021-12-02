@@ -1,0 +1,9 @@
+[Unit]
+Description=NetworkManager Applet
+
+[Service]
+Type=simple
+ExecStart=nm-applet
+
+[Install]
+WantedBy=default.target
