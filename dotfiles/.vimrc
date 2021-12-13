@@ -312,6 +312,8 @@ let g:tex_conceal="abdgms"
 " |_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
 "                |___/             |___/
 
+au BufNewFile,BufRead /*.rasi setf css
+
 autocmd FileType html       set ts=2 sw=2 sts=2
 autocmd FileType htmldjango set ts=2 sw=2 sts=2
 autocmd FileType rust       set cc=101

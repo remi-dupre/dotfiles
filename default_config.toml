@@ -39,5 +39,17 @@ font_size = 6.5
   [i3status.gpu]
   enabled = false
 
+  [[i3status.bluetooth]]
+  label = "FP Earbuds"
+  mac = "00:00:AB:CD:55:75"
+
+  [[i3status.bluetooth]]
+  label = "HyperX"
+  mac = "04:21:44:49:4C:C6"
+
+  [[i3status.bluetooth]]
+  label = "Platan"
+  mac = "5C:EB:68:70:9E:9E"
+
 [gsettings]
 "org.cinnamon.desktop.default-applications.terminal" = { exec = "alacritty" }

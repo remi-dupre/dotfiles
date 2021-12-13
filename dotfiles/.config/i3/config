@@ -46,9 +46,12 @@ set $MIC_MUTE_OFF       pactl set-source-mute @DEFAULT_SOURCE@ off
 set $MIC_UP             pactl set-source-volume @DEFAULT_SOURCE@ +5%
 set $MIC_DOWN           pactl set-source-volume @DEFAULT_SOURCE@ -5%
 
-# Brightness control
+# Brightness controlarandr
 set $BRIGHTNESS_UP      brightnessctl set 5%+
 set $BRIGHTNESS_DOWN    brightnessctl set 5%-
+
+# Rofi commands
+set $DRUN               rofi -theme ~/.config/rofi/drun.rasi -show
 
 #  ____  _           _ _
 # | __ )(_)_ __   __| (_)_ __   __ _ ___
@@ -58,7 +61,7 @@ set $BRIGHTNESS_DOWN    brightnessctl set 5%-
 #                              |___/
 
 # Rebuild config and restart i3 in place
-bindsym $mod+Shift+r exec --no-startup-id "~/.dotfiles/deploy.py" restart
+bindsym $mod+Shift+r exec "$HOME/.dotfiles/deploy.py" restart
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -119,18 +122,18 @@ bindsym $mod+q focus parent
 bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+ampersand workspace number 1
-bindsym $mod+eacute workspace number 2
-bindsym $mod+quotedbl workspace number 3
+bindsym $mod+ampersand  workspace number 1
+bindsym $mod+eacute     workspace number 2
+bindsym $mod+quotedbl   workspace number 3
 bindsym $mod+apostrophe workspace number 4
-bindsym $mod+parenleft workspace number 5
-bindsym $mod+minus workspace number 6
-bindsym $mod+egrave workspace number 7
+bindsym $mod+parenleft  workspace number 5
+bindsym $mod+minus      workspace number 6
+bindsym $mod+egrave     workspace number 7
 bindsym $mod+underscore workspace number 8
-bindsym $mod+ccedilla workspace number 9
-bindsym $mod+agrave workspace number 10
-bindsym $mod+t workspace ""
-bindsym $mod+m workspace ""
+bindsym $mod+ccedilla   workspace number 9
+bindsym $mod+agrave     workspace number 10
+bindsym $mod+t          workspace ""
+bindsym $mod+m          workspace ""
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -213,7 +216,7 @@ bindsym Control+Mod1+b exec blueman-manager
 
 bindsym Control+Shift+l exec $LOCK
 
-bindsym Mod1+F2 exec rofi -show-icons -show
+bindsym Mod1+F2 exec $DRUN
 bindsym Mod1+F4 kill
 
 bindsym Shift+Print exec xfce4-screenshooter
@@ -256,15 +259,16 @@ exec i3-msg "workspace ; exec thunderbird"
 # Popups
 for_window [class="Adl" instance="adl"] floating enable
 for_window [class="Ankama Launcher"] floating enable
+for_window [class="Arandr"] floating enable
 for_window [class="battle.net.exe"] floating enable
+for_window [class="Blueman-manager"] floating enable
 for_window [class="Firefox" instance="Devtools"] floating enable
 for_window [class="KeePassXC"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Thunderbird" instance="Calendar"] floating enable
-for_window [class="Blueman-manager"] floating enable
-for_window [window_role="About"] floating enable
 for_window [title="Origin"] floating enable # fix launcher for Origin games
+for_window [window_role="About"] floating enable
 
 # ---
 # --- Startup executions

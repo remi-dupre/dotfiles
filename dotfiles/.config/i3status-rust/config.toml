@@ -58,6 +58,14 @@ max_width = 120
 # hide_when_empty = true
 # max_width = 60
 
+{% for device in i3status.bluetooth %}
+  [[block]]
+  block = "bluetooth"
+  mac = "{{ device.mac }}"
+  label = "{{ device.label }}"
+  hide_disconnected = true
+{% endfor %}
+
 {% if i3status.velib.stations %}
   [[block]]
   block = "custom"

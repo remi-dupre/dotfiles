@@ -2,6 +2,7 @@ configuration {
     modi: "drun,ssh";
     font: "{{ font.default }} 9";
     combi-modi: "window,drun,ssh";
+    terminal: "alacritty";
 }
 
 @theme "solarized"

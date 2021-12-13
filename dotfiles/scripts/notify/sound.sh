@@ -19,7 +19,7 @@ name() {
 volume() {
     pacmd list-sinks |
         awk '/^\s+name: /{indefault = $2 == "<'$(default_sink_name)'>"}
-             /^\s+volume: ([0-9]*)/ && indefault {gsub(/%/,""); print $5; exit}'
+             /^\s+volume: ([0-9]*)/ && indefault {gsub(/%,?/,""); print $5; exit}'
 }
 
 muted() {
