@@ -247,12 +247,6 @@ exec --no-startup-id syndaemon -d -i 0.05 -t -K -R
 # Set wallpaper
 exec --no-startup-id feh --bg-fill $HOME/.wallpaper.jpg
 
-# At start
-exec --no-startup-id sleep 0.5 ; nm-applet
-exec --no-startup-id system-config-printer-applet
-exec --no-startup-id light-locker
-exec --no-startup-id xfce4-power-manager
-
 # Launch applications at startup
 exec i3-msg "workspace ; exec thunderbird"
 
@@ -282,8 +276,12 @@ exec --no-startup-id picom
 
 # Applets
 exec --no-startup-id $PASS
-exec --no-startup-id blueman-applet
-exec --no-startup-id syncthing-gtk --minimized
+# exec --no-startup-id blueman-applet
+# exec --no-startup-id syncthing-gtk --minimized
+# exec --no-startup-id sleep 0.5 ; nm-applet
+# exec --no-startup-id system-config-printer-applet
+# exec --no-startup-id light-locker
+# exec --no-startup-id xfce4-power-manager
 
 # Lock at startup
 {% if user.startup_lock %}
