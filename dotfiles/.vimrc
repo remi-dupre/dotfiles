@@ -246,7 +246,7 @@ let g:coc_global_extensions = [
  \  'coc-git',
  \  'coc-clangd',
  \  'coc-json',
- \  'coc-python',
+ \  'coc-pyright',
  \  'coc-rust-analyzer'
  \]
 
