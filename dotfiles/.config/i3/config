@@ -276,9 +276,9 @@ exec --no-startup-id picom
 
 # Applets
 exec --no-startup-id $PASS
+exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-applet
 # exec --no-startup-id syncthing-gtk --minimized
-# exec --no-startup-id sleep 0.5 ; nm-applet
 # exec --no-startup-id system-config-printer-applet
 # exec --no-startup-id light-locker
 # exec --no-startup-id xfce4-power-manager
