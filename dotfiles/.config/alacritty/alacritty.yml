@@ -25,6 +25,10 @@ window:
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
 
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  opacity: 1
+
 # Font configuration
 font:
   normal:
@@ -76,12 +80,6 @@ schemes:
       white:    "#BABABA"
 
 colors: *darkside
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
