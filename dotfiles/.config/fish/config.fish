@@ -15,7 +15,10 @@ fish_vi_key_bindings --no-erase insert
 bind \cz fg
 
 starship init fish | source
-load_nvm
+
+{% if env.nvm.enabled %}
+    load_nvm
+{% endif %}
 
 ## FZF settings & functions for fish; collected with attribution and modified.
 
