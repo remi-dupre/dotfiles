@@ -27,5 +27,7 @@
     "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.diagnostics.disabled": [
         "macro-error"
-    ]
+    ],
+    "python.linting.pylintEnabled": true,
+    "pyright.disableDiagnostics": true
 }
