@@ -2,6 +2,8 @@
 name = "Rémi Dupré"
 email = "remi@dupre.io"
 startup_lock = true
+gdm_lock = false
+wayland = false
 
 [font]
 default = "Noto Sans"
@@ -54,5 +56,10 @@ font_size = 6.5
 [env.nvm]
 enabled = false
 
-[gsettings]
-"org.cinnamon.desktop.default-applications.terminal" = { exec = "alacritty" }
+[gsettings."org.cinnamon.desktop.default-applications.terminal"]
+exec = "alacritty"
+
+[gsettings."org.gnome.desktop.interface"]
+gtk-theme = "Bubble-Dark-Blue"
+icon-theme = "Numix"
+font-name = "Noto Sans"
