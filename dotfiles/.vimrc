@@ -355,3 +355,9 @@ autocmd InsertEnter * setlocal nohlsearch
 autocmd InsertLeave * setlocal hlsearch lz
 inoremap <silent><Esc> <Esc>:nohl<bar>set nolz<CR>
 inoremap <silent><C-c> <C-c>:nohl<bar>set nolz<CR>
+
+" String formating support for Rust
+autocmd Filetype rust syn region rustFormatStringVariable matchgroup=rustEscape start=+{\|}+ end=+}\|{+ contains=rustIdentifier contained
+autocmd Filetype rust syn region rustString matchgroup=rustStringDelimiter start=+b"+ skip=+\\\\\|\\"+ end=+"+ contains=rustEscape,rustEscapeError,rustStringContinuation,rustFormatStringVariable
+autocmd Filetype rust syn region rustString matchgroup=rustStringDelimiter start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=rustEscape,rustEscapeUnicode,rustEscapeError,rustStringContinuation,@Spell,rustFormatStringVariable
+autocmd Filetype rust syn region rustString matchgroup=rustStringDelimiter start='b\?r\z(#*\)"' end='"\z1' contains=@Spell,rustFormatStringVariable

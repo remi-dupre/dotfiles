@@ -15,6 +15,13 @@ hide_edge_borders smart
 
     # See https://github.com/swaywm/sway/issues/5732#issuecomment-731466006
     exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+    # See https://wiki.archlinux.org/title/PipeWire#WebRTC_screen_sharing
+    exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+    input type:touchpad {
+        tap enabled
+    }
 {% else %}
     new_window pixel 1
 {% endif %}
@@ -32,7 +39,7 @@ set $MSG                {% if user.wayland %} swaymsg {% else %} i3-msg {% endif
 # Terminal emulator
 set $TERM               WINIT_X11_SCALE_FACTOR={{ alacritty.pixel_ratio }} alacritty 2>&1 >> /tmp/alacritty_logs
 
-{% if user.gdm_lock %}
+{% if not user.gdm_lock %}
     # i3lock fork from cac03: https://github.com/cac03/i3lock (AUR)
     set $LOCK           $HOME/scripts/lock.sh
 {% else %}
