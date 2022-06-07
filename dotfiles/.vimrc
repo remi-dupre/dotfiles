@@ -105,11 +105,14 @@ call plug#begin('~/.vim/plugged')
     " Highlight docstrings as comments
     Plug 'Kareeeeem/python-docstring-comments'
 
-    " A vim plugin to display the indention levels with thin vertical lines
-    Plug 'Yggdroot/indentLine'
-
     " Improved conceal for tex in vim
     Plug 'PietroPate/vim-tex-conceal'
+
+    " Nvim Treesitter configurations and abstraction layer
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+    " Indent guides for Neovim
+    Plug 'lukas-reineke/indent-blankline.nvim'
 
     " Languages syntax
     Plug 'cespare/vim-toml'
@@ -235,9 +238,12 @@ hi MatchWord ctermfg=lightgreen guifg=lightgreen cterm=bold gui=bold
 " Lightline:
 set laststatus=2
 
-" IndentLine:
-let g:indentLine_char = '⁚'
-let g:indentLine_setConceal = 2
+
+" IndentBlankline:
+let g:indent_blankline_space_char_blankline = ' '
+let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_char = '⁚'
+let g:indent_blankline_show_current_context = v:true
 
 
 " CoC:
