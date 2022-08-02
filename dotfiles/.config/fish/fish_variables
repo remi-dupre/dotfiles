@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export FFSEND_HOST:https://send.dupre.io
 SETUVAR --export DOCKER_BUILDKIT:1
 SETUVAR --export GOPATH:/home/remi/.go
 SETUVAR --export --path LD_PRELOAD:/usr/lib/libstderred\x2eso
