@@ -19,14 +19,14 @@ require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
- 
+
     -- Find, Filter, Preview, Pick. All lua, all the time
     use {
         'nvim-telescope/telescope.nvim',
         requires = { 'nvim-lua/plenary.nvim' }
     }
 
-    --  Nvim Treesitter configurations and abstraction layer
+    -- Nvim Treesitter configurations and abstraction layer
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -40,13 +40,23 @@ require('packer').startup(function(use)
 
     -- Git integration for buffers
     use 'lewis6991/gitsigns.nvim'
-end)
 
-require('nvim-autopairs').setup()
-require('nvim-tree').setup()
-require('gitsigns').setup()
+    -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
+    use 'nvim-lualine/lualine.nvim'
+
+    -- Smart and powerful comment plugin for neovim. Supports treesitter, dot
+    -- repeat, left-right/up-down motions, hooks, and more
+    use 'numToStr/Comment.nvim'
+end)
 
 require 'config.cmp'
 require 'config.ident-blankline'
+require 'config.lualine'
 require 'config.telescope'
 require 'config.treesitter'
+
+-- Config-free plugins
+require('Comment').setup()
+require('gitsigns').setup()
+require('nvim-autopairs').setup()
+require('nvim-tree').setup()

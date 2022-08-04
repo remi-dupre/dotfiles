@@ -1,5 +1,8 @@
 require 'plugins'
 require 'keys'
+
+require 'languages.lua'
+require 'languages.python'
 require 'languages.rust'
 
 vim.cmd 'colorscheme tender'
