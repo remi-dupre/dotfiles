@@ -41,15 +41,23 @@ require('packer').startup(function(use)
     -- Git integration for buffers
     use 'lewis6991/gitsigns.nvim'
 
+    -- A lua neovim plugin to generate shareable file permalinks (with line ranges) for several git
+    -- web frontend hosts. Inspired by tpope/vim-fugitive's :GBrowse
+    use {
+        'ruifm/gitlinker.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+    }
+
     -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
     use 'nvim-lualine/lualine.nvim'
 
-    -- Smart and powerful comment plugin for neovim. Supports treesitter, dot
-    -- repeat, left-right/up-down motions, hooks, and more
+    -- Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat,
+    -- left-right/up-down motions, hooks, and more
     use 'numToStr/Comment.nvim'
 end)
 
 require 'config.cmp'
+require 'config.gitlinker'
 require 'config.ident-blankline'
 require 'config.lualine'
 require 'config.telescope'

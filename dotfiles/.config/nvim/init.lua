@@ -1,15 +1,9 @@
-require 'plugins'
-require 'keys'
-
-require 'languages.lua'
-require 'languages.python'
-require 'languages.rust'
-
 vim.cmd 'colorscheme tender'
 vim.cmd 'highlight LineNr     ctermbg=NONE guibg=NONE'
 vim.cmd 'highlight Normal     ctermbg=NONE guibg=NONE'
 vim.cmd 'highlight SignColumn ctermbg=NONE guibg=NONE'
 
+vim.g.mapleader = ","
 vim.opt.colorcolumn = '100'
 vim.opt.cursorline = true
 vim.opt.expandtab = true
@@ -30,3 +24,12 @@ vim.cmd 'autocmd InsertEnter * setlocal nohlsearch'
 
 -- Auto reformat
 vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()'
+
+
+require 'plugins'
+require 'keys'
+
+require 'languages.lua'
+require 'languages.python'
+require 'languages.rust'
+require 'languages.yaml'
