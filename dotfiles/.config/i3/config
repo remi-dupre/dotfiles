@@ -23,7 +23,8 @@ hide_edge_borders smart
         tap enabled
     }
 {% else %}
-    new_window pixel 1
+    default_border pixel 1
+    default_floating_border pixel 1
 {% endif %}
 
 #  ____
@@ -47,7 +48,7 @@ set $TERM               WINIT_X11_SCALE_FACTOR={{ alacritty.pixel_ratio }} alacr
 {% endif %}
 
 # Password manager
-set $PASS               keepassxc
+set $PASS               flatpak run org.keepassxc.KeePassXC
 
 # Sound and brightness notifications
 set $NOTIFY_SOUND       $HOME/scripts/notify/sound.sh
