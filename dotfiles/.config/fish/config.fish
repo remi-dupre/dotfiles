@@ -13,6 +13,7 @@ fish_default_key_bindings -M insert
 fish_vi_key_bindings --no-erase insert
 
 bind \cz fg
+bind -M insert \cn "nicer; commandline -f repaint"
 
 starship init fish | source
 

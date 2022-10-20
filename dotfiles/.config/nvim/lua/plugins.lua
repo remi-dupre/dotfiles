@@ -54,6 +54,9 @@ require('packer').startup(function(use)
     -- Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat,
     -- left-right/up-down motions, hooks, and more
     use 'numToStr/Comment.nvim'
+
+    -- Git Blame plugin for Neovim written in Lua
+    use 'f-person/git-blame.nvim'
 end)
 
 require 'config.cmp'
@@ -62,6 +65,7 @@ require 'config.ident-blankline'
 require 'config.lualine'
 require 'config.telescope'
 require 'config.treesitter'
+require 'config.gitblame'
 
 -- Config-free plugins
 require('Comment').setup()

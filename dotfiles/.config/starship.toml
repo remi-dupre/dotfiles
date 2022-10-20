@@ -1,3 +1,7 @@
+format = """$all$fill$kubernetes \
+$line_break\
+$jobs$battery$time$status$container$shell$character"""
+
 [directory]
 truncate_to_repo = false
 
@@ -5,3 +9,18 @@ truncate_to_repo = false
 disabled = false
 format = "[$time]($style) "
 style = "dimmed"
+
+[kubernetes]
+disabled = false
+format = '[$symbol$namespace]($style)'
+
+[fill]
+symbol = " "
+
+[custom.nice]
+command = 'echo "★ $(nice)"'
+when = """if [ $(nice) == "0" ]; then exit 1; else exit 0; fi"""
+shell = "/bin/bash"
+
+[package]
+disabled = true

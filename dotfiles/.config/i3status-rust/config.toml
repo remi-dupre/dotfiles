@@ -120,16 +120,16 @@ block = "custom"
 command = "echo ''"
 interval = 3600
 
-# [[block]]
-# block = "sound"
-# device_kind = "source"
-# show_volume_when_muted = true
-# on_click = "pavucontrol -t 4"
-#
-# [[block]]
-# block = "sound"
-# show_volume_when_muted = true
-# on_click = "pavucontrol -t 3"
+[[block]]
+block = "sound"
+device_kind = "source"
+show_volume_when_muted = true
+on_click = "pavucontrol -t 4"
+
+[[block]]
+block = "sound"
+show_volume_when_muted = true
+on_click = "pavucontrol -t 3"
 
 {% if i3status.backlight.enabled %}
   [[block]]

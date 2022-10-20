@@ -11,10 +11,10 @@ monospace = "Fira Mono"
 awesome = "Font Awesome"
 
 [color]
-back = "#1c1b22" # background color
-prim = "#883333" # primary color for accents
+back = "#000000" # background color
+prim = "#800808" # primary color for accents
 font = "#BABABA" # font color
-fdim = "#444444" # dimmed font color
+fdim = "#222222" # dimmed font color
 fbri = "#FFFFFF" # bright font color
 
 [monitor]
