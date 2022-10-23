@@ -7,25 +7,25 @@ NOTIF_ID=$(cat $ID_FILE || echo "602")
 
 
 default_source_name() {
-    pacmd stat | awk -F": " '/^Default source name: /{print $2}'
+    pactl get-default-source
 }
 
 name() {
-    pacmd list-sources |
-        awk '/^\s+name: /{indefault = $2 == "<'$(default_source_name)'>"}
-            /^\s+device.description = / && indefault {$1=$2=""; gsub(/"|^ +/, ""); print $0; exit}'
+    pactl list sources \
+        | sed "0,/$(default_source_name)/d" \
+        | grep Description \
+        | sed -e 's/^.*Description: \(.*\)$/\1/g' \
+        | head -n 1
 }
 
 volume() {
-    pacmd list-sources |
-        awk '/^\s+name: /{indefault = $2 == "<'$(default_source_name)'>"}
-             /^\s+volume: ([0-9]*)/ && indefault {gsub(/%,?/,""); print $5; exit}'
+    pactl get-source-volume $(default_source_name) \
+        | head -n 1 | sed -e 's/^.* \([0-9]\+\)%.*$/\1/g'
 }
 
 muted() {
-    pacmd list-sources |
-        awk '/^\s+name: /{indefault = $2 == "<'$(default_source_name)'>"}
-             /^\s+muted: / && indefault {print $2; exit}'
+    pactl get-source-mute $(default_source_name) \
+        | sed -e 's/^Mute: \(.*\)$/\1/'
 }
 
 # Notification attributes
@@ -53,7 +53,7 @@ if [ `muted` = "yes" ]; then
                  --icon=notification-microphone-sensitivity-muted \
                  --urgency=low \
                  --timeout=1000 \
-                 "`name`: Off" "" \
+                 "`name`" "Off" \
     )
 else
     NOTIF_ID=$(
@@ -63,7 +63,7 @@ else
                  --icon=notification-microphone-sensitivity-$force \
                  --urgency=$urgency \
                  --timeout=1000 \
-                 "`name`: `volume`%" "" \
+                 "`name`" "`volume`%" \
     )
 fi
 

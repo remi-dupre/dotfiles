@@ -265,6 +265,7 @@ exec $MSG "workspace ; exec thunderbird"
 # Popups
 for_window [title="Firefox — Sharing Indicator"] kill;
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable;
+for_window [app_id="pavucontrol"] floating enable;
 
 # ---
 # --- Startup executions
