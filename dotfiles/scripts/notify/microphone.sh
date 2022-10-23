@@ -53,16 +53,17 @@ if [ `muted` = "yes" ]; then
                  --icon=notification-microphone-sensitivity-muted \
                  --urgency=low \
                  --timeout=1000 \
-                 "`name`: Off" "<b>${bar//$BAR_FILL/$BAR_MUTE}</b>" \
+                 "`name`: Off" "" \
     )
 else
     NOTIF_ID=$(
         dunstify --printid \
+                 --hints "int:value:$(volume)" \
                  --replace=$NOTIF_ID \
                  --icon=notification-microphone-sensitivity-$force \
                  --urgency=$urgency \
                  --timeout=1000 \
-                 "`name`: `volume`%" "<b>$bar</b>" \
+                 "`name`: `volume`%" "" \
     )
 fi
 

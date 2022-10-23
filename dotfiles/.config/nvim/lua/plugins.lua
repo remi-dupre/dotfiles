@@ -15,10 +15,14 @@ require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig'
 
     -- A completion plugin for neovim coded in Lua
-    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+    use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
+    use 'hrsh7th/cmp-cmdline' -- nvim-cmp source for vim's cmdline
     use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+    use 'hrsh7th/cmp-path' --  nvim-cmp source for path
+    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
+    use 'onsails/lspkind.nvim' --  vscode-like pictograms for neovim lsp completion items
 
     -- Find, Filter, Preview, Pick. All lua, all the time
     use {
@@ -57,6 +61,9 @@ require('packer').startup(function(use)
 
     -- Git Blame plugin for Neovim written in Lua
     use 'f-person/git-blame.nvim'
+
+    -- Vim configuration for Fish
+    use 'nickeb96/fish.vim'
 end)
 
 require 'config.cmp'

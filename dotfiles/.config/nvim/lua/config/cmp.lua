@@ -4,6 +4,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+local lspkind = require 'lspkind'
 
 cmp.setup {
     snippet = {
@@ -38,8 +39,29 @@ cmp.setup {
             end
         end, { 'i', 's' }),
     }),
+    formatting = {
+        format = lspkind.cmp_format({
+            mode = 'symbol_text',
+            maxwidth = 50,
+            ellipsis_char = '…',
+        })
+    },
     sources = {
-        { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'nvim_lsp' },
+        { name = 'path' },
+        { name = 'buffer' },
     },
 }
+
+cmp.setup.cmdline(':', {
+    sources = {
+        { name = 'cmdline' }
+    }
+})
+
+cmp.setup.cmdline('/', {
+    sources = {
+        { name = 'buffer' }
+    }
+})

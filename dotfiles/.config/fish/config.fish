@@ -1,27 +1,30 @@
-# Update $PATH environment variable
-fish_add_path /home/remi/.local/bin
-fish_add_path /home/remi/.cargo/bin
-fish_add_path /home/remi/.nvm/versions/node/v16.3.0/bin
+# Set $PATH variable
+set -U fish_user_paths /home/remi/.local/bin /home/remi/.cargo/bin
 
 # GPG command line utility suffers from some sort of conflict with stderred, we
 # just need to disable it while running.
 alias gpg="LD_PRELOAD=\"\" /usr/bin/gpg"
 
-# eval (ssh-agent -c)
+# ---
+# --- Key Bindings
+# ---
 
+# Enable vim-like mode
 fish_default_key_bindings -M insert
 fish_vi_key_bindings --no-erase insert
 
 bind \cz fg
 bind -M insert \cn "nicer; commandline -f repaint"
 
+# ---
+# --- Init starship
+# ---
+
 starship init fish | source
 
-{% if env.nvm.enabled %}
-    load_nvm
-{% endif %}
-
-## FZF settings & functions for fish; collected with attribution and modified.
+# ---
+# --- FZF settings & functions for fish; collected with attribution and modified.
+# ---
 
 # These rely on `git lg`; from git's config:
 #     lg             = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
@@ -44,6 +47,8 @@ set -gx FZF_ALT_C_COMMAND $FZF_DEFAULT_COMMAND "--type d"
 set -gx FZF_ALT_C_OPTS "--preview 'exa -T {} | head -200'"
 # https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings
 set -gx FZF_CTRL_R_OPTS "--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+
+
 
 # Heavily adapted & simplified from:
 # https://github.com/junegunn/fzf/wiki/Examples-(fish)#navigation

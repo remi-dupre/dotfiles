@@ -23,10 +23,11 @@ fi
 
 NOTIF_ID=$(
     dunstify --printid \
+             --hints "int:value:$(brightness)" \
              --replace=$NOTIF_ID \
              --icon=notification-display-brightness-$force \
              --urgency=low \
-             --timeout=1000 "Brightness: `brightness` %" "<b>`progress $(brightness)`</b>"
+             --timeout=1000 "Brightness" "`brightness` %"
 )
 
 echo $NOTIF_ID > $ID_FILE
