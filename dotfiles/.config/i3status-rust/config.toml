@@ -11,7 +11,6 @@ name = "awesome"
 
   [icons.overrides]
   net_wireless = ""
-  volume_muted = " \uf026 "
   music = ""
 
   # Borrowed from "material-nf" as they are missing from awesome5
@@ -122,6 +121,7 @@ on_click = "pavucontrol -t 3"
 {% if i3status.backlight.enabled %}
   [[block]]
   block = "backlight"
+  invert_icons = true
 {% endif %}
 
 [[block]]

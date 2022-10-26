@@ -23,12 +23,12 @@ vim.opt.tabstop = 4
 vim.cmd 'autocmd InsertEnter * setlocal nohlsearch'
 
 -- Auto reformat
-vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.format()'
+vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.format { async = true }'
 
-
-require 'plugins'
 require 'keys'
+require 'plugins'
 
+require 'languages.javascript'
 require 'languages.lua'
 require 'languages.python'
 require 'languages.rust'

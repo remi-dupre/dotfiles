@@ -209,11 +209,11 @@ bar {
 }
 
 # Class                 border           backgr.          text             indicator
-client.focused          {{ color.prim }} {{ color.prim }} {{ color.fbri }} #000000
-client.focused_inactive {{ color.back }} {{ color.back }} {{ color.font }} #000000
-client.unfocused        {{ color.fdim }} {{ color.fdim }} {{ color.fbri }} #000000
-client.urgent           {{ color.back }} {{ color.back }} {{ color.font }} #000000
-client.placeholder      {{ color.back }} {{ color.back }} {{ color.font }} #000000
+client.focused          {{ color.prim }} {{ color.prim }} {{ color.fbri }} {{ color.fdim }}
+client.focused_inactive {{ color.back }} {{ color.back }} {{ color.font }} {{ color.fdim }}
+client.unfocused        {{ color.fdim }} {{ color.fdim }} {{ color.fbri }} {{ color.fdim }}
+client.urgent           {{ color.back }} {{ color.back }} {{ color.font }} {{ color.fdim }}
+client.placeholder      {{ color.back }} {{ color.back }} {{ color.font }} {{ color.fdim }}
 
 # Application shortcuts
 bindsym Control+Mod1+d exec nemo
@@ -266,6 +266,7 @@ exec $MSG "workspace ; exec thunderbird"
 for_window [title="Firefox — Sharing Indicator"] kill;
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable;
 for_window [app_id="pavucontrol"] floating enable;
+for_window [app_id="wdisplays"] floating enable; resize set width 1000;
 
 # ---
 # --- Startup executions
@@ -276,6 +277,9 @@ output "*" bg ~/.wallpaper.jpg fill
 
 # Applets
 exec --no-startup-id $PASS
+
+# Automatically configure displays
+exec_always "pkill kanshi; kanshi"
 
 # Lock at startup
 {% if user.startup_lock %}

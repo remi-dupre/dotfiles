@@ -13,7 +13,7 @@ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
 vim.api.nvim_set_keymap('n', '<C-x>', ':NvimTreeFocus<CR>', { silent = true })
 
 -- Git
-vim.keymap.set('n', '<C-l>', require('gitsigns').prev_hunk)
-vim.keymap.set('n', '<C-h>', require('gitsigns').next_hunk)
+vim.keymap.set('n', '<C-h>', require('gitsigns').prev_hunk)
+vim.keymap.set('n', '<C-l>', require('gitsigns').next_hunk)
 vim.keymap.set('n', '<C-j>', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<C-k>', vim.diagnostic.goto_prev)

@@ -1,0 +1,9 @@
+profile work {
+    output DP-5 position 0,0
+    output DP-4 position 1920,0
+    output eDP-1 disable
+}
+
+profile laptop {
+     output eDP-1 enable
+}
