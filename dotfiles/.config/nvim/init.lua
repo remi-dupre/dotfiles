@@ -23,7 +23,17 @@ vim.opt.tabstop = 4
 vim.cmd 'autocmd InsertEnter * setlocal nohlsearch'
 
 -- Auto reformat
-vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.format { async = true }'
+vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function()
+        vim.lsp.buf.format {
+            async = true,
+            filter = function(client)
+                -- Filter out tsserver which should be overriden by prettier from null_ls
+                return client.name ~= "tsserver"
+            end,
+        }
+    end
+})
 
 require 'keys'
 require 'plugins'

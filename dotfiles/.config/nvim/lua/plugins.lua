@@ -14,6 +14,9 @@ require('packer').startup(function(use)
     --  Quickstart configs for Nvim LSP
     use 'neovim/nvim-lspconfig'
 
+    -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+    use 'jose-elias-alvarez/null-ls.nvim'
+
     -- A completion plugin for neovim coded in Lua
     use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
     use 'hrsh7th/cmp-cmdline' -- nvim-cmp source for vim's cmdline
@@ -67,12 +70,13 @@ require('packer').startup(function(use)
 end)
 
 require 'config.cmp'
+require 'config.gitblame'
 require 'config.gitlinker'
 require 'config.ident-blankline'
 require 'config.lualine'
+require 'config.null_ls'
 require 'config.telescope'
 require 'config.treesitter'
-require 'config.gitblame'
 
 -- Config-free plugins
 require('Comment').setup()
