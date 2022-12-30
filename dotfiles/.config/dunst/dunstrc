@@ -37,7 +37,7 @@
     scale = 0
 
     # Maximum number of notification (0 means no limit)
-    notification_limit = 4
+    notification_limit = 6
 
     ### Progress bar ###
 
@@ -93,7 +93,7 @@
     # If value is greater than 0, separator_height will be ignored and a border
     # of size frame_width will be drawn around each notification instead.
     # Click events on gaps do not currently propagate to applications below.
-    gap_size = 20
+    gap_size = 10
 
 
     # Define a color for the separator.

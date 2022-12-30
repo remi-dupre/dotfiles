@@ -1,3 +1,10 @@
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = "lua",
+    callback = function()
+        vim.cmd [[ set tw=100 ]]
+    end
+})
+
 require('lspconfig').sumneko_lua.setup {
     settings = {
         Lua = {
@@ -7,7 +14,7 @@ require('lspconfig').sumneko_lua.setup {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {'vim'},
+                globals = { 'vim' },
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files

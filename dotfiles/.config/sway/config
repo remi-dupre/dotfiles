@@ -145,18 +145,18 @@ bindsym $mod+t          workspace ""
 bindsym $mod+m          workspace ""
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+eacute move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+egrave move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+ccedilla move container to workspace number 9
-bindsym $mod+Shift+agrave move container to workspace number 10
-bindsym $mod+Shift+t move container to workspace ""
-bindsym $mod+Shift+m move container to workspace ""
+bindsym $mod+Shift+ampersand  move container to workspace number 1
+bindsym $mod+Shift+eacute     move container to workspace number 2
+bindsym $mod+Shift+quotedbl   move container to workspace number 3
+bindsym $mod+Shift+apostrophe move container to workspace number 4
+bindsym $mod+Shift+parenleft  move container to workspace number 5
+bindsym $mod+Shift+minus      move container to workspace number 6
+bindsym $mod+Shift+egrave     move container to workspace number 7
+bindsym $mod+Shift+underscore move container to workspace number 8
+bindsym $mod+Shift+ccedilla   move container to workspace number 9
+bindsym $mod+Shift+agrave     move container to workspace number 10
+bindsym $mod+Shift+t          move container to workspace ""
+bindsym $mod+Shift+m          move container to workspace ""
 
 # switch to previous or next workspace
 bindsym $mod+Tab exec ~/scripts/swap-workspace.py next
@@ -266,6 +266,8 @@ exec $MSG "workspace ; exec thunderbird"
 for_window [title="Firefox — Sharing Indicator"] kill;
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable;
 for_window [app_id="pavucontrol"] floating enable;
+for_window [app_id="blueman-manager"] floating enable;
+for_window [instance="protonmail-bridge"] floating enable;
 for_window [app_id="wdisplays"] floating enable; resize set width 1000;
 
 # ---
@@ -279,7 +281,7 @@ output "*" bg ~/.wallpaper.jpg fill
 exec --no-startup-id $PASS
 
 # Automatically configure displays
-exec_always "pkill kanshi; kanshi"
+# exec_always "pkill kanshi; kanshi"
 
 # Lock at startup
 {% if user.startup_lock %}
