@@ -13,7 +13,7 @@ window {
     transparency:                   "real";
     background-color:               @bg;
     text-color:                     @fg;
-    border:                         1px;
+    border:                         4px;
     border-color:                   @ac;
     border-radius:                  12px;
     width:                          35%;

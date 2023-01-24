@@ -4,15 +4,18 @@ import time
 import urllib.request
 
 
-TARGET_URL = "https://perdu.com"
+TARGET_URL = "https://www.qwant.com"
 DELAY = 1
 
 
 if __name__ == "__main__":
     while True:
         try:
-            response = urllib.request.urlopen(TARGET_URL, timeout=1)
-            break
-        except urllib.request.URLError:
-            print("Waiting for internet...", file=sys.stderr)
+            print("Waiting for internet...", file=sys.stderr, end="")
+
+            with urllib.request.urlopen(TARGET_URL, timeout=1):
+                print(" ok", file=sys.stderr)
+                break
+        except urllib.request.URLError as err:
+            print(f" {err}", file=sys.stderr)
             time.sleep(DELAY)

@@ -11,7 +11,7 @@ awesome = "Font Awesome"
 
 [color]
 back = "#000000" # background color
-prim = "#800808" # primary color for accents
+prim = "#2e2f5d" # primary color for accents
 font = "#BABABA" # font color
 fdim = "#222222" # dimmed font color
 fbri = "#FFFFFF" # bright font color
@@ -56,7 +56,7 @@ font_size = 6.5
 exec = "alacritty"
 
 [gsettings."org.gnome.desktop.interface"]
-gtk-theme = "Bubble-Dark-Blue"
+gtk-theme = "adw-gtk3-dark" # gtk <= 3.0
+color-scheme = "prefer-dark" # gtk 4
 icon-theme = "Numix"
 font-name = "Noto Sans"
-color-scheme = "prefer-dark"
