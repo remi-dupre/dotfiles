@@ -1,0 +1,9 @@
+/* Inspired from https://forum.manjaro.org/t/xfce-gtk-and-qt-remove-rounded-corners-using-css/66879 */
+
+headerbar {
+  border-radius: 0 0 0 0;
+}
+
+decoration {
+  border-radius: 0px;
+}

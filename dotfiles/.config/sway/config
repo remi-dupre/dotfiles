@@ -3,8 +3,9 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-font pango:{{ font.default }}, {{ font.awesome }} 8
+font pango:{{ font.default }}, {{ font.awesome }} {{ sway.font_size }}
 
+output * scale {{ sway.scale }}
 default_border pixel 4
 hide_edge_borders smart
 
@@ -82,26 +83,31 @@ bindsym $mod+Shift+r exec "$HOME/.dotfiles/deploy.py" && $MSG reload
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# always on top window
+# Always on top window
 bindsym $mod+w sticky toggle
 
-# stick and resize
-bindsym $mod+Shift+w floating enable; sticky enable; border none; resize set 533 300; move position 1385 22
+# Stick and resize
+bindsym $mod+Shift+w floating enable; sticky enable; border none; resize set 624 351; move position {{ (monitor.width / sway.scale - 634) | int }} 0
 
-# start a terminal
+# Start a terminal
 bindsym $mod+Return exec $TERM
+for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+
+# Shutdown button
 bindsym XF86PowerOff exec shutdown -h now
 
-# change focus
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# Change focus
+bindsym $mod+Left      focus left
+bindsym $mod+Down      focus down
+bindsym $mod+Up        focus up
+bindsym $mod+Right     focus right
+bindsym $mod+Tab       focus next
+bindsym $mod+Shift+Tab focus prev
 
-# move focused window
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
+# Move focused window
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
@@ -118,19 +124,19 @@ bindsym $mod+s layout stacking
 bindsym $mod+z layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+# Focus the parent container
 bindsym $mod+q focus parent
 
-# focus the child container
+# Focus the child container
 bindsym $mod+d focus child
 
-# switch to workspace
+# Switch to workspace
 bindsym $mod+ampersand  workspace number 1
 bindsym $mod+eacute     workspace number 2
 bindsym $mod+quotedbl   workspace number 3
@@ -142,9 +148,9 @@ bindsym $mod+underscore workspace number 8
 bindsym $mod+ccedilla   workspace number 9
 bindsym $mod+agrave     workspace number 10
 bindsym $mod+t          workspace ""
-bindsym $mod+m          workspace ""
+# bindsym $mod+m          workspace ""
 
-# move focused container to workspace
+# Move focused container to workspace
 bindsym $mod+Shift+ampersand  move container to workspace number 1
 bindsym $mod+Shift+eacute     move container to workspace number 2
 bindsym $mod+Shift+quotedbl   move container to workspace number 3
@@ -156,34 +162,35 @@ bindsym $mod+Shift+underscore move container to workspace number 8
 bindsym $mod+Shift+ccedilla   move container to workspace number 9
 bindsym $mod+Shift+agrave     move container to workspace number 10
 bindsym $mod+Shift+t          move container to workspace ""
-bindsym $mod+Shift+m          move container to workspace ""
+# bindsym $mod+Shift+m          move container to workspace ""
 
-# switch to previous or next workspace
-bindsym $mod+Tab exec ~/scripts/swap-workspace.py next
-bindsym $mod+Shift+Tab exec ~/scripts/swap-workspace.py prev
+# Gesture navigation between workspaces
+bindgesture swipe:3:right workspace next
+bindgesture swipe:3:up    workspace next
+bindgesture swipe:3:left  workspace prev
+bindgesture swipe:3:down  workspace prev
 
-# change monitor for a workspace
+# Change monitor for a workspace
 bindsym Mod1+Left move workspace to output left
 bindsym Mod1+Right move workspace to output right
 
-
-# resize window (you can also use the mouse for that)
+# Resize window (you can also use the mouse for that)
 mode "resize" {
-  # These bindings trigger as soon as you enter the resize mode
-  bindsym Left resize shrink width 1 px or 1 ppt
-  bindsym Down resize grow height 1 px or 1 ppt
-  bindsym Up resize shrink height 1 px or 1 ppt
-  bindsym Right resize grow width 1 px or 1 ppt
+    # These bindings trigger as soon as you enter the resize mode
+    bindsym Left resize shrink width 1 px or 1 ppt
+    bindsym Down resize grow height 1 px or 1 ppt
+    bindsym Up resize shrink height 1 px or 1 ppt
+    bindsym Right resize grow width 1 px or 1 ppt
 
-  # All the same but 10 times as effective with controll key pressed
-  bindsym Control+Left resize shrink width 10 px or 10 ppt
-  bindsym Control+Down resize grow height 10 px or 10 ppt
-  bindsym Control+Up resize shrink height 10 px or 10 ppt
-  bindsym Control+Right resize grow width 10 px or 10 ppt
+    # All the same but 10 times as effective with controll key pressed
+    bindsym Control+Left resize shrink width 10 px or 10 ppt
+    bindsym Control+Down resize grow height 10 px or 10 ppt
+    bindsym Control+Up resize shrink height 10 px or 10 ppt
+    bindsym Control+Right resize grow width 10 px or 10 ppt
 
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
+    # Back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -222,8 +229,28 @@ bindsym Control+Mod1+k exec $PASS
 bindsym Control+Mod1+s exec pavucontrol
 bindsym Control+Mod1+t exec $TERM
 bindsym Control+Mod1+b exec blueman-manager
+bindsym         Mod1+c exec rofimoji -f "emojis_*" "mathematical_*" "miscellaneous_symbols_and_arrows" --hidden-descriptions --selector-args "-theme rofimoji"
 
-bindsym Control+Shift+l exec $LOCK
+# Lock shortcut and on lid close
+bindswitch --reload --locked lid:on exec $LOCK
+
+# Lock shortcut
+bindsym $mod+l exec $LOCK
+
+# Left trackpad button on Tuxedo Laptop
+bindcode $mod+Control+93 exec systemctl suspend
+
+# Handle sleep key (if not managed by /etc/systemd/logind.conf)
+bindsym XF86Sleep exec systemctl suspend-then-hibernate
+
+# Lock before sleeping
+exec swayidle -w before-sleep $LOCK
+
+# Lock after 30min of idle
+exec swayidle -w \
+    timeout 1800 'swaylock -f' \
+    timeout 1805 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"'
 
 bindsym Mod1+F2 exec $DRUN
 bindsym Mod1+F4 kill
@@ -248,7 +275,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl prev
 bindsym XF86AudioStop exec playerctl stop
 
-# Sreen brightness
+# Screen brightness
 bindsym XF86MonBrightnessUp exec "$BRIGHTNESS_UP ; $NOTIFY_BRIGHTNESS"
 bindsym XF86MonBrightnessDown exec "$BRIGHTNESS_DOWN ; $NOTIFY_BRIGHTNESS"
 
@@ -260,7 +287,7 @@ bindsym Control+Shift+space exec dunstctl history-pop
 exec --no-startup-id syndaemon -d -i 0.05 -t -K -R
 
 # Launch applications at startup
-exec $MSG "workspace ; exec thunderbird"
+# exec $MSG "workspace ; exec thunderbird"
 
 # Popups
 for_window [title="Firefox — Sharing Indicator"] kill;
@@ -275,10 +302,16 @@ for_window [app_id="wdisplays"] floating enable; resize set width 1000;
 # ---
 
 # Set wallpaper
-output "*" bg ~/.wallpaper.2.jpg fill
+output * bg ~/.wallpaper.2.jpg fill
 
 # Applets
 exec --no-startup-id $PASS
+
+# Redshift equivalent for Wayland
+exec --no-startup-id gammastep -l 48.52:2.19
+
+# Init gnome-keyring
+exec dbus-update-activation-environment --all
 
 # Dim inactive windows
 # exec --no-startup-id bash -c "cd $HOME/scripts && pipenv run ./inactive-windows.py"

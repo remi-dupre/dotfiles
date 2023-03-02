@@ -87,13 +87,16 @@ class TemplateFile(State):
     def target_path(self) -> Path:
         return Path.home() / self.path.relative_to(DOTFILES_PATH)
 
-    def render(self) -> str:
-        return jinja2.Template(self.path.read_text()).render(**self.config)
+    def render(self) -> bytes:
+        try:
+            return jinja2.Template(self.path.read_text()).render(**self.config).encode()
+        except UnicodeDecodeError:
+            return self.path.read_bytes()
 
     def changed(self) -> bool:
         return not (
             self.target_path().exists()
-            and self.render() == self.target_path().read_text()
+            and self.render() == self.target_path().read_bytes()
             and self.path.stat().st_mode == self.target_path().stat().st_mode
         )
 
@@ -103,7 +106,7 @@ class TemplateFile(State):
 
     def apply(self):
         self.target_path().parent.mkdir(parents=True, exist_ok=True)
-        self.target_path().write_text(self.render())
+        self.target_path().write_bytes(self.render())
         copystat(self.path, self.target_path())
 
 

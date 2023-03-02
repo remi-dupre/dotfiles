@@ -1,5 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export PYENV_ROOT:/home/remi/.pyenv
+SETUVAR --export AIRFLOW_HOME:/home/remi/.airflow
 SETUVAR --export FFSEND_HOST:https://send.dupre.io
 SETUVAR --export DOCKER_BUILDKIT:1
 SETUVAR --export GOPATH:/home/remi/.go

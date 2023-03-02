@@ -1,5 +1,6 @@
 # Set $PATH variable
-set -U fish_user_paths /home/remi/.local/bin /home/remi/.cargo/bin
+# set -U fish_user_paths /home/remi/.local/bin /home/remi/.cargo/bin $PYENV_ROOT/bin
+set -U fish_user_paths /home/remi/.cargo/bin $PYENV_ROOT/bin
 
 # GPG command line utility suffers from some sort of conflict with stderred, we
 # just need to disable it while running.

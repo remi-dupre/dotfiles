@@ -15,29 +15,6 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 
--- Set color scheme and adjustments
-vim.cmd [[
-    colorscheme tender
-
-    hi LineNr       guibg=NONE  ctermbg=NONE
-    hi Normal       guibg=NONE  ctermbg=NONE
-    hi SignColumn   guibg=NONE  ctermbg=NONE
-    hi FoldColumn   guibg=NONE  ctermbg=NONE
-    hi VertSplit    guibg=NONE  ctermbg=NONE    guifg=234   ctermfg=234
-    hi StatusLine   guibg=235   ctermbg=235
-    hi StatusLineNC guibg=235   ctermbg=235
-    hi RustCommentLineDoc guifg=248 ctermfg=248
-
-    hi EndOfBuffer  guibg=232   ctermfg=232
-    hi ColorColumn  guibg=232   ctermbg=232
-    hi CursorLine   guibg=233   ctermbg=233
-
-    hi DiffText     guibg=22    ctermbg=22      cterm=NONE
-    hi DiffAdd      guibg=22    ctermbg=22
-    hi DiffChange   guibg=234   ctermbg=234
-    hi DiffDelete   guibg=234   ctermbg=234
-]]
-
 -- Remove highlighting when entering insert mode
 vim.api.nvim_create_autocmd('InsertEnter', {
     pattern  = '*',
@@ -59,7 +36,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     end
 })
 
----Highlight yanked text
+-- Highlight yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = vim.api.nvim_create_augroup('yank_highlight', {}),
     pattern = '*',
@@ -68,11 +45,33 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
-require 'keys'
+-- Install plugins and colorscheme
 require 'plugins'
+require 'keys'
 
 require 'languages.javascript'
 require 'languages.lua'
 require 'languages.python'
 require 'languages.rust'
 require 'languages.yaml'
+
+-- Set color scheme and adjustments
+vim.cmd [[
+    hi LineNr       guibg=NONE  ctermbg=NONE
+    hi Normal       guibg=NONE  ctermbg=NONE
+    hi SignColumn   guibg=NONE  ctermbg=NONE
+    hi FoldColumn   guibg=NONE  ctermbg=NONE
+    hi VertSplit    guibg=NONE  ctermbg=NONE    guifg=234   ctermfg=234
+    hi StatusLine   guibg=235   ctermbg=235
+    hi StatusLineNC guibg=235   ctermbg=235
+    hi RustCommentLineDoc guifg=248 ctermfg=248
+
+    hi EndOfBuffer  guibg=232   ctermfg=232
+    hi ColorColumn  guibg=232   ctermbg=232
+    hi CursorLine   guibg=233   ctermbg=233
+
+    hi DiffText     guibg=22    ctermbg=22      cterm=NONE
+    hi DiffAdd      guibg=22    ctermbg=22
+    hi DiffChange   guibg=234   ctermbg=234
+    hi DiffDelete   guibg=234   ctermbg=234
+]]

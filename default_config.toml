@@ -1,3 +1,7 @@
+[sway]
+scale = 1
+font_size = 12
+
 [user]
 name = "Rémi Dupré"
 email = "remi@dupre.io"
@@ -51,9 +55,6 @@ font_size = 6.5
   [[i3status.bluetooth]]
   label = "Platan"
   mac = "5C:EB:68:70:9E:9E"
-
-[gsettings."org.cinnamon.desktop.default-applications.terminal"]
-exec = "alacritty"
 
 [gsettings."org.gnome.desktop.interface"]
 gtk-theme = "adw-gtk3-dark" # gtk <= 3.0

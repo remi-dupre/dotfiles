@@ -1,73 +1,92 @@
-require('packer').startup(function(use)
-    -- Self management for packer
-    use 'wbthomason/packer.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup({
     -- Color scheme
-    use 'jacoborus/tender.vim'
+    {
+        'jacoborus/tender.vim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd [[colorscheme tender]]
+        end,
+    },
 
     --  Adds file type icons to Vim plugins
-    use 'kyazdani42/nvim-web-devicons'
+    'kyazdani42/nvim-web-devicons',
 
     --  A file explorer tree for neovim written in lua
-    use 'kyazdani42/nvim-tree.lua'
+    'kyazdani42/nvim-tree.lua',
 
     --  Quickstart configs for Nvim LSP
-    use 'neovim/nvim-lspconfig'
+    'neovim/nvim-lspconfig',
 
     -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-    use 'jose-elias-alvarez/null-ls.nvim'
+    'jose-elias-alvarez/null-ls.nvim',
 
     -- A completion plugin for neovim coded in Lua
-    use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-    use 'hrsh7th/cmp-cmdline' -- nvim-cmp source for vim's cmdline
-    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-    use 'hrsh7th/cmp-path' --  nvim-cmp source for path
-    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-    use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-    use 'L3MON4D3/LuaSnip' -- Snippets plugin
-    use 'onsails/lspkind.nvim' --  vscode-like pictograms for neovim lsp completion items
+    'hrsh7th/cmp-buffer', -- nvim-cmp source for buffer words
+    'hrsh7th/cmp-cmdline', -- nvim-cmp source for vim's cmdline
+    'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
+    'hrsh7th/cmp-path', --  nvim-cmp source for path
+    'hrsh7th/nvim-cmp', -- Autocompletion plugin
+    'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
+    'L3MON4D3/LuaSnip', -- Snippets plugin
+    'onsails/lspkind.nvim', --  vscode-like pictograms for neovim lsp completion items
 
     -- Find, Filter, Preview, Pick. All lua, all the time
-    use {
+    {
         'nvim-telescope/telescope.nvim',
-        requires = { 'nvim-lua/plenary.nvim' }
-    }
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
 
     -- Nvim Treesitter configurations and abstraction layer
-    use {
+    {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-    }
+        build = ':TSUpdate',
+    },
 
     -- Indent guides for Neovim
-    use 'lukas-reineke/indent-blankline.nvim'
+    'lukas-reineke/indent-blankline.nvim',
 
     -- Autopairs for neovim written in lua
-    use 'windwp/nvim-autopairs'
+    'windwp/nvim-autopairs',
 
     -- Git integration for buffers
-    use 'lewis6991/gitsigns.nvim'
+    'lewis6991/gitsigns.nvim',
 
     -- A lua neovim plugin to generate shareable file permalinks (with line ranges) for several git
     -- web frontend hosts. Inspired by tpope/vim-fugitive's :GBrowse
-    use {
+    {
         'ruifm/gitlinker.nvim',
-        requires = 'nvim-lua/plenary.nvim',
-    }
+        dependencies = 'nvim-lua/plenary.nvim',
+    },
 
     -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
-    use 'nvim-lualine/lualine.nvim'
+    'nvim-lualine/lualine.nvim',
 
     -- Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat,
     -- left-right/up-down motions, hooks, and more
-    use 'numToStr/Comment.nvim'
+    'numToStr/Comment.nvim',
 
     -- Git Blame plugin for Neovim written in Lua
-    use 'f-person/git-blame.nvim'
+    'f-person/git-blame.nvim',
 
     -- Vim configuration for Fish
-    use 'nickeb96/fish.vim'
-end)
+    'nickeb96/fish.vim',
+})
 
 require 'config.cmp'
 require 'config.gitblame'

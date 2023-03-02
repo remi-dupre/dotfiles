@@ -1,0 +1,3 @@
+#!/bin/bash
+# Fake gnome-terminal to open terminal apps with alacritty in Nautilus
+alacritty -e "${@:2}"

@@ -17,19 +17,8 @@ TMP_FILE_PATH = "/tmp/wallpaper.png"
 FILE_PATH = "/home/remi/.lock-wallpaper.png"
 META_URL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=fr-FR"
 
-# # Wait for main display to be attached to get screen geometry
-# while True:
-#     try:
-#         screen = Display(":0").screen()
-#         break
-#     except DisplayConnectionError:
-#         print("Waiting for main screen...", file=sys.stderr)
-#         time.sleep(1)
-#
-# screen_width = screen.width_in_pixels
-# screen_height = screen.height_in_pixels
-screen_width = 1920
-screen_height = 1080
+screen_width = {{ monitor.width }}
+screen_height = {{ monitor.height }}
 print(f"Screen size: {screen_width}x{screen_height}")
 
 
@@ -55,21 +44,24 @@ img = Image.open(TMP_FILE_PATH)
 print(f"Image size: {img.width}x{img.height}")
 
 img = img.convert("RGBA")
-img = img.resize((screen_width, screen_height), Image.ANTIALIAS)
+img = img.resize((screen_width, screen_height), Image.LANCZOS)
 
 tmp = Image.new("RGBA", img.size, (0, 0, 0, 0))
 draw = ImageDraw.Draw(tmp)
 
-font = ImageFont.truetype(font="/usr/share/fonts/noto/NotoSans-Regular.ttf", size=18)
-text_size = draw.textsize(text, font=font)
-shape = (
-    img.size[0] - text_size[0] - 6,
-    img.size[1] - text_size[1] - 6,
-    img.size[0],
-    img.size[1],
-)
-draw.rectangle(shape, fill=(0, 0, 0, 150))
-draw.text((shape[0] + 3, shape[1] + 3), text, font=font, fill=(255, 255, 255))
+font = ImageFont.truetype(font="/usr/share/fonts/noto/NotoSans-Regular.ttf", size=24)
+
+text_params = {
+    "xy": tuple(c - 8 for c in img.size),
+    "text": text,
+    "anchor": "rs",
+    "font": font,
+    "spacing": 20,
+}
+
+text_bbox = draw.textbbox(**text_params)
+draw.rectangle((text_bbox[0] - 8, text_bbox[1] - 8, text_bbox[2] + 8, text_bbox[3] + 8), fill=(0, 0, 0, 150))
+draw.text(**text_params)
 
 img = Image.alpha_composite(img, tmp)
 img.save(TMP_FILE_PATH)
