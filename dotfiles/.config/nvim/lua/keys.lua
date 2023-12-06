@@ -17,3 +17,10 @@ vim.keymap.set('n', '<C-h>', require('gitsigns').prev_hunk)
 vim.keymap.set('n', '<C-l>', require('gitsigns').next_hunk)
 vim.keymap.set('n', '<C-j>', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<C-k>', vim.diagnostic.goto_prev)
+
+-- Copilot
+-- vim.keymap.set('i', '<A-h>', require("copilot.suggestion").prev)
+-- vim.keymap.set('i', '<A-l>', require("copilot.suggestion").next)
+-- vim.keymap.set('i', '<A-j>', require("copilot.suggestion").accept_line)
+-- vim.keymap.set('i', '<A-m>', require("copilot.suggestion").accept)
+-- vim.keymap.set('i', '<A-k>', require("copilot.suggestion").accept_word)

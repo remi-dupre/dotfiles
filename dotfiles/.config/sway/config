@@ -40,9 +40,6 @@ set $MSG                swaymsg
 set $TERM               WINIT_X11_SCALE_FACTOR={{ alacritty.pixel_ratio }} alacritty 3>&1 >> /tmp/alacritty_logs
 set $LOCK               $HOME/scripts/lock.sh
 
-# Password manager
-set $PASS               flatpak run org.keepassxc.KeePassXC
-
 # Sound and brightness notifications
 set $NOTIFY_SOUND       $HOME/scripts/notify/sound.sh
 set $NOTIFY_BRIGHTNESS  $HOME/scripts/notify/brightness.sh
@@ -91,7 +88,6 @@ bindsym $mod+Shift+w floating enable; sticky enable; border none; resize set 624
 
 # Start a terminal
 bindsym $mod+Return exec $TERM
-for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 
 # Shutdown button
 bindsym XF86PowerOff exec shutdown -h now
@@ -225,7 +221,7 @@ client.placeholder      {{ color.fdim }} {{ color.fdim }} {{ color.font }} {{ co
 # Application shortcuts
 bindsym Control+Mod1+d exec nautilus
 bindsym Control+Mod1+f exec MOZ_ENABLE_WAYLAND=1 firefox
-bindsym Control+Mod1+k exec $PASS
+bindsym Control+Shift+p exec MOZ_ENABLE_WAYLAND=1 firefox --private-window
 bindsym Control+Mod1+s exec pavucontrol
 bindsym Control+Mod1+t exec $TERM
 bindsym Control+Mod1+b exec blueman-manager
@@ -256,8 +252,9 @@ bindsym Mod1+F2 exec $DRUN
 bindsym Mod1+F4 kill
 
 # Screenshoot
-bindsym Print exec XDG_CURRENT_DESKTOP=sway flameshot gui
-bindsym Shift+F11 exec XDG_CURRENT_DESKTOP=sway flameshot gui
+bindsym Print exec $HOME/scripts/screenshot.sh screen
+bindsym Shift+Print exec $HOME/scripts/screenshot.sh area
+bindsym Control+Print exec $HOME/scripts/screenshot.sh window
 
 # Sound
 bindsym XF86AudioRaiseVolume exec "$SOUND_MUTE_OFF ; $SOUND_UP ; $SOUND_SAMPLE ; $NOTIFY_SOUND"
@@ -290,12 +287,14 @@ exec --no-startup-id syndaemon -d -i 0.05 -t -K -R
 # exec $MSG "workspace ; exec thunderbird"
 
 # Popups
-for_window [title="Firefox — Sharing Indicator"] kill;
-for_window [app_id="org.keepassxc.KeePassXC"] floating enable;
+for_window [title="Firefox — Sharing Indicator"] floating enable; move position {{ (monitor.width / sway.scale - 428) | int }} 0; sticky enable;
+for_window [title="Firefox Developer Edition — Sharing Indicator"] floating enable; move position {{ (monitor.width / sway.scale - 438) | int }} 0; sticky enable;
 for_window [app_id="pavucontrol"] floating enable;
 for_window [app_id="blueman-manager"] floating enable;
 for_window [instance="protonmail-bridge"] floating enable;
 for_window [app_id="wdisplays"] floating enable; resize set width 1000;
+for_window [app_id="signal"] floating enable;
+for_window [title="Extension:*"] floating enable,
 
 # ---
 # --- Startup executions
@@ -303,9 +302,6 @@ for_window [app_id="wdisplays"] floating enable; resize set width 1000;
 
 # Set wallpaper
 output * bg ~/.wallpaper.2.jpg fill
-
-# Applets
-exec --no-startup-id $PASS
 
 # Redshift equivalent for Wayland
 exec --no-startup-id gammastep -l 48.52:2.19

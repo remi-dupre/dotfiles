@@ -49,7 +49,8 @@ set -gx FZF_ALT_C_OPTS "--preview 'exa -T {} | head -200'"
 # https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings
 set -gx FZF_CTRL_R_OPTS "--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 
-
+# PyEnv integration
+pyenv init - | source
 
 # Heavily adapted & simplified from:
 # https://github.com/junegunn/fzf/wiki/Examples-(fish)#navigation
@@ -145,4 +146,4 @@ function git_fzf_key_bindings -d "Set custom key bindings for git+fzf"
   bind -M insert \cg\ch __git_fzf_git_log
 end
 
-fzf_key_bindings
+git_fzf_key_bindings

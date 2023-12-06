@@ -1,4 +1,6 @@
-require("indent_blankline").setup {
-    show_current_context = true,
-    char = '⁚',
+require("ibl").setup {
+    indent = {
+        -- show_current_context = true,
+        char = '⁚',
+    }
 }

@@ -37,14 +37,14 @@ require('lazy').setup({
     'jose-elias-alvarez/null-ls.nvim',
 
     -- A completion plugin for neovim coded in Lua
-    'hrsh7th/cmp-buffer', -- nvim-cmp source for buffer words
-    'hrsh7th/cmp-cmdline', -- nvim-cmp source for vim's cmdline
-    'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
-    'hrsh7th/cmp-path', --  nvim-cmp source for path
-    'hrsh7th/nvim-cmp', -- Autocompletion plugin
+    'hrsh7th/cmp-buffer',       -- nvim-cmp source for buffer words
+    'hrsh7th/cmp-cmdline',      -- nvim-cmp source for vim's cmdline
+    'hrsh7th/cmp-nvim-lsp',     -- LSP source for nvim-cmp
+    'hrsh7th/cmp-path',         --  nvim-cmp source for path
+    'hrsh7th/nvim-cmp',         -- Autocompletion plugin
     'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
-    'L3MON4D3/LuaSnip', -- Snippets plugin
-    'onsails/lspkind.nvim', --  vscode-like pictograms for neovim lsp completion items
+    'L3MON4D3/LuaSnip',         -- Snippets plugin
+    'onsails/lspkind.nvim',     --  vscode-like pictograms for neovim lsp completion items
 
     -- Find, Filter, Preview, Pick. All lua, all the time
     {
@@ -86,9 +86,14 @@ require('lazy').setup({
 
     -- Vim configuration for Fish
     'nickeb96/fish.vim',
+
+    -- Fully featured & enhanced replacement for copilot.vim complete with API for interacting with
+    -- Github Copilot
+    -- 'zbirenbaum/copilot.lua',
 })
 
 require 'config.cmp'
+-- require 'config.copilot'
 require 'config.gitblame'
 require 'config.gitlinker'
 require 'config.ident-blankline'
