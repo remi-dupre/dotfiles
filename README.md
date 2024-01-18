@@ -1,3 +1,5 @@
+**Unmaintained : I moved to NixOS : https://github.com/remi-dupre/nix-config**
+
 Crontab
 -------
 
